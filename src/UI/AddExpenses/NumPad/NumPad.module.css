@@ -1,0 +1,21 @@
+.numpad {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-bottom: 12%;
+}
+.numpadrow {
+  display: flex;
+  width: 90%;
+
+  height: 25%;
+  margin: 0 auto;
+}
+.numpadrow button {
+  width: 33.3%;
+  height: 100%;
+  background: transparent;
+  border: 0px solid teal;
+}

@@ -1,8 +1,9 @@
-import logo from "./logo.svg";
-import "./App.css";
+import "./styles/App.css";
+import React from "react";
+import Main from "./pages/Main";
 
 function App() {
-  return <div className="wrapper"></div>;
+  return <Main />;
 }
 
 export default App;

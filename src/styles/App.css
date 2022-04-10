@@ -1,0 +1,96 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 100vh;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+.header {
+  width: 100%;
+  height: 40%;
+  padding-top: 20%;
+  background: rgb(222, 201, 238);
+  background: linear-gradient(
+    225deg,
+    rgba(222, 201, 238, 0.9332326680672269) 10%,
+    rgba(80, 87, 163, 1) 100%,
+    rgba(70, 79, 158, 1) 100%
+  );
+  text-align: center;
+  position: relative;
+}
+.header__container {
+  width: 80%;
+  margin: 0 auto;
+}
+.header__money {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 150px;
+  color: white;
+}
+
+.main {
+  height: 61%;
+  bottom: 0;
+  width: -webkit-fill-available;
+  position: absolute;
+  background-color: white;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+.expenses {
+}
+
+.expenses__container {
+  width: 90%;
+  margin: 0 auto;
+}
+.expenses__details {
+}
+
+/* add expenses */
+.expenses__add-expenses {
+  width: 100%;
+  position: absolute;
+  bottom: -124%;
+  display: flex;
+
+  flex-direction: column;
+  height: 130%;
+  transition: all 0.5s;
+}
+.AddExpenses_checked {
+  background-color: #fff;
+
+  border-radius: 10px;
+}
+/* .add-expenses {
+}
+.add-expenses__body {
+}
+
+.add-expenses__body {
+  position: absolute;
+  bottom: -120%;
+  border-top: 1px solid teal;
+  height: 130%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  transition: all 0.5s;
+} */
+
+/* .add-expenses__body.open {
+  bottom: 0;
+} */

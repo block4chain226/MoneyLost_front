@@ -1,0 +1,11 @@
+.MyInput {
+  padding: 5px 10px;
+  color: teal;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 0.2px solid teal;
+}
+
+.MyInput:focus {
+  border: 1px solid teal;
+}

@@ -1,0 +1,21 @@
+.switch {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  height: 60px;
+  background-color: rgb(233, 233, 233);
+  margin-bottom: 10px;
+}
+.switch button {
+  width: 48%;
+  height: 50px;
+  background-color: rgb(233, 233, 233);
+  border: 0;
+  transition: all 0.7s;
+}
+.switch .checkb {
+  background-color: white;
+  border-radius: 10px;
+}

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import cl from "./Header.module.css";
-
+import SwitchButton from "../SwitchButton/SwitchButton";
 const Header = () => {
   const [date, setDate] = useState("Day");
 
   function fff(event) {
     setDate(event.target.textContent);
-    console.log(date);
   }
 
   return (
@@ -17,6 +16,7 @@ const Header = () => {
           <button onClick={fff}>Month</button>
           <button onClick={fff}>Year</button>
         </div>
+
         <div className={cl.header__money}>
           <div className={cl.money__total}>
             <h1>77877</h1>

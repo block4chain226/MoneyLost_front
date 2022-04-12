@@ -8,6 +8,7 @@ import { useFetching } from "../components/hooks/useFetching";
 import PostService from "../API/PostService";
 import { useEffect } from "react";
 import { ContextType } from "react";
+import SwitchButton from "../components/SwitchButton/SwitchButton";
 
 const Main = () => {
   const [fetchPosts, postError] = useFetching(async () => {
@@ -27,6 +28,7 @@ const Main = () => {
   return (
     <div className="wrapper">
       <Header />
+      <SwitchButton />
       <section className="main">
         <ExpensesDetails />
       </section>

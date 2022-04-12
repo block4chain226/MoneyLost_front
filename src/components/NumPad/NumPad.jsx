@@ -3,7 +3,7 @@ import MyButton from "../MyButton/MyButton";
 import MyInput from "../Input/MyInput";
 import cl from "./NumPad.module.css";
 
-const NumPad = () => {
+const NumPad = (props) => {
   let [amount, setAmount] = useState("");
 
   function deleteChar() {
@@ -18,6 +18,9 @@ const NumPad = () => {
         value={amount}
         className=""
         type="number"
+        step="0.01"
+        min="0"
+        max="10"
         onChange={(event) => {
           setAmount(event.target.value);
         }}
@@ -132,7 +135,7 @@ const NumPad = () => {
           delete
         </button>
       </div>
-      <MyButton type="submit">submit</MyButton>
+      <MyButton onClick={() => props.showCategory(true)}>submit</MyButton>
     </div>
   );
 };

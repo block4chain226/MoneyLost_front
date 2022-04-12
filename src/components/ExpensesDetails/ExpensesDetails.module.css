@@ -1,8 +1,10 @@
-.expensesdetails {
-  margin-bottom: 10px;
+.expenses {
 }
-.expensesdetails {
-  padding: 10px 20px;
-  background-color: black;
-  border-radius: 10px;
+
+.expenses__container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px 0px;
+}
+.expenses__details {
 }

@@ -4,6 +4,13 @@
   width: 90%;
   margin: 0 auto;
   height: 100%;
+  text-align: center;
+}
+.container span {
+  text-align: center;
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
 }
 .content {
   display: flex;
@@ -44,18 +51,17 @@
   background-color: white;
   border-radius: 10px;
 }
-
-/* .checkb:focus {
-  background-color: #fff;
-
-  border-radius: 10px;
-} */
-/* .checkb {
-  background-color: red;
-  border-radius: 10px;
-  border: 2px red;
-} */
-
 .open {
   bottom: -30%;
+}
+
+.body .bottom {
+  position: absolute;
+  bottom: -132%;
+}
+.toggle-top {
+}
+.toggle-left {
+}
+.toggle-right {
 }

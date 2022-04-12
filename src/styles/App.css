@@ -21,17 +21,7 @@ body {
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
 }
-.expenses {
-}
 
-.expenses__container {
-  width: 90%;
-  margin: 0 auto;
-}
-.expenses__details {
-}
-
-/* add expenses */
 .expenses__add-expenses {
   width: 100%;
   position: absolute;

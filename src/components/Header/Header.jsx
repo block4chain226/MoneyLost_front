@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import cl from "./Header.module.css";
 
 const Header = () => {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("Day");
 
   function fff(event) {
-    event.preventDefault();
-    console.log(event.target.textContent);
+    setDate(event.target.textContent);
+    console.log(date);
   }
 
   return (

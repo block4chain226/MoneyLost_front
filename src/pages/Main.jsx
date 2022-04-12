@@ -1,14 +1,13 @@
 import React from "react";
 import "../styles/App.css";
 import Header from "../components/Header/Header";
-import ExpensesDetails from "../components/ExpensesDetails";
-import AddExpenses from "../UI/AddExpenses/AddExpenses";
-import NumPad from "../UI/AddExpenses/NumPad/NumPad";
+import ExpensesDetails from "../components/ExpensesDetails/ExpensesDetails";
+import AddExpenses from "../components/AddExpenses/AddExpenses";
+
 import { useFetching } from "../components/hooks/useFetching";
 import PostService from "../API/PostService";
 import { useEffect } from "react";
 import { ContextType } from "react";
-import AddExpensesClass from "../UI/AddExpenses/AddExpensesClass";
 
 const Main = () => {
   const [fetchPosts, postError] = useFetching(async () => {
@@ -28,16 +27,8 @@ const Main = () => {
   return (
     <div className="wrapper">
       <Header />
-
       <section className="main">
-        <div className="expenses">
-          <div className="expenses__details">
-            <div className="expenses__container">
-              <ExpensesDetails />
-            </div>
-          </div>
-          <AddExpenses position="toggle-bottom"></AddExpenses>
-        </div>
+        <ExpensesDetails />
       </section>
     </div>
   );

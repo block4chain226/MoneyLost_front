@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MyButton from "../../MyButton/MyButton";
+import MyButton from "../MyButton/MyButton";
 import MyInput from "../Input/MyInput";
 import cl from "./NumPad.module.css";
 

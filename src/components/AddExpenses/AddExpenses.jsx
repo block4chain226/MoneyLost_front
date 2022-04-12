@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import cl from "./AddExpenses.module.css";
-import NumPad from "./NumPad/NumPad";
+import NumPad from "../NumPad/NumPad";
 
 //AddExpenses body
 const AddExpenses = (props) => {

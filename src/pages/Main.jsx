@@ -1,18 +1,34 @@
 import React from "react";
 import "../styles/App.css";
-import MoneyInfo from "../components/MoneyInfo";
+import Header from "../components/Header/Header";
 import ExpensesDetails from "../components/ExpensesDetails";
 import AddExpenses from "../UI/AddExpenses/AddExpenses";
 import NumPad from "../UI/AddExpenses/NumPad/NumPad";
+import { useFetching } from "../components/hooks/useFetching";
+import PostService from "../API/PostService";
+import { useEffect } from "react";
+import { ContextType } from "react";
+import AddExpensesClass from "../UI/AddExpenses/AddExpensesClass";
 
 const Main = () => {
+  const [fetchPosts, postError] = useFetching(async () => {
+    const response = await PostService.getAll();
+    console.log(response);
+    // setPosts(response.data);
+    // const totalCount = response.headers["x-total-count"];
+  });
+  const Log = (p) => {
+    console.log(p);
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
     <div className="wrapper">
-      <section className="header">
-        <div className="header__container">
-          <MoneyInfo />
-        </div>
-      </section>
+      <Header />
+
       <section className="main">
         <div className="expenses">
           <div className="expenses__details">
@@ -20,10 +36,7 @@ const Main = () => {
               <ExpensesDetails />
             </div>
           </div>
-
-          <div className="expenses__add-expenses">
-            {/* <AddExpenses></AddExpenses> */}
-          </div>
+          <AddExpenses position="toggle-bottom"></AddExpenses>
         </div>
       </section>
     </div>

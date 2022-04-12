@@ -8,11 +8,7 @@ class Categories extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>dfgdfgdfgfd</h1>
-      </div>
-    );
+    return <div></div>;
   }
 }
 

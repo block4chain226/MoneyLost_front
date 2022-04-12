@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyButton from "../../MyButton/MyButton";
 import MyInput from "../Input/MyInput";
 import cl from "./NumPad.module.css";
@@ -17,7 +17,7 @@ const NumPad = () => {
       <MyInput
         value={amount}
         className=""
-        type="text"
+        type="number"
         onChange={(event) => {
           setAmount(event.target.value);
         }}

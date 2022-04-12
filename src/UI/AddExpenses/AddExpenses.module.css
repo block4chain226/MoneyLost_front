@@ -12,15 +12,16 @@
   height: 84%;
 }
 .body {
-  border-top: 1px solid teal;
-  display: flex;
-  justify-content: center;
   width: 100%;
-  height: 100%;
-  background-color: white;
-  border-top-right-radius: 12px;
-  border-top-left-radius: 12px;
+  position: absolute;
+  bottom: -132%;
+  display: flex;
+  background-color: #fff;
+  flex-direction: column;
+  border-radius: 10px;
+  height: 140%;
   transition: all 0.5s;
+  border: 0.5px solid teal;
 }
 .category {
   display: flex;
@@ -39,12 +40,21 @@
   border: 0;
   transition: all 0.7s;
 }
+.category .checkb {
+  background-color: white;
+  border-radius: 10px;
+}
 
-.checkb:focus {
+/* .checkb:focus {
   background-color: #fff;
 
   border-radius: 10px;
-}
+} */
+/* .checkb {
+  background-color: red;
+  border-radius: 10px;
+  border: 2px red;
+} */
 
 .open {
   bottom: -30%;

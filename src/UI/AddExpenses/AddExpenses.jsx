@@ -3,46 +3,39 @@ import cl from "./AddExpenses.module.css";
 import NumPad from "./NumPad/NumPad";
 
 //AddExpenses body
-const AddExpenses = () => {
-  //toggle expenses or income
-  function changeChecked(st) {
-    let state;
-    return function () {
-      state = st;
-      console.log(state);
-    };
-  }
-  function toggleMode(st) {
-    const change = changeChecked(st);
-    return change();
-  }
+const AddExpenses = (props) => {
+  const [menu, setMenu] = useState({ isOpen: false });
+  const [toggleButton, setToggleButton] = useState({
+    isExpense: true,
+    isIncome: false,
+  });
 
   return (
-    <div
-      className={cl.body}
-      onClick={(event) => {
-        // event.stopPropagation();
-        event.target.parentElement.parentElement.parentElement.parentElement.classList.toggle(
-          cl.open
-        );
-      }}
-    >
+    <div className={`${cl.body} ${menu.isOpen ? cl.open : ""}`}>
       <div className={cl.container}>
         <div className={cl.content}>
-          <span style={{ textAlign: "center" }}>open</span>
+          <span
+            style={{ textAlign: "center", marginBottom: "20px" }}
+            onClick={() => {
+              setMenu({ isOpen: !menu.isOpen });
+            }}
+          >
+            open {toggleButton.isExpense ? "true" : "false"}
+          </span>
+
           <div className={cl.category}>
             <button
-              className={cl.checkb}
+              className={` ${toggleButton.isExpense ? cl.checkb : ""}`}
               onClick={() => {
-                toggleMode("expense");
+                setToggleButton({ isExpense: true, isIncome: false });
               }}
             >
               EXPENSES
             </button>
             <button
-              className={cl.checkb}
+              className={` ${toggleButton.isIncome ? cl.checkb : ""}`}
               onClick={() => {
-                toggleMode("income");
+                setToggleButton({ isExpense: false, isIncome: true });
               }}
             >
               INCOME

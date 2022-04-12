@@ -1,0 +1,59 @@
+.header {
+  width: 100%;
+  height: 40%;
+  padding-top: 3%;
+  background: rgb(222, 201, 238);
+  background: linear-gradient(
+    225deg,
+    rgba(222, 201, 238, 0.9332326680672269) 10%,
+    rgba(80, 87, 163, 1) 100%,
+    rgba(70, 79, 158, 1) 100%
+  );
+  text-align: center;
+  position: relative;
+}
+.header__date {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15%;
+}
+.header__date button {
+  background-color: transparent;
+  border: 0;
+  color: rgb(238, 238, 238);
+  font-size: 24px;
+  opacity: 0.8;
+}
+.header__date button:focus {
+  color: teal;
+}
+
+.header__container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+.header__money {
+  text-align: left;
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+}
+.money__total {
+  letter-spacing: 3px;
+  line-height: 1.5;
+}
+.money__expenses {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-weight: 100;
+}
+.money__income {
+  display: flex;
+  color: rgb(25, 25, 25);
+  justify-content: space-between;
+  font-weight: 100;
+}

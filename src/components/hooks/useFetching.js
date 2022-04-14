@@ -12,5 +12,5 @@ export const useFetching = (callback) => {
     }
   };
 
-  return [fetching, error];
+  return [fetching];
 };

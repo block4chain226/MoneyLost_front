@@ -10,7 +10,7 @@ const AddExpenses = (props) => {
   const [menu, setMenu] = useState({ isOpen: false });
 
   function showCategory(callback) {
-    setIsCategory(true);
+    setIsCategory(callback);
   }
 
   function toggleMenu() {
@@ -21,10 +21,19 @@ const AddExpenses = (props) => {
   return (
     <div className={`${cl.body}  ${menu.isOpen ? cl.open : ""}`}>
       <div className={cl.container}>
-        <span onClick={toggleMenu}>open</span>
+        <div className={cl.topmenu}>
+          {/* {isCategory ? (
+            <button onClick={() => props.showCategory(false)}>Back</button>
+          ) : (
+            <></>
+          )} */}
+
+          <span onClick={toggleMenu}>open</span>
+        </div>
+
         {/* show category or not */}
         {isCategory ? (
-          <Category />
+          <Category showCategory={showCategory} category={props.category} />
         ) : (
           <div className={cl.content}>
             <SwitchButton />

@@ -3,7 +3,7 @@ import AddExpenses from "../AddExpenses/AddExpenses";
 import Category from "../Category/Category";
 import cl from "./ExpensesDetails.module.css";
 
-const ExpensesDetails = () => {
+const ExpensesDetails = (props) => {
   return (
     <div className={cl.expenses}>
       <div className={cl.expenses__details}>
@@ -12,7 +12,7 @@ const ExpensesDetails = () => {
         </div>
       </div>
 
-      <AddExpenses position="bottom"></AddExpenses>
+      <AddExpenses position="bottom" category={props.category}></AddExpenses>
       {/* <Category /> */}
     </div>
   );

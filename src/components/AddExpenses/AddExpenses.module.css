@@ -51,6 +51,9 @@
   background-color: white;
   border-radius: 10px;
 }
+.topmenu {
+  display: flex;
+}
 .open {
   bottom: -30%;
 }

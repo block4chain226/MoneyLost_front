@@ -1,60 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import cl from "./Category.module.css";
+import PostService from "../API/PostService";
 
 const Category = (props) => {
   return (
     <div className={cl.category}>
+      <button onClick={() => props.showCategory(false)}>Back</button>
       <div className={cl.category__container}>
-        <div className={cl.category__row}>
-          <div className={cl.category__column}>
-            <div className={cl.category__item}>
-              <div className={cl.category__img}>
-                <button>
-                  <img src={"//fastpic.at.ua/_nw/35/69031221.png"}></img>
-                </button>
-              </div>
-              <div className={cl.category__name}>
-                <span>accessory</span>
-              </div>
+        {props.category.map((item) => (
+          <div key={item.name} className={cl.category__item}>
+            <div className={cl.category__img}>
+              <button>
+                <img src={`${item.path}`}></img>
+              </button>
+            </div>
+            <div className={cl.category__name}>
+              <span>{item.name}</span>
             </div>
           </div>
-          <div className={cl.category__column}>
-            <div className={cl.category__item}>
-              <div className={cl.category__img}>
-                <img
-                  src={"https://imageup.ru/img250/3916909/ic_accessory.png"}
-                ></img>
-              </div>
-              <div className={cl.category__name}>
-                <span>accessory</span>
-              </div>
-            </div>
-          </div>
-          <div className={cl.category__column}>
-            <div className={cl.category__item}>
-              <div className={cl.category__img}>
-                <img
-                  src={"https://imageup.ru/img250/3916909/ic_accessory.png"}
-                ></img>
-              </div>
-              <div className={cl.category__name}>
-                <span>accessory</span>
-              </div>
-            </div>
-          </div>
-          <div className={cl.category__column}>
-            <div className={cl.category__item}>
-              <div className={cl.category__img}>
-                <img
-                  src={"https://imageup.ru/img250/3916909/ic_accessory.png"}
-                ></img>
-              </div>
-              <div className={cl.category__name}>
-                <span>accessory</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

@@ -14,7 +14,13 @@ const Header = () => {
         <div className={cl.header__date}>
           <button onClick={fff}>Day</button>
           <button onClick={fff}>Month</button>
-          <button onClick={fff}>Year</button>
+          <button
+            onClick={() => {
+              sessionStorage.removeItem("token");
+            }}
+          >
+            Year
+          </button>
         </div>
 
         <div className={cl.header__money}>

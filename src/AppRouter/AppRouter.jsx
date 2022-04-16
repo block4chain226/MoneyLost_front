@@ -1,16 +1,34 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import Login from "../pages/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "../pages/Main";
 import { privateRoutes, publicRoutes } from "../Router/router";
 import { AuthContext } from "../components/context";
+import useToken from "../components/hooks/useToken";
 
-const AppRouter = () => {
-  const [isAuth, setIsAuth] = useContext(AuthContext);
-  console.log("approuter: ", isAuth);
-  return isAuth ? (
+const AppRouter = ({ token }) => {
+  // const [token, setToken] = useState("");
+  // function setToken(userToken) {
+  //   sessionStorage.setItem("token", JSON.stringify(userToken));
+  //   console.log(sessionStorage);
+  // }
+
+  // function getToken() {}
+
+  // const token = getToken();
+
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
+  // debugger;
+  // const { token, setToken } = useToken();
+
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
+  // debugger;
+  return token ? (
     <Routes>
-      {console.log("Auth=true in Routes: ", isAuth)}
       {privateRoutes.map((route) => (
         <Route
           key={route.path}
@@ -19,7 +37,7 @@ const AppRouter = () => {
           exact={route.exact}
         />
       ))}
-      <Route path="*" element={<Main />} />
+      {/* <Route path="*" element={<Main />} /> */}
     </Routes>
   ) : (
     <Routes>

@@ -9,20 +9,23 @@ import AppRouter from "./AppRouter/AppRouter";
 import { AuthContext } from "./components/context";
 
 function App() {
-  const { token, setToken } = useToken();
+  // const { token, setToken } = useToken();
 
-  // if (!token) {
-  //   return <Login setToken={setToken} />;
-  // }
-  // debugger;
-  return token === null ? (
+  return (
     <Router>
-      <Login setToken={setToken} />;
+      <AppRouter />
     </Router>
-  ) : (
-    <Router>
-      <AppRouter token={token} />;
-    </Router>
+
+    // <Router>
+    //   <Routes>
+    //     {token ? (
+    //       <Route path="/main" element={<Main />} />
+    //     ) : (
+    //       <Route path="/login" element={<Login setToken={setToken} />} />
+    //     )}
+    //     {/* <Route path="*" element={<Login />} /> */}
+    //   </Routes>
+    // </Router>
   );
 }
 

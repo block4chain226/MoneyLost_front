@@ -9,13 +9,26 @@ import {
 } from "react-router-dom";
 import { AuthContext } from "../components/context";
 import PropTypes from "prop-types";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import App from "../App";
+import Main from "./Main";
+import useToken from "../components/hooks/useToken";
 
-const Login = ({ setToken }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [main, setMain] = useState(false);
+  const { token, setToken } = useToken();
   // const [token, setToken] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      debugger;
+      navigate("/main");
+    }
+  }, [token]);
 
   async function login(event) {
     event.preventDefault();
@@ -37,6 +50,7 @@ const Login = ({ setToken }) => {
     console.log("login", response);
     // debugger;
     await setToken(response.token);
+    navigate("/main");
   }
 
   return (

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import cl from "./Header.module.css";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const [date, setDate] = useState("Day");
 
   function fff(event) {
     setDate(event.target.textContent);
   }
-
+  const navigate = useNavigate();
   return (
     <section className={cl.header}>
       <div className={cl.header__container}>
@@ -17,6 +18,7 @@ const Header = () => {
           <button
             onClick={() => {
               sessionStorage.removeItem("token");
+              navigate("/login");
             }}
           >
             Year

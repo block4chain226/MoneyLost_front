@@ -17,21 +17,11 @@ function App() {
   // debugger;
   return token === null ? (
     <Router>
-      <Routes>
-        <Route path="/login" exact element={<Login setToken={setToken} />} />
-        <Route path="*" exact element={<Login />} />
-      </Routes>
+      <Login setToken={setToken} />;
     </Router>
   ) : (
-    // <Router>
-    //   <Login setToken={setToken} />;
-    // </Router>
     <Router>
-      <Routes>
-        <Route path="/main" token={token} element={<Main />} />
-        <Route path="*" element={<Main />} />
-        {/* <AppRouter token={token} />; */}
-      </Routes>
+      <AppRouter token={token} />;
     </Router>
   );
 }

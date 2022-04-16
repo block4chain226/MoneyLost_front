@@ -26,18 +26,18 @@ const AppRouter = ({ token }) => {
   // if (!token) {
   //   return <Login setToken={setToken} />;
   // }
-  // debugger;
+  debugger;
   return token ? (
     <Routes>
       {privateRoutes.map((route) => (
         <Route
           key={route.path}
-          element={<route.component />}
+          element={route.component}
           path={route.path}
           exact={route.exact}
         />
       ))}
-      {/* <Route path="*" element={<Main />} /> */}
+      <Route path="*" element={<Main />} />
     </Routes>
   ) : (
     <Routes>

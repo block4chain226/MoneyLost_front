@@ -1,0 +1,29 @@
+.login {
+  width: 300px;
+  margin: 0 auto;
+  background-color: teal;
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+}
+.login a {
+  color: #fff;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+}
+.login h1 {
+  margin-bottom: 10px;
+}
+.login span {
+  margin-bottom: 5px;
+}
+.login label {
+  margin-bottom: 5px;
+}
+.login input {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

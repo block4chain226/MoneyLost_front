@@ -7,7 +7,7 @@ import AddExpenses from "../components/AddExpenses/AddExpenses";
 import { useFetching } from "../components/hooks/useFetching";
 import PostService from "../components/API/PostService";
 import { useEffect } from "react";
-import { ContextType } from "react";
+// import { ContextType } from "react";
 import SwitchButton from "../components/SwitchButton/SwitchButton";
 
 const Main = () => {

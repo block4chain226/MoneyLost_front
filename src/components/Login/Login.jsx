@@ -1,28 +1,28 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import AuthContext from "../../context/AuthProvider";
-import { useContext } from "react";
+import useAuth from "../hooks/useAuth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MyButton from "../MyButton/MyButton";
 import MyInput from "../Input/MyInput";
 import cl from "./Login.module.css";
-import axios from "axios";
-
-const Login_Url = "/user/login";
+import RequireAuth from "../RequireAuth";
 
 const Login = () => {
   const userRef = useRef();
   const errorRef = useRef();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [success, setSuccess] = useState(false);
 
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
 
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
+  // useEffect(() => {
+  //   userRef.current.focus();
+  // }, []);
   useEffect(() => {
     setErrorMsg("");
   }, [email, password]);
@@ -49,7 +49,7 @@ const Login = () => {
       setAuth({ email, password, accessToken });
       setEmail("");
       setPassword("");
-      setSuccess(true);
+      navigate(from, { replace: true });
     } catch (error) {
       if (!error.response) {
         setErrorMsg("no server response");
@@ -61,66 +61,56 @@ const Login = () => {
   };
 
   return (
-    <>
-      {success ? (
-        <section className={cl.login}>
-          <h1>You are logged</h1>
-          <br />
-          <p>
-            <a href="#">Go to Home</a>
-          </p>
-        </section>
-      ) : (
-        <section className={cl.login}>
-          <p ref={errorRef} aria-live="assertive">
-            {errorMsg}
-          </p>
-          <h1>Sign In</h1>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              ref={userRef}
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-              autoComplete="off"
-              value={email}
-              required
-            />
-            <label htmlFor="password">password</label>
-            <MyInput
-              type="password"
-              id="password"
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              value={password}
-              required
-            />
-            <MyButton
-              style={{
-                backgroundColor: "white",
-                color: "teal",
-                textAlign: "center",
-                width: "100px",
-                marginBottom: "10px",
-              }}
-            >
-              SignIn
-            </MyButton>
-          </form>
-          <p>
-            Need an Account?
-            <br />
-            <span className="line">
-              <a href="#">Sign Up</a>
-            </span>
-          </p>
-        </section>
-      )}
-    </>
+    <section className={cl.login}>
+      <p ref={errorRef} aria-live="assertive">
+        {errorMsg}
+      </p>
+      <h1>Sign In</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          ref={userRef}
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+          autoComplete="off"
+          value={email}
+          required
+        />
+        <label htmlFor="password">Password</label>
+        <MyInput
+          type="password"
+          id="password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+          value={password}
+          required
+        />
+        <MyButton
+          style={{
+            backgroundColor: "white",
+            color: "teal",
+            textAlign: "center",
+            width: "100px",
+            marginBottom: "10px",
+            fontSize: "16px",
+          }}
+        >
+          Sign In
+        </MyButton>
+      </form>
+      <p>
+        Need an Account?
+        <br />
+        <Link to="/">main </Link>
+        <span className="line">
+          <a href="#">Sign Up</a>
+        </span>
+      </p>
+    </section>
   );
 };
 

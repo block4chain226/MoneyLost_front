@@ -1,9 +1,13 @@
-.login {
-  width: 300px;
-  margin: 0 auto;
+body {
   background-color: teal;
-  padding: 20px;
-  border-radius: 10px;
+}
+.login {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30%;
+  background-color: teal;
+  padding: 60px;
+
   color: #fff;
 }
 .login a {
@@ -24,6 +28,7 @@
   margin-bottom: 5px;
 }
 .login input {
+  padding: 7px 10px;
   border-radius: 10px;
   margin-bottom: 10px;
 }

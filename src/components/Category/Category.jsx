@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import cl from "./Category.module.css";
-import PostService from "../API/PostService";
+// import PostService from "../API/PostService";
 
 const Category = (props) => {
   return (

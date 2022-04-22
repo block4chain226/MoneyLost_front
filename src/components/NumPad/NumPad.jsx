@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import MyButton from "../MyButton/MyButton";
 import MyInput from "../Input/MyInput";
 import cl from "./NumPad.module.css";
+import NewExpenseContext from "../../context/NewExpenseContext";
 
-const NumPad = (props) => {
-  let [amount, setAmount] = useState("");
-
+const NumPad = () => {
+  let { amount, setAmount } = useContext(NewExpenseContext);
+  // let newAmount;
   function deleteChar() {
     if (amount) {
       setAmount(amount.split("").slice(0, -1).join(""));
     }
   }
+
+  // function settAmount(newAmount) {
+  //   props.getAmount(newAmount);
+  // }
 
   return (
     <div className={cl.numpad}>
@@ -135,7 +140,7 @@ const NumPad = (props) => {
           delete
         </button>
       </div>
-      <MyButton onClick={() => props.showCategory(true)}>submit</MyButton>
+      {/* <MyButton onClick={() => showCategory(true)}>submit</MyButton> */}
     </div>
   );
 };

@@ -3,12 +3,13 @@
   height: 40%;
   padding-top: 3%;
   background: rgb(222, 201, 238);
-  background: linear-gradient(
+  /* background: linear-gradient(
     225deg,
     rgba(222, 201, 238, 0.9332326680672269) 10%,
     rgba(80, 87, 163, 1) 100%,
     rgba(70, 79, 158, 1) 100%
-  );
+  ); */
+  background-color: teal;
   text-align: center;
   position: relative;
 }

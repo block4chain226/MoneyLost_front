@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import cl from "./Header.module.css";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useNavigate } from "react-router-dom";
+import RequireAuth from "../RequireAuth";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [date, setDate] = useState("Day");
 
@@ -15,14 +17,7 @@ const Header = () => {
         <div className={cl.header__date}>
           <button onClick={fff}>Day</button>
           <button onClick={fff}>Month</button>
-          <button
-            onClick={() => {
-              sessionStorage.removeItem("token");
-              navigate("/login");
-            }}
-          >
-            Year
-          </button>
+          <button>Year</button>
         </div>
 
         <div className={cl.header__money}>

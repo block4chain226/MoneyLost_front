@@ -1,31 +1,27 @@
 import "./styles/App.css";
-import React, { useState } from "react";
+import React from "react";
+import Login from "./components/Login/Login";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
 import Main from "./pages/Main";
-import Login from "./pages/Login";
-import useToken from "./components/hooks/useToken";
-
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import AppRouter from "./AppRouter/AppRouter";
-import { AuthContext } from "./components/context";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
-  // const { token, setToken } = useToken();
-
   return (
-    <Router>
-      <AppRouter />
-    </Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="/login" element={<Login />} />
 
-    // <Router>
-    //   <Routes>
-    //     {token ? (
-    //       <Route path="/main" element={<Main />} />
-    //     ) : (
-    //       <Route path="/login" element={<Login setToken={setToken} />} />
-    //     )}
-    //     {/* <Route path="*" element={<Login />} /> */}
-    //   </Routes>
-    // </Router>
+        <Route
+          index
+          element={
+            <RequireAuth>
+              <Main />
+            </RequireAuth>
+          }
+        />
+      </Route>
+    </Routes>
   );
 }
 

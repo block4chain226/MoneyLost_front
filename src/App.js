@@ -7,16 +7,20 @@ import Main from "./pages/Main";
 import RequireAuth from "./components/RequireAuth";
 
 function App() {
-  // const { token, setToken } = useToken();
-
   return (
     <Routes>
-      {/* <Route path="/" element={<Layout />}> */}
-      <Route path="/login" element={<Login />} />
-      <Route element={<RequireAuth />}>
-        <Route path="/" element={<Main />} />
+      <Route path="/" element={<Layout />}>
+        <Route path="/login" element={<Login />} />
+
+        <Route
+          index
+          element={
+            <RequireAuth>
+              <Main />
+            </RequireAuth>
+          }
+        />
       </Route>
-      {/* </Route> */}
     </Routes>
   );
 }

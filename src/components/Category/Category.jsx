@@ -11,7 +11,7 @@ const Category = (props) => {
           <div key={item.name} className={cl.category__item}>
             <div className={cl.category__img}>
               <button>
-                <img src={`${item.path}`}></img>
+                <img src={`http:${item.path}`}></img>
               </button>
             </div>
             <div className={cl.category__name}>

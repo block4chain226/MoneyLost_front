@@ -16,10 +16,8 @@ const Main = () => {
   });
 
   useEffect(() => {
-    console.log("fetch category");
     fetchCategories();
   }, []);
-
   return (
     <div className="wrapper">
       <Header />

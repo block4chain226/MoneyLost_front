@@ -48,8 +48,8 @@ const Login = () => {
       const accessToken = response.token;
       setAuth({ email, password, accessToken });
       setEmail("");
-      setPassword("");
-      navigate(from, { replace: true });
+      setPassword("", { replace: true });
+      navigate("/");
     } catch (error) {
       if (!error.response) {
         setErrorMsg("no server response");

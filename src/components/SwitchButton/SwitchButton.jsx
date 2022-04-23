@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import NewExpenseContext from "../../context/NewExpenseContext";
 import cl from "./SwitchButton.module.css";
 
 const SwitchButton = () => {
-  const [toggleButton, setToggleButton] = useState({
-    isExpense: true,
-    isIncome: false,
-  });
+  // const [toggleButton, setToggleButton] = useState({
+  //   isExpense: true,
+  //   isIncome: false,
+  // });
+  const { switchMode, setSwitchMode } = useContext(NewExpenseContext);
 
   return (
     <div className={cl.switch}>
       <button
-        className={` ${toggleButton.isExpense ? cl.checkb : ""}`}
+        className={` ${switchMode.isExpense ? cl.checkb : ""}`}
         onClick={() => {
-          setToggleButton({ isExpense: true, isIncome: false });
+          setSwitchMode({ isExpense: true, isIncome: false });
         }}
       >
         EXPENSES
       </button>
       <button
-        className={` ${toggleButton.isIncome ? cl.checkb : ""}`}
+        className={` ${switchMode.isIncome ? cl.checkb : ""}`}
         onClick={() => {
-          setToggleButton({ isExpense: false, isIncome: true });
+          setSwitchMode({ isExpense: false, isIncome: true });
         }}
       >
         INCOME

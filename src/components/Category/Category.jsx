@@ -1,16 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import cl from "./Category.module.css";
+import MyButton from "../MyButton/MyButton";
+import NewExpenseContext from "../../context/NewExpenseContext";
 // import PostService from "../API/PostService";
 
 const Category = (props) => {
+  const { categoryName, setCategoryName } = useContext(NewExpenseContext);
+  const { addNewExpense } = useContext(NewExpenseContext);
+
+  const postNewExpense = (categor) => {
+    setCategoryName(categor);
+    addNewExpense(categor);
+    props.toggleMenu();
+    props.showCategory(false);
+  };
+
   return (
     <div className={cl.category}>
-      <button onClick={() => props.showCategory(false)}>Back</button>
+      <MyButton onClick={() => props.showCategory(false)}>Back</MyButton>
       <div className={cl.category__container}>
         {props.category.map((item) => (
           <div key={item.name} className={cl.category__item}>
             <div className={cl.category__img}>
-              <button>
+              <button
+                onClick={() => {
+                  // setCategoryName(item.name);
+                  postNewExpense(item.name);
+                }}
+              >
                 <img src={`http:${item.path}`}></img>
               </button>
             </div>

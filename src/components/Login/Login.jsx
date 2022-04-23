@@ -10,19 +10,14 @@ import RequireAuth from "../RequireAuth";
 const Login = () => {
   const userRef = useRef();
   const errorRef = useRef();
-
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-
   const { setAuth } = useAuth();
 
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
   useEffect(() => {
     setErrorMsg("");
   }, [email, password]);
@@ -45,11 +40,15 @@ const Login = () => {
         config
       ).then((res) => res.json());
       console.log("token = ", response.token);
+      console.log("user = ", response.userid);
       const accessToken = response.token;
-      setAuth({ email, password, accessToken });
+      const userId = response.userid;
+      setAuth({ userId, email, password, accessToken });
       setEmail("");
-      setPassword("", { replace: true });
-      navigate("/");
+      sessionStorage.setItem("token", accessToken);
+      sessionStorage.setItem("userId", userId);
+      setPassword("");
+      navigate("/", { replace: true });
     } catch (error) {
       if (!error.response) {
         setErrorMsg("no server response");

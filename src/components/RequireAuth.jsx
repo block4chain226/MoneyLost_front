@@ -6,16 +6,14 @@ import Main from "../pages/Main";
 const RequireAuth = ({ children }) => {
   const { auth } = useAuth();
   const location = useLocation();
-  debugger;
-  if (!auth?.accessToken) {
-    <Navigate to="/login" state={{ from: location }} replace />;
-  }
-  return children;
-  // return auth?.accessToken ? (
-  //   children
-  // ) : (
-  //   <Navigate to="/login" state={{ from: location }} replace />
-  // );
+  console.log("token", sessionStorage.getItem("token"));
+  console.log("auth", auth.token);
+
+  return sessionStorage.getItem("token") ? (
+    children
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default RequireAuth;

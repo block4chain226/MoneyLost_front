@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Main from "./pages/Main";
 import RequireAuth from "./components/RequireAuth";
+import { NewExpenseProvider } from "./context/NewExpenseContext";
+import { AuthProvider } from "./context/AuthProvider";
 
 function App() {
   return (
@@ -16,7 +18,11 @@ function App() {
           index
           element={
             <RequireAuth>
-              <Main />
+              <AuthProvider>
+                <NewExpenseProvider>
+                  <Main />
+                </NewExpenseProvider>
+              </AuthProvider>
             </RequireAuth>
           }
         />

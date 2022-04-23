@@ -10,12 +10,11 @@ const ExpensesDetails = (props) => {
         <div className={cl.expenses__container}>
           <div className={cl.expenses}>
             <details>555</details>
+            {/* <MyDetails /> */}
           </div>
         </div>
       </div>
-
       <AddExpenses position="bottom" category={props.category}></AddExpenses>
-      {/* <Category /> */}
     </div>
   );
 };

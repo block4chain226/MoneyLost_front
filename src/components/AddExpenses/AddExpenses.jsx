@@ -7,11 +7,14 @@ import NewExpenseContext, {
   NewExpenseProvider,
 } from "../../context/NewExpenseContext";
 import MyButton from "../MyButton/MyButton";
+import useAuth from "../hooks/useAuth";
 
 //AddExpenses body
 const AddExpenses = (props) => {
   const [isCategory, setIsCategory] = useState(false);
   const [menu, setMenu] = useState({ isOpen: false });
+  const { auth } = useAuth();
+
   const {
     categoryName,
     setCategoryName,
@@ -21,13 +24,9 @@ const AddExpenses = (props) => {
     setAmount,
   } = useContext(NewExpenseContext);
   console.log(
-    "🚀 ~ file: AddExpenses.jsx ~ line 23 ~ AddExpenses ~ categoryName",
-    categoryName
+    "🚀 ~ file: AddExpenses.jsx ~ line 26 ~ AddExpenses ~ switchMode",
+    switchMode
   );
-
-  useEffect(() => {
-    console.log("expenses: ", switchMode);
-  }, [switchMode]);
 
   function showCategory(callback) {
     setIsCategory(callback);
@@ -37,9 +36,46 @@ const AddExpenses = (props) => {
     setMenu({ isOpen: !menu.isOpen });
   }
 
-  // function getAmount(newAmount) {
-  //   setAmount(amount + newAmount);
-  // }
+  // const addNewExpense = (category) => {
+  //   const config = {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       userId: sessionStorage.getItem("userId"),
+  //       category: categoryName,
+  //       date: new Date().toLocaleDateString("en-US"),
+  //       moneyAmount: amount,
+  //     }),
+  //   };
+  //   try {
+  //     const response = fetch("http://localhost:3000/expenses", config).then(
+  //       (res) => res.json()
+  //     );
+  //   } catch (error) {}
+  // };
+
+  const AddNewIncome = () => {
+    const config = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: sessionStorage.getItem("userId"),
+        date: new Date().toLocaleDateString("en-US"),
+        incomeAmount: amount,
+      }),
+    };
+    try {
+      debugger;
+      const response = fetch("http://localhost:3000/income", config).then(
+        (res) => res.json()
+      );
+    } catch (error) {}
+    toggleMenu();
+  };
 
   const bottom = props.position;
   return (
@@ -51,12 +87,22 @@ const AddExpenses = (props) => {
         {/* <button onClick={() => console.log(amount)}>showAmount</button> */}
         {/* show category or not */}
         {isCategory ? (
-          <Category showCategory={showCategory} category={props.category} />
+          <Category
+            toggleMenu={toggleMenu}
+            showCategory={showCategory}
+            category={props.category}
+          />
         ) : (
           <div className={cl.content}>
             <SwitchButton />
             <NumPad />
-            <MyButton onClick={() => setIsCategory(true)}>submit</MyButton>
+            <MyButton
+              onClick={() =>
+                switchMode.isExpense ? setIsCategory(true) : AddNewIncome()
+              }
+            >
+              submit
+            </MyButton>
           </div>
         )}
       </div>

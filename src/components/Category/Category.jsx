@@ -6,6 +6,14 @@ import NewExpenseContext from "../../context/NewExpenseContext";
 
 const Category = (props) => {
   const { categoryName, setCategoryName } = useContext(NewExpenseContext);
+  const { addNewExpense } = useContext(NewExpenseContext);
+
+  const postNewExpense = (categor) => {
+    setCategoryName(categor);
+    addNewExpense(categor);
+    props.toggleMenu();
+    props.showCategory(false);
+  };
 
   return (
     <div className={cl.category}>
@@ -16,7 +24,8 @@ const Category = (props) => {
             <div className={cl.category__img}>
               <button
                 onClick={() => {
-                  setCategoryName(item.name);
+                  // setCategoryName(item.name);
+                  postNewExpense(item.name);
                 }}
               >
                 <img src={`http:${item.path}`}></img>

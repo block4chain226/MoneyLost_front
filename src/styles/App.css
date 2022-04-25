@@ -14,23 +14,25 @@ body {
 }
 
 .main {
-  height: 50%;
+  height: 60%;
   bottom: 0;
   width: -webkit-fill-available;
-  position: absolute;
+  /* position: absolute; */
   background-color: white;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
+  overflow: scroll;
 }
-
+.newmain {
+}
 .expenses__add-expenses {
   width: 100%;
   position: absolute;
-  bottom: -124%;
+  bottom: -100%;
   display: flex;
 
   flex-direction: column;
-  height: 130%;
+  height: 10%;
   transition: all 0.5s;
 }
 .AddExpenses_checked {
@@ -42,7 +44,7 @@ body {
   padding: 0px 20px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15%;
+  margin-bottom: 10px;
 }
 .date-mod__date button {
   background-color: transparent;

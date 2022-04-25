@@ -31,7 +31,9 @@ const Main = () => {
         <Header />
         <DateMode />
         <section className="main">
-          <ExpensesDetails category={category} />
+          <div className="newmain">
+            <ExpensesDetails category={category} />
+          </div>
         </section>
       </ExpensesDetailsProvider>
     </div>

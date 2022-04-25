@@ -10,6 +10,9 @@ summary {
   font-size: 4vw;
   margin-bottom: 5px;
 }
+strong {
+  vertical-align: -webkit-baseline-middle;
+}
 .expenses__title {
   display: flex;
   justify-content: space-between;
@@ -26,8 +29,13 @@ summary {
   font-size: 5vw;
 }
 .imgcontainer {
-  width: 10%;
+  width: 20%;
   margin-right: 10px;
+}
+.expenses__category .imgcontainer {
+  width: 15%;
+  margin-right: 10px;
+  margin-left: 15px;
 }
 .expenses__name {
   display: flex;

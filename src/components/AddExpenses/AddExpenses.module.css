@@ -16,17 +16,17 @@
   display: flex;
   /* justify-content: center; */
   flex-direction: column;
-  height: 84%;
+  height: 130%;
 }
 .body {
   width: 100%;
   position: absolute;
-  bottom: -150%;
+  bottom: 0;
   display: flex;
   background-color: #fff;
   flex-direction: column;
   border-radius: 10px;
-  height: 160%;
+  height: 54%;
   transition: all 0.5s;
   border: 0.5px solid teal;
 }
@@ -55,7 +55,7 @@
   display: flex;
 }
 .open {
-  bottom: -60%;
+  bottom: -50%;
 }
 
 .body .bottom {

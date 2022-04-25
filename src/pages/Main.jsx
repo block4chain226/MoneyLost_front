@@ -2,26 +2,15 @@ import React, { useState, useContext } from "react";
 import "../styles/App.css";
 import Header from "../components/Header/Header";
 import ExpensesDetails from "../components/ExpensesDetails/ExpensesDetails";
-import NewExpenseContext, {
-  NewExpenseProvider,
-} from "../context/NewExpenseContext";
+import "../styles/App.css";
 import { useFetching } from "../components/hooks/useFetching";
 import { useEffect } from "react";
-import useAuth from "../components/hooks/useAuth";
+import DateMode from "../components/DateMode";
+import { ExpensesDetailsProvider } from "../context/ExpenseDetailsContext";
+import CategoryContext from "../context/CategoryContext";
 
 const Main = () => {
-  const [category, setCategory] = useState([]);
-  const { auth } = useAuth();
-  console.log("token", sessionStorage.getItem("token"));
-  console.log("auth", auth.token);
-  const {
-    categoryName,
-    setCategoryName,
-    switchMode,
-    setSwitchMode,
-    amount,
-    setAmount,
-  } = useContext(NewExpenseContext);
+  const { category, setCategory } = useContext(CategoryContext);
 
   const categoryUrl = "http://localhost:3000/category/";
 
@@ -35,33 +24,16 @@ const Main = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
-  // const addNewExpense = (callback) => {
-  //   const config = {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       userId: auth.userId,
-  //       category: categoryName,
-  //       date: new Date().toLocaleDateString("en-US"),
-  //       moneyAmount: amount,
-  //     }),
-  //   };
-  //   try {
-  //     const response = fetch("http://localhost:3000/user/login", config).then(
-  //       (res) => res.json()
-  //     );
-  //   } catch (error) {}
-  // };
-
+  // console.log(category);
   return (
     <div className="wrapper">
-      <Header />
-      <section className="main">
-        <ExpensesDetails category={category} />
-      </section>
+      <ExpensesDetailsProvider>
+        <Header />
+        <DateMode />
+        <section className="main">
+          <ExpensesDetails category={category} />
+        </section>
+      </ExpensesDetailsProvider>
     </div>
   );
 };

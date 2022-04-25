@@ -7,6 +7,7 @@ import Main from "./pages/Main";
 import RequireAuth from "./components/RequireAuth";
 import { NewExpenseProvider } from "./context/NewExpenseContext";
 import { AuthProvider } from "./context/AuthProvider";
+import { CategoryContextProvider } from "./context/CategoryContext";
 
 function App() {
   return (
@@ -19,9 +20,11 @@ function App() {
           element={
             <RequireAuth>
               <AuthProvider>
-                <NewExpenseProvider>
-                  <Main />
-                </NewExpenseProvider>
+                <CategoryContextProvider>
+                  <NewExpenseProvider>
+                    <Main />
+                  </NewExpenseProvider>
+                </CategoryContextProvider>
               </AuthProvider>
             </RequireAuth>
           }

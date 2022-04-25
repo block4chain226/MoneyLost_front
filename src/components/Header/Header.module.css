@@ -13,21 +13,6 @@
   text-align: center;
   position: relative;
 }
-.header__date {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15%;
-}
-.header__date button {
-  background-color: transparent;
-  border: 0;
-  color: rgb(238, 238, 238);
-  font-size: 24px;
-  opacity: 0.8;
-}
-.header__date button:focus {
-  color: teal;
-}
 
 .header__container {
   display: flex;
@@ -36,6 +21,7 @@
   margin: 0 auto;
 }
 .header__money {
+  margin-top: 20%;
   text-align: left;
   display: flex;
   width: 200px;

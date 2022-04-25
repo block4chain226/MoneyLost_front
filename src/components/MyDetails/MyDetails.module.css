@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+.expenses {
+  /* font-family: "Inter", sans-serif; */
+  font-size: 4vw;
+  margin-bottom: 15px;
+}
+summary {
+  list-style: none;
+  /* background-color: rgb(216, 237, 237); */
+  font-size: 4vw;
+  margin-bottom: 5px;
+}
+.expenses__title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.expenses__body {
+  display: flex;
+  justify-content: space-between;
+}
+.expenses__category {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 5vw;
+}
+.imgcontainer {
+  width: 10%;
+  margin-right: 10px;
+}
+.expenses__name {
+  display: flex;
+}
+
+.imgcontainer img {
+  max-width: 100%;
+}

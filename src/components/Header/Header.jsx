@@ -14,12 +14,6 @@ const Header = () => {
   return (
     <section className={cl.header}>
       <div className={cl.header__container}>
-        <div className={cl.header__date}>
-          <button onClick={fff}>Day</button>
-          <button onClick={fff}>Month</button>
-          <button>Year</button>
-        </div>
-
         <div className={cl.header__money}>
           <div className={cl.money__total}>
             <h1>77877</h1>

@@ -1,6 +1,6 @@
 .numpad {
   width: 100%;
-  height: 58%;
+  height: 47%;
   display: flex;
   /* flex: 1; */
   flex-direction: column;
@@ -19,6 +19,6 @@
   border: 0px solid teal;
 }
 .numpad input {
-  padding: 10px 10px;
-  font-size: 20px;
+  padding: 5px 10px;
+  font-size: 4vw;
 }

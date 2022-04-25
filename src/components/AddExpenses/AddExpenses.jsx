@@ -23,10 +23,6 @@ const AddExpenses = (props) => {
     amount,
     setAmount,
   } = useContext(NewExpenseContext);
-  console.log(
-    "🚀 ~ file: AddExpenses.jsx ~ line 26 ~ AddExpenses ~ switchMode",
-    switchMode
-  );
 
   function showCategory(callback) {
     setIsCategory(callback);

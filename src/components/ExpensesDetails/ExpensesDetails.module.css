@@ -2,9 +2,14 @@
 }
 
 .expenses__container {
-  width: 90%;
+  width: 89%;
   margin: 0 auto;
   padding: 10px 0px;
 }
 .expenses__details {
+}
+.expenses__date {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15%;
 }

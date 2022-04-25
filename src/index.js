@@ -4,14 +4,17 @@ import "./index.css";
 import App from "./App";
 import { AuthProvider } from "./context/AuthProvider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ExpensesDetailsProvider } from "./context/ExpenseDetailsContext";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
   <Router>
+    {/* <ExpensesDetailsProvider> */}
     <AuthProvider>
       <Routes>
         <Route path="/*" element={<App />} />
       </Routes>
     </AuthProvider>
+    {/* </ExpensesDetailsProvider> */}
   </Router>
 );

@@ -14,7 +14,7 @@ body {
 }
 
 .main {
-  height: 45%;
+  height: 50%;
   bottom: 0;
   width: -webkit-fill-available;
   position: absolute;
@@ -37,4 +37,20 @@ body {
   background-color: #fff;
 
   border-radius: 10px;
+}
+.date-mod__date {
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15%;
+}
+.date-mod__date button {
+  background-color: transparent;
+  border: 0;
+  color: rgb(177, 177, 177);
+  font-size: 24px;
+  opacity: 0.8;
+}
+.date-mod__date button:focus {
+  color: #fff;
 }

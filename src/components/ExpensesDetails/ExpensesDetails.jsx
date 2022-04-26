@@ -5,10 +5,22 @@ import MyDetails from "../MyDetails/MyDetails";
 import cl from "./ExpensesDetails.module.css";
 
 const ExpensesDetails = (props) => {
-  const { allExpenses, setAllExpenses, setDateMode, dateMode, callBack } =
-    useContext(ExpensesDetailsContext);
-  const [titleCategory, setTitleCategory] = useState([]);
-  const [moneyAmount, setMoneyAmount] = useState([]);
+  const {
+    allExpenses,
+    setAllExpenses,
+    setDateMode,
+    dateMode,
+    callBack,
+    titleCategory,
+    setTitleCategory,
+    moneyAmount,
+    newTitleCategory,
+    setNewTitleCategory,
+    isUpdate,
+    setIsUpdate,
+  } = useContext(ExpensesDetailsContext);
+  // const [titleCategory, setTitleCategory] = useState([]);
+
   const userId = sessionStorage.getItem("userId");
 
   const getAllExpenses = async () => {
@@ -41,16 +53,22 @@ const ExpensesDetails = (props) => {
   useEffect(() => {
     getCategoryTitles(callback);
   }, [titleCategory, dateMode]);
-  console.log(allExpenses);
+  // debugger;
+
   return (
     <div className={cl.expenses}>
       <div className={cl.expenses__details}>
         <div className={cl.expenses__container}>
           <div className={cl.expenses}>
-            <div>{moneyAmount}</div>
+            {/* <div>{moneyAmount}</div> */}
             <ul>
               {titleCategory.map((item) => (
-                <MyDetails key={item} categoryName={item} />
+                <MyDetails
+                  key={item.category}
+                  money={moneyAmount}
+                  categoryName={item}
+                  newCategoryName={newTitleCategory}
+                />
               ))}
             </ul>
           </div>

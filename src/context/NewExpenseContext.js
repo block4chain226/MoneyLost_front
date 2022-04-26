@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createContext } from "react";
+import ExpensesDetailsContext from "../context/ExpenseDetailsContext";
 const NewExpenseContext = createContext({});
 
 export const NewExpenseProvider = ({ children }) => {
@@ -8,7 +9,9 @@ export const NewExpenseProvider = ({ children }) => {
     isIncome: false,
   });
   let [amount, setAmount] = useState("");
+
   const [categoryName, setCategoryName] = useState("");
+
   const addNewExpense = (categor) => {
     console.log("userId= ", sessionStorage.getItem("userId"));
     const config = {

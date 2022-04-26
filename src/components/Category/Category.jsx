@@ -2,17 +2,38 @@ import React, { useContext, useEffect, useState } from "react";
 import cl from "./Category.module.css";
 import MyButton from "../MyButton/MyButton";
 import NewExpenseContext from "../../context/NewExpenseContext";
-// import PostService from "../API/PostService";
+import MyDetails from "../MyDetails/MyDetails";
+import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
 
 const Category = (props) => {
-  const { categoryName, setCategoryName } = useContext(NewExpenseContext);
+  const { amount, categoryName, setCategoryName } =
+    useContext(NewExpenseContext);
   const { addNewExpense } = useContext(NewExpenseContext);
+  const {
+    titleCategory,
+    setTitleCategory,
+    newTitleCategory,
+    setNewTitleCategory,
+  } = useContext(ExpensesDetailsContext);
+  const { setMoneyAmount } = useContext(ExpensesDetailsContext);
 
   const postNewExpense = (categor) => {
     setCategoryName(categor);
     addNewExpense(categor);
+    console.log("categories from AddNewExpense", titleCategory);
+    // setNewTitleCategory(categor);
+    displayNewExpense(categor);
+    setMoneyAmount(amount);
+    // sessionStorage.setItem("");
     props.toggleMenu();
     props.showCategory(false);
+  };
+
+  const displayNewExpense = (categor) => {
+    titleCategory.includes(categor)
+      ? setNewTitleCategory(categor)
+      : setTitleCategory([...titleCategory, categor]);
+    console.log("newtitlecategory ", newTitleCategory);
   };
 
   return (

@@ -6,7 +6,6 @@ import "../styles/App.css";
 import { useFetching } from "../components/hooks/useFetching";
 import { useEffect } from "react";
 import DateMode from "../components/DateMode";
-import { ExpensesDetailsProvider } from "../context/ExpenseDetailsContext";
 import CategoryContext from "../context/CategoryContext";
 
 const Main = () => {
@@ -27,15 +26,15 @@ const Main = () => {
   // console.log(category);
   return (
     <div className="wrapper">
-      <ExpensesDetailsProvider>
-        <Header />
-        <DateMode />
-        <section className="main">
-          <div className="newmain">
-            <ExpensesDetails category={category} />
-          </div>
-        </section>
-      </ExpensesDetailsProvider>
+      {/* <ExpensesDetailsProvider> */}
+      <Header />
+      <DateMode />
+      <section className="main">
+        <div className="newmain">
+          <ExpensesDetails category={category} />
+        </div>
+      </section>
+      {/* </ExpensesDetailsProvider> */}
     </div>
   );
 };

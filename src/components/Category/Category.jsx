@@ -1,39 +1,45 @@
 import React, { useContext, useEffect, useState } from "react";
 import cl from "./Category.module.css";
 import MyButton from "../MyButton/MyButton";
-import NewExpenseContext from "../../context/NewExpenseContext";
-import MyDetails from "../MyDetails/MyDetails";
-import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
+import ExpensesContext from "../../context/ExpensesContext";
 
 const Category = (props) => {
-  const { amount, categoryName, setCategoryName } =
-    useContext(NewExpenseContext);
-  const { addNewExpense } = useContext(NewExpenseContext);
+  const { amount, setCategoryName, addNewExpense } =
+    useContext(ExpensesContext);
   const {
     titleCategory,
     setTitleCategory,
-    newTitleCategory,
-    setNewTitleCategory,
-  } = useContext(ExpensesDetailsContext);
-  const { setMoneyAmount } = useContext(ExpensesDetailsContext);
+    allExpenses,
+    setAllExpenses,
+    setMoneyAmount,
+  } = useContext(ExpensesContext);
 
   const postNewExpense = (categor) => {
     setCategoryName(categor);
     addNewExpense(categor);
-    console.log("categories from AddNewExpense", titleCategory);
-    // setNewTitleCategory(categor);
     displayNewExpense(categor);
     setMoneyAmount(amount);
-    // sessionStorage.setItem("");
+    updateAllExpenses(categor);
     props.toggleMenu();
     props.showCategory(false);
   };
 
+  const updateAllExpenses = (categor) => {
+    setAllExpenses([
+      ...allExpenses,
+      {
+        category: categor,
+        date: new Date().toLocaleDateString("en-US"),
+        moneyAmount: +amount,
+      },
+    ]);
+    console.log("updater allExpenses: ", allExpenses);
+  };
+
   const displayNewExpense = (categor) => {
-    titleCategory.includes(categor)
-      ? setNewTitleCategory(categor)
-      : setTitleCategory([...titleCategory, categor]);
-    console.log("newtitlecategory ", newTitleCategory);
+    if (!titleCategory.includes(categor)) {
+      setTitleCategory([...titleCategory, categor]);
+    }
   };
 
   return (
@@ -45,7 +51,6 @@ const Category = (props) => {
             <div className={cl.category__img}>
               <button
                 onClick={() => {
-                  // setCategoryName(item.name);
                   postNewExpense(item.name);
                 }}
               >

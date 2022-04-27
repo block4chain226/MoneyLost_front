@@ -5,9 +5,9 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Main from "./pages/Main";
 import RequireAuth from "./components/RequireAuth";
-import { NewExpenseProvider } from "./context/NewExpenseContext";
 import { AuthProvider } from "./context/AuthProvider";
 import { CategoryContextProvider } from "./context/CategoryContext";
+import { ExpensesContextProvider } from "./context/ExpensesContext";
 
 function App() {
   return (
@@ -21,9 +21,11 @@ function App() {
             <RequireAuth>
               <AuthProvider>
                 <CategoryContextProvider>
-                  <NewExpenseProvider>
+                  <ExpensesContextProvider>
+                    {/* <NewExpenseProvider> */}
                     <Main />
-                  </NewExpenseProvider>
+                    {/* </NewExpenseProvider> */}
+                  </ExpensesContextProvider>
                 </CategoryContextProvider>
               </AuthProvider>
             </RequireAuth>

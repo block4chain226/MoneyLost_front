@@ -3,11 +3,9 @@ import cl from "./AddExpenses.module.css";
 import NumPad from "../NumPad/NumPad";
 import Category from "../Category/Category";
 import SwitchButton from "../SwitchButton/SwitchButton";
-import NewExpenseContext, {
-  NewExpenseProvider,
-} from "../../context/NewExpenseContext";
 import MyButton from "../MyButton/MyButton";
 import useAuth from "../hooks/useAuth";
+import ExpensesContext from "../../context/ExpensesContext";
 
 //AddExpenses body
 const AddExpenses = (props) => {
@@ -15,14 +13,7 @@ const AddExpenses = (props) => {
   const [menu, setMenu] = useState({ isOpen: false });
   const { auth } = useAuth();
 
-  const {
-    categoryName,
-    setCategoryName,
-    switchMode,
-    setSwitchMode,
-    amount,
-    setAmount,
-  } = useContext(NewExpenseContext);
+  const { switchMode, amount } = useContext(ExpensesContext);
 
   function showCategory(callback) {
     setIsCategory(callback);
@@ -31,26 +22,6 @@ const AddExpenses = (props) => {
   function toggleMenu() {
     setMenu({ isOpen: !menu.isOpen });
   }
-
-  // const addNewExpense = (category) => {
-  //   const config = {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       userId: sessionStorage.getItem("userId"),
-  //       category: categoryName,
-  //       date: new Date().toLocaleDateString("en-US"),
-  //       moneyAmount: amount,
-  //     }),
-  //   };
-  //   try {
-  //     const response = fetch("http://localhost:3000/expenses", config).then(
-  //       (res) => res.json()
-  //     );
-  //   } catch (error) {}
-  // };
 
   const AddNewIncome = () => {
     const config = {

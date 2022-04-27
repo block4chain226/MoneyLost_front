@@ -34,11 +34,13 @@ const Login = () => {
         password: password,
       }),
     };
+
     try {
       const response = await fetch(
         "http://localhost:3000/user/login",
         config
       ).then((res) => res.json());
+
       console.log("token = ", response.token);
       console.log("user = ", response.userid);
       const accessToken = response.token;

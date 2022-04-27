@@ -1,25 +1,19 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
 import AddExpenses from "../AddExpenses/AddExpenses";
-import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
+
 import MyDetails from "../MyDetails/MyDetails";
 import cl from "./ExpensesDetails.module.css";
+import ExpensesContext from "../../context/ExpensesContext";
 
 const ExpensesDetails = (props) => {
   const {
     allExpenses,
     setAllExpenses,
-    setDateMode,
     dateMode,
-    callBack,
     titleCategory,
     setTitleCategory,
     moneyAmount,
-    newTitleCategory,
-    setNewTitleCategory,
-    isUpdate,
-    setIsUpdate,
-  } = useContext(ExpensesDetailsContext);
-  // const [titleCategory, setTitleCategory] = useState([]);
+  } = useContext(ExpensesContext);
 
   const userId = sessionStorage.getItem("userId");
 
@@ -32,8 +26,6 @@ const ExpensesDetails = (props) => {
   useEffect(() => {
     getAllExpenses();
   }, []);
-
-  //if titleCategory array not includes titleCategoryegory give to new details, then details on own side find and draw all this titleCategoryegories
 
   function callback() {
     Object.values(allExpenses).map((element) => {
@@ -52,7 +44,7 @@ const ExpensesDetails = (props) => {
 
   useEffect(() => {
     getCategoryTitles(callback);
-  }, [titleCategory, dateMode]);
+  }, [titleCategory]);
   // debugger;
 
   return (
@@ -60,14 +52,12 @@ const ExpensesDetails = (props) => {
       <div className={cl.expenses__details}>
         <div className={cl.expenses__container}>
           <div className={cl.expenses}>
-            {/* <div>{moneyAmount}</div> */}
             <ul>
               {titleCategory.map((item) => (
                 <MyDetails
-                  key={item.category}
+                  key={item._id}
                   money={moneyAmount}
                   categoryName={item}
-                  newCategoryName={newTitleCategory}
                 />
               ))}
             </ul>

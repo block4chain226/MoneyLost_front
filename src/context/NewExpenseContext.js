@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useContext } from "react";
 import { createContext } from "react";
 
 const NewExpenseContext = createContext({});

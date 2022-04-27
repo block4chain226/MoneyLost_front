@@ -5,12 +5,15 @@ import NewExpenseContext from "../../context/NewExpenseContext";
 import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
 
 const Category = (props) => {
-  const { amount, categoryName, setCategoryName } =
+  const { amount, setCategoryName, addNewExpense } =
     useContext(NewExpenseContext);
-  const { addNewExpense } = useContext(NewExpenseContext);
-  const { titleCategory, setTitleCategory, allExpenses, setAllExpenses } =
-    useContext(ExpensesDetailsContext);
-  const { setMoneyAmount } = useContext(ExpensesDetailsContext);
+  const {
+    titleCategory,
+    setTitleCategory,
+    allExpenses,
+    setAllExpenses,
+    setMoneyAmount,
+  } = useContext(ExpensesDetailsContext);
 
   const postNewExpense = (categor) => {
     setCategoryName(categor);

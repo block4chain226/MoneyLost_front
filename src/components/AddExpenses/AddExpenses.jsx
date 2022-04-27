@@ -15,14 +15,7 @@ const AddExpenses = (props) => {
   const [menu, setMenu] = useState({ isOpen: false });
   const { auth } = useAuth();
 
-  const {
-    categoryName,
-    setCategoryName,
-    switchMode,
-    setSwitchMode,
-    amount,
-    setAmount,
-  } = useContext(NewExpenseContext);
+  const { switchMode, amount } = useContext(NewExpenseContext);
 
   function showCategory(callback) {
     setIsCategory(callback);

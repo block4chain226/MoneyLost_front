@@ -4,10 +4,9 @@ import CategoryContext from "../../context/CategoryContext";
 import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
 import cl from "./MyDetails.module.css";
 const MyDetails = ({ categoryName, money }) => {
-  const { titleCategory } = useContext(ExpensesDetailsContext);
-  const { category, setCategory } = useContext(CategoryContext);
+  const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
-  const { allExpenses, expensesToShow } = useContext(ExpensesDetailsContext);
+  const { allExpenses } = useContext(ExpensesDetailsContext);
   const [totalAmount, setTotalAmount] = useState();
 
   const getCategoryImgPath = () => {
@@ -25,7 +24,6 @@ const MyDetails = ({ categoryName, money }) => {
           item.date === new Date().toLocaleDateString("en-US") &&
           item.category === categoryName
         ) {
-          console.log("item to reduce", item);
           return item;
         }
       })
@@ -60,10 +58,10 @@ const MyDetails = ({ categoryName, money }) => {
             <span>{totalAmount}</span>
           </div>
         </summary>
-        {allExpenses.map((item, index) =>
+        {allExpenses.map((item) =>
           item.category === categoryName &&
           item.date === new Date().toLocaleDateString("en-US") ? (
-            <div key={index} className={cl.expenses__body}>
+            <div key={item._id} className={cl.expenses__body}>
               <div className={cl.expenses__category}>
                 <div className={cl.imgcontainer}>
                   <img src={`http://${categoryImg}`}></img>
@@ -76,20 +74,6 @@ const MyDetails = ({ categoryName, money }) => {
             ""
           )
         )}
-
-        {/* {newCategoryName !== "" && newCategoryName === categoryName ? (
-          <div className={cl.expenses__body}>
-            <div className={cl.expenses__category}>
-              <div className={cl.imgcontainer}>
-                <img src={`http://${categoryImg}`}></img>
-              </div>
-              <span>{newCategoryName}</span>
-            </div>
-            <span>{money}</span>
-          </div>
-        ) : (
-          ""
-        )} */}
       </details>
     </div>
   );

@@ -8,14 +8,10 @@ const ExpensesDetails = (props) => {
   const {
     allExpenses,
     setAllExpenses,
-    setDateMode,
     dateMode,
-    callBack,
     titleCategory,
     setTitleCategory,
     moneyAmount,
-    isUpdate,
-    setIsUpdate,
   } = useContext(ExpensesDetailsContext);
 
   const userId = sessionStorage.getItem("userId");
@@ -47,7 +43,7 @@ const ExpensesDetails = (props) => {
 
   useEffect(() => {
     getCategoryTitles(callback);
-  }, [titleCategory, dateMode]);
+  }, [titleCategory]);
   // debugger;
   console.log(allExpenses);
   return (
@@ -58,7 +54,7 @@ const ExpensesDetails = (props) => {
             <ul>
               {titleCategory.map((item) => (
                 <MyDetails
-                  key={item.category}
+                  key={item._id}
                   money={moneyAmount}
                   categoryName={item}
                 />

@@ -3,11 +3,9 @@ import cl from "./AddExpenses.module.css";
 import NumPad from "../NumPad/NumPad";
 import Category from "../Category/Category";
 import SwitchButton from "../SwitchButton/SwitchButton";
-import NewExpenseContext, {
-  NewExpenseProvider,
-} from "../../context/NewExpenseContext";
 import MyButton from "../MyButton/MyButton";
 import useAuth from "../hooks/useAuth";
+import ExpensesContext from "../../context/ExpensesContext";
 
 //AddExpenses body
 const AddExpenses = (props) => {
@@ -15,7 +13,7 @@ const AddExpenses = (props) => {
   const [menu, setMenu] = useState({ isOpen: false });
   const { auth } = useAuth();
 
-  const { switchMode, amount } = useContext(NewExpenseContext);
+  const { switchMode, amount } = useContext(ExpensesContext);
 
   function showCategory(callback) {
     setIsCategory(callback);

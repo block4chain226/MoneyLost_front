@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import CategoryContext from "../../context/CategoryContext";
-import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
+import ExpensesContext from "../../context/ExpensesContext";
 import cl from "./MyDetails.module.css";
 const MyDetails = ({ categoryName, money }) => {
   const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
-  const { allExpenses } = useContext(ExpensesDetailsContext);
+  const { allExpenses } = useContext(ExpensesContext);
   const [totalAmount, setTotalAmount] = useState();
 
   const getCategoryImgPath = () => {

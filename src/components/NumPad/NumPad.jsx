@@ -2,10 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import MyButton from "../MyButton/MyButton";
 import MyInput from "../Input/MyInput";
 import cl from "./NumPad.module.css";
-import NewExpenseContext from "../../context/NewExpenseContext";
+import ExpensesContext from "../../context/ExpensesContext";
 
 const NumPad = () => {
-  let { amount, setAmount } = useContext(NewExpenseContext);
+  let { amount, setAmount } = useContext(ExpensesContext);
   // let newAmount;
   function deleteChar() {
     if (amount) {

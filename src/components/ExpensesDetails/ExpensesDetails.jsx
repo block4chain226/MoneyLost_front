@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
 import AddExpenses from "../AddExpenses/AddExpenses";
-import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
+
 import MyDetails from "../MyDetails/MyDetails";
 import cl from "./ExpensesDetails.module.css";
+import ExpensesContext from "../../context/ExpensesContext";
 
 const ExpensesDetails = (props) => {
   const {
@@ -12,7 +13,7 @@ const ExpensesDetails = (props) => {
     titleCategory,
     setTitleCategory,
     moneyAmount,
-  } = useContext(ExpensesDetailsContext);
+  } = useContext(ExpensesContext);
 
   const userId = sessionStorage.getItem("userId");
 
@@ -45,7 +46,7 @@ const ExpensesDetails = (props) => {
     getCategoryTitles(callback);
   }, [titleCategory]);
   // debugger;
-  console.log(allExpenses);
+
   return (
     <div className={cl.expenses}>
       <div className={cl.expenses__details}>

@@ -1,12 +1,11 @@
 import React from "react";
 import { useContext } from "react";
 import "../styles/App.css";
-import ExpensesDetailsContext from "../context/ExpenseDetailsContext";
+import ExpensesContext from "../context/ExpensesContext";
 
 const DateMode = () => {
-  const { setDateMode, byDay, byMonth, byYear, setCallBack } = useContext(
-    ExpensesDetailsContext
-  );
+  const { setDateMode, byDay, byMonth, byYear, setCallBack } =
+    useContext(ExpensesContext);
 
   return (
     <div className="date-mod__date">

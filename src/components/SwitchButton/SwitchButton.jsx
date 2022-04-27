@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import NewExpenseContext from "../../context/NewExpenseContext";
+import ExpensesContext from "../../context/ExpensesContext";
 import cl from "./SwitchButton.module.css";
 
 const SwitchButton = () => {
@@ -7,7 +7,7 @@ const SwitchButton = () => {
   //   isExpense: true,
   //   isIncome: false,
   // });
-  const { switchMode, setSwitchMode } = useContext(NewExpenseContext);
+  const { switchMode, setSwitchMode } = useContext(ExpensesContext);
 
   return (
     <div className={cl.switch}>

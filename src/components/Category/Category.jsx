@@ -1,19 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import cl from "./Category.module.css";
 import MyButton from "../MyButton/MyButton";
-import NewExpenseContext from "../../context/NewExpenseContext";
-import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
+import ExpensesContext from "../../context/ExpensesContext";
 
 const Category = (props) => {
   const { amount, setCategoryName, addNewExpense } =
-    useContext(NewExpenseContext);
+    useContext(ExpensesContext);
   const {
     titleCategory,
     setTitleCategory,
     allExpenses,
     setAllExpenses,
     setMoneyAmount,
-  } = useContext(ExpensesDetailsContext);
+  } = useContext(ExpensesContext);
 
   const postNewExpense = (categor) => {
     setCategoryName(categor);

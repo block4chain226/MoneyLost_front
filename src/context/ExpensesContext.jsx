@@ -1,9 +1,17 @@
+import React from "react";
 import { createContext } from "react";
 import { useState } from "react";
 
-const ExpensesDetailsContext = createContext();
+const ExpensesContext = createContext();
 
-export const ExpensesDetailsProvider = ({ children }) => {
+export const ExpensesContextProvider = ({ children }) => {
+  const [switchMode, setSwitchMode] = useState({
+    isExpense: true,
+    isIncome: false,
+  });
+  let [amount, setAmount] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+
   const [allExpenses, setAllExpenses] = useState([]);
 
   const [moneyAmount, setMoneyAmount] = useState(0);
@@ -14,6 +22,27 @@ export const ExpensesDetailsProvider = ({ children }) => {
     month: false,
     year: false,
   });
+
+  const addNewExpense = (categor) => {
+    console.log("userId= ", sessionStorage.getItem("userId"));
+    const config = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: sessionStorage.getItem("userId"),
+        category: categor,
+        date: new Date().toLocaleDateString("en-US"),
+        moneyAmount: amount,
+      }),
+    };
+    try {
+      const response = fetch("http://localhost:3000/expenses", config).then(
+        (res) => res.json()
+      );
+    } catch (error) {}
+  };
 
   function byDay(element) {
     console.log("byDay");
@@ -34,8 +63,15 @@ export const ExpensesDetailsProvider = ({ children }) => {
   }
 
   return (
-    <ExpensesDetailsContext.Provider
+    <ExpensesContext.Provider
       value={{
+        switchMode,
+        setSwitchMode,
+        amount,
+        setAmount,
+        categoryName,
+        setCategoryName,
+        addNewExpense,
         allExpenses,
         setAllExpenses,
         dateMode,
@@ -52,8 +88,8 @@ export const ExpensesDetailsProvider = ({ children }) => {
       }}
     >
       {children}
-    </ExpensesDetailsContext.Provider>
+    </ExpensesContext.Provider>
   );
 };
 
-export default ExpensesDetailsContext;
+export default ExpensesContext;

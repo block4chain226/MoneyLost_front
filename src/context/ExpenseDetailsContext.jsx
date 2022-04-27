@@ -1,12 +1,11 @@
-import React, { useEffect, useMemo } from "react";
 import { createContext } from "react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 const ExpensesDetailsContext = createContext();
 
 export const ExpensesDetailsProvider = ({ children }) => {
   const [allExpenses, setAllExpenses] = useState([]);
-  const [newTitleCategory, setNewTitleCategory] = useState("");
+
   const [moneyAmount, setMoneyAmount] = useState(0);
   const [callBack, setCallBack] = useState(() => byDay);
   const [titleCategory, setTitleCategory] = useState([]);
@@ -50,8 +49,6 @@ export const ExpensesDetailsProvider = ({ children }) => {
         setTitleCategory,
         moneyAmount,
         setMoneyAmount,
-        newTitleCategory,
-        setNewTitleCategory,
       }}
     >
       {children}

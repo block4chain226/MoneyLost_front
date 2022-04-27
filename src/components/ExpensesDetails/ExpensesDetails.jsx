@@ -14,8 +14,6 @@ const ExpensesDetails = (props) => {
     titleCategory,
     setTitleCategory,
     moneyAmount,
-    newTitleCategory,
-    setNewTitleCategory,
     isUpdate,
     setIsUpdate,
   } = useContext(ExpensesDetailsContext);
@@ -31,8 +29,6 @@ const ExpensesDetails = (props) => {
   useEffect(() => {
     getAllExpenses();
   }, []);
-
-  //if titleCategory array not includes titleCategoryegory give to new details, then details on own side find and draw all this titleCategoryegories
 
   function callback() {
     Object.values(allExpenses).map((element) => {
@@ -65,7 +61,6 @@ const ExpensesDetails = (props) => {
                   key={item.category}
                   money={moneyAmount}
                   categoryName={item}
-                  newCategoryName={newTitleCategory}
                 />
               ))}
             </ul>

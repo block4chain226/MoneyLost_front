@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CategoryContext from "../../context/CategoryContext";
 import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
 import cl from "./MyDetails.module.css";
-const MyDetails = ({ categoryName, newCategoryName, money }) => {
+const MyDetails = ({ categoryName, money }) => {
   const { titleCategory } = useContext(ExpensesDetailsContext);
   const { category, setCategory } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
@@ -17,7 +17,6 @@ const MyDetails = ({ categoryName, newCategoryName, money }) => {
       }
     });
   };
-  ////////save titleCategory in sessionState and then compare if it includes categoryName/////////
 
   const getTotal = () => {
     let total = allExpenses
@@ -38,7 +37,7 @@ const MyDetails = ({ categoryName, newCategoryName, money }) => {
 
   useEffect(() => {
     getTotal();
-  }, [newCategoryName === categoryName, money]);
+  }, [categoryName, money]);
 
   useEffect(() => {
     getCategoryImgPath();

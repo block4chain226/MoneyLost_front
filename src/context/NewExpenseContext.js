@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { createContext } from "react";
 import ExpensesDetailsContext from "../context/ExpenseDetailsContext";
 const NewExpenseContext = createContext({});
@@ -9,7 +10,7 @@ export const NewExpenseProvider = ({ children }) => {
     isIncome: false,
   });
   let [amount, setAmount] = useState("");
-
+  // const { allExpenses, setAllExpenses } = useContext(ExpensesDetailsContext);
   const [categoryName, setCategoryName] = useState("");
 
   const addNewExpense = (categor) => {
@@ -31,6 +32,12 @@ export const NewExpenseProvider = ({ children }) => {
         (res) => res.json()
       );
     } catch (error) {}
+    // setAllExpenses([
+    //   ...allExpenses,
+    //   categor,
+    //   new Date().toLocaleDateString("en-US"),
+    //   amount,
+    // ]);
   };
 
   return (

@@ -19,7 +19,6 @@ const ExpensesDetails = (props) => {
     isUpdate,
     setIsUpdate,
   } = useContext(ExpensesDetailsContext);
-  // const [titleCategory, setTitleCategory] = useState([]);
 
   const userId = sessionStorage.getItem("userId");
 
@@ -54,13 +53,12 @@ const ExpensesDetails = (props) => {
     getCategoryTitles(callback);
   }, [titleCategory, dateMode]);
   // debugger;
-
+  console.log(allExpenses);
   return (
     <div className={cl.expenses}>
       <div className={cl.expenses__details}>
         <div className={cl.expenses__container}>
           <div className={cl.expenses}>
-            {/* <div>{moneyAmount}</div> */}
             <ul>
               {titleCategory.map((item) => (
                 <MyDetails

@@ -14,6 +14,8 @@ const Category = (props) => {
     setTitleCategory,
     newTitleCategory,
     setNewTitleCategory,
+    allExpenses,
+    setAllExpenses,
   } = useContext(ExpensesDetailsContext);
   const { setMoneyAmount } = useContext(ExpensesDetailsContext);
 
@@ -21,12 +23,23 @@ const Category = (props) => {
     setCategoryName(categor);
     addNewExpense(categor);
     console.log("categories from AddNewExpense", titleCategory);
-    // setNewTitleCategory(categor);
     displayNewExpense(categor);
     setMoneyAmount(amount);
-    // sessionStorage.setItem("");
+    updateAllExpenses(categor);
     props.toggleMenu();
     props.showCategory(false);
+  };
+
+  const updateAllExpenses = (categor) => {
+    setAllExpenses([
+      ...allExpenses,
+      {
+        category: categor,
+        date: new Date().toLocaleDateString("en-US"),
+        moneyAmount: +amount,
+      },
+    ]);
+    console.log("updater allExpenses: ", allExpenses);
   };
 
   const displayNewExpense = (categor) => {
@@ -45,7 +58,6 @@ const Category = (props) => {
             <div className={cl.category__img}>
               <button
                 onClick={() => {
-                  // setCategoryName(item.name);
                   postNewExpense(item.name);
                 }}
               >

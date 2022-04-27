@@ -4,9 +4,7 @@ import CategoryContext from "../../context/CategoryContext";
 import ExpensesDetailsContext from "../../context/ExpenseDetailsContext";
 import cl from "./MyDetails.module.css";
 const MyDetails = ({ categoryName, newCategoryName, money }) => {
-  // debugger;
   const { titleCategory } = useContext(ExpensesDetailsContext);
-  // console.log(titleCategory);
   const { category, setCategory } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
   const { allExpenses, expensesToShow } = useContext(ExpensesDetailsContext);
@@ -20,7 +18,6 @@ const MyDetails = ({ categoryName, newCategoryName, money }) => {
     });
   };
   ////////save titleCategory in sessionState and then compare if it includes categoryName/////////
-  console.log("new = ", newCategoryName);
 
   const getTotal = () => {
     let total = allExpenses
@@ -29,18 +26,20 @@ const MyDetails = ({ categoryName, newCategoryName, money }) => {
           item.date === new Date().toLocaleDateString("en-US") &&
           item.category === categoryName
         ) {
+          console.log("item to reduce", item);
           return item;
         }
       })
       .reduce((acc, cut) => {
         return acc + cut.moneyAmount;
-      }, +money);
+      }, 0);
     setTotalAmount(total);
   };
 
   useEffect(() => {
     getTotal();
-  }, [newCategoryName === categoryName]);
+  }, [newCategoryName === categoryName, money]);
+
   useEffect(() => {
     getCategoryImgPath();
   }, []);
@@ -79,10 +78,9 @@ const MyDetails = ({ categoryName, newCategoryName, money }) => {
           )
         )}
 
-        {newCategoryName !== "" && newCategoryName === categoryName ? (
+        {/* {newCategoryName !== "" && newCategoryName === categoryName ? (
           <div className={cl.expenses__body}>
             <div className={cl.expenses__category}>
-              {/* ({setTotalAmount(totalAmount + money)}) */}
               <div className={cl.imgcontainer}>
                 <img src={`http://${categoryImg}`}></img>
               </div>
@@ -92,7 +90,7 @@ const MyDetails = ({ categoryName, newCategoryName, money }) => {
           </div>
         ) : (
           ""
-        )}
+        )} */}
       </details>
     </div>
   );

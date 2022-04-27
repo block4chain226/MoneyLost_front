@@ -32,26 +32,6 @@ const AddExpenses = (props) => {
     setMenu({ isOpen: !menu.isOpen });
   }
 
-  // const addNewExpense = (category) => {
-  //   const config = {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       userId: sessionStorage.getItem("userId"),
-  //       category: categoryName,
-  //       date: new Date().toLocaleDateString("en-US"),
-  //       moneyAmount: amount,
-  //     }),
-  //   };
-  //   try {
-  //     const response = fetch("http://localhost:3000/expenses", config).then(
-  //       (res) => res.json()
-  //     );
-  //   } catch (error) {}
-  // };
-
   const AddNewIncome = () => {
     const config = {
       method: "POST",

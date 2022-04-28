@@ -57,6 +57,14 @@ export const ExpensesContextProvider = ({ children }) => {
   }
   function byMonth() {
     console.log("byMonth");
+    Object.values(allExpenses).map((element) => {
+      if (
+        !titleCategory.includes(element.category) &&
+        element.date === new Date().toLocaleDateString("en-US")
+      ) {
+        setTitleCategory([...titleCategory, element.category]);
+      }
+    });
   }
   function byYear() {
     console.log("byYear");

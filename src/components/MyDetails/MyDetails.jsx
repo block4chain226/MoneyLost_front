@@ -66,7 +66,7 @@ const MyDetails = ({ categoryName, money }) => {
                 <div className={cl.imgcontainer}>
                   <img src={`http://${categoryImg}`}></img>
                 </div>
-                <span>{categoryName}</span>
+                <span>{item.date}</span>
               </div>
               <span>{item.moneyAmount}</span>
             </div>

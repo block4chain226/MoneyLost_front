@@ -9,7 +9,8 @@ const ExpensesDetails = (props) => {
   const {
     allExpenses,
     setAllExpenses,
-    dateMode,
+    byDay,
+    callback,
     titleCategory,
     setTitleCategory,
     moneyAmount,
@@ -27,23 +28,8 @@ const ExpensesDetails = (props) => {
     getAllExpenses();
   }, []);
 
-  function callback() {
-    Object.values(allExpenses).map((element) => {
-      if (
-        !titleCategory.includes(element.category) &&
-        element.date === new Date().toLocaleDateString("en-US")
-      ) {
-        setTitleCategory([...titleCategory, element.category]);
-      }
-    });
-  }
-
-  const getCategoryTitles = (callBack) => {
-    callBack();
-  };
-
   useEffect(() => {
-    getCategoryTitles(callback);
+    byDay();
   }, [titleCategory]);
   // debugger;
 
@@ -55,7 +41,7 @@ const ExpensesDetails = (props) => {
             <ul>
               {titleCategory.map((item) => (
                 <MyDetails
-                  key={item._id}
+                  key={item.toString()}
                   money={moneyAmount}
                   categoryName={item}
                 />

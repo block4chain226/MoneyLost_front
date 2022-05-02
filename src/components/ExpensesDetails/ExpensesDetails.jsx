@@ -4,6 +4,7 @@ import AddExpenses from "../AddExpenses/AddExpenses";
 import MyDetails from "../MyDetails/MyDetails";
 import cl from "./ExpensesDetails.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
+import CategoryContext from "../../context/CategoryContext";
 
 const ExpensesDetails = (props) => {
   const {
@@ -15,6 +16,8 @@ const ExpensesDetails = (props) => {
     setTitleCategory,
     moneyAmount,
   } = useContext(ExpensesContext);
+
+  const { category } = useContext(CategoryContext);
 
   const userId = sessionStorage.getItem("userId");
 
@@ -30,8 +33,7 @@ const ExpensesDetails = (props) => {
 
   useEffect(() => {
     byDay();
-  }, [titleCategory]);
-  // debugger;
+  }, [allExpenses]);
 
   return (
     <div className={cl.expenses}>
@@ -39,18 +41,30 @@ const ExpensesDetails = (props) => {
         <div className={cl.expenses__container}>
           <div className={cl.expenses}>
             <ul>
-              {titleCategory.map((item) => (
-                <MyDetails
-                  key={item.toString()}
-                  money={moneyAmount}
-                  categoryName={item}
-                />
-              ))}
+              {Object.entries(titleCategory).map((item) => {
+                return (
+                  <MyDetails
+                    key={item[1][0].id}
+                    money={moneyAmount}
+                    categoryName={item[0]}
+                    items={item[1]}
+                  />
+                );
+              })}
+              {/* {Object.values(titleCategory).map((item) => (
+                <h1>{item}</h1>
+                // <MyDetails
+                //   key={item.toString()}
+                //   money={moneyAmount}
+                //   categoryName={item}
+                // />
+              ))} */}
             </ul>
           </div>
         </div>
       </div>
-      <AddExpenses position="bottom" category={props.category}></AddExpenses>
+      {/* <AddExpenses position="bottom" category={props.category}></AddExpenses> */}
+      <AddExpenses position="bottom" category={category}></AddExpenses>
     </div>
   );
 };

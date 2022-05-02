@@ -22,9 +22,7 @@ function App() {
               <AuthProvider>
                 <CategoryContextProvider>
                   <ExpensesContextProvider>
-                    {/* <NewExpenseProvider> */}
                     <Main />
-                    {/* </NewExpenseProvider> */}
                   </ExpensesContextProvider>
                 </CategoryContextProvider>
               </AuthProvider>

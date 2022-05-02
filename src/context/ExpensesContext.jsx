@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createContext } from "react";
 import { useState } from "react";
 
@@ -9,14 +9,16 @@ export const ExpensesContextProvider = ({ children }) => {
     isExpense: true,
     isIncome: false,
   });
+  const [expenseId, setExpenseId] = useState(new Date().getTime());
   let [amount, setAmount] = useState("");
+  const datenow = new Date().toLocaleDateString("en-US");
   const [categoryName, setCategoryName] = useState("");
-
+  let [currentDate, setCurrentDate] = useState(datenow);
   const [allExpenses, setAllExpenses] = useState([]);
 
   const [moneyAmount, setMoneyAmount] = useState(0);
   const [callBack, setCallBack] = useState(() => byDay);
-  const [titleCategory, setTitleCategory] = useState([]);
+  const [titleCategory, setTitleCategory] = useState({});
   const [dateMode, setDateMode] = useState({
     day: true,
     month: false,
@@ -24,7 +26,7 @@ export const ExpensesContextProvider = ({ children }) => {
   });
 
   const addNewExpense = (categor) => {
-    console.log("userId= ", sessionStorage.getItem("userId"));
+    setExpenseId(new Date().getTime());
     const config = {
       method: "POST",
       headers: {
@@ -32,6 +34,7 @@ export const ExpensesContextProvider = ({ children }) => {
       },
       body: JSON.stringify({
         userId: sessionStorage.getItem("userId"),
+        id: expenseId,
         category: categor,
         date: new Date().toLocaleDateString("en-US"),
         moneyAmount: amount,
@@ -46,15 +49,38 @@ export const ExpensesContextProvider = ({ children }) => {
 
   function byDay(element) {
     console.log("byDay");
-    Object.values(allExpenses).map((element) => {
-      if (
-        !titleCategory.includes(element.category) &&
-        element.date === new Date().toLocaleDateString("en-US")
-      ) {
-        setTitleCategory([...titleCategory, element.category]);
+    //{
+    // food:[
+    // {amount:dfgfdg,date:fdfv}
+    // {amount:dfgfdg,date:fdfv}
+    // {amount:dfgfdg,date:fdfv}
+    // ]
+    // }
+    const cat = {};
+    allExpenses.forEach((element) => {
+      if (element.date === currentDate) {
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
       }
     });
+
+    setTitleCategory(cat);
   }
+  function Is() {
+    if (titleCategory.hasOwnProperty()) {
+      console.log(true);
+    } else {
+      console.log(false);
+    }
+  }
+
+  useEffect(() => {
+    Is();
+  }, []);
+
   function byMonth() {
     console.log("byMonth");
     Object.values(allExpenses).map((element) => {

@@ -4,7 +4,7 @@ import MyButton from "../MyButton/MyButton";
 import ExpensesContext from "../../context/ExpensesContext";
 
 const Category = (props) => {
-  const { amount, setCategoryName, addNewExpense } =
+  const { amount, setAmount, setCategoryName, addNewExpense, expenseId } =
     useContext(ExpensesContext);
   const {
     titleCategory,
@@ -17,28 +17,50 @@ const Category = (props) => {
   const postNewExpense = (categor) => {
     setCategoryName(categor);
     addNewExpense(categor);
+    updateAllExpenses(categor);
     displayNewExpense(categor);
     setMoneyAmount(amount);
-    updateAllExpenses(categor);
     props.toggleMenu();
     props.showCategory(false);
+    setAmount("");
   };
 
   const updateAllExpenses = (categor) => {
-    setAllExpenses([
-      ...allExpenses,
-      {
-        category: categor,
-        date: new Date().toLocaleDateString("en-US"),
-        moneyAmount: +amount,
-      },
-    ]);
-    console.log("updater allExpenses: ", allExpenses);
+    if (Object.keys(titleCategory).length !== 0) {
+      const cat = {};
+      Object.entries(titleCategory).map((element) => {
+        console.log("ele", element);
+        if (element[0] === categor) {
+          cat[element[0]] = element;
+          setTitleCategory(
+            titleCategory,
+            titleCategory[categor].push({
+              id: expenseId,
+              category: categor,
+              date: new Date().toLocaleDateString("en-US"),
+              moneyAmount: +amount,
+            })
+          );
+          console.log("iuo", cat[element[0]]);
+        }
+      });
+    }
   };
 
   const displayNewExpense = (categor) => {
-    if (!titleCategory.includes(categor)) {
-      setTitleCategory([...titleCategory, categor]);
+    const cat = {};
+    if (!titleCategory.hasOwnProperty(categor)) {
+      cat[categor] = [];
+      titleCategory[categor] = [];
+      setTitleCategory(
+        titleCategory,
+        titleCategory[categor].push({
+          id: expenseId,
+          category: categor,
+          date: new Date().toLocaleDateString("en-US"),
+          moneyAmount: +amount,
+        })
+      );
     }
   };
 

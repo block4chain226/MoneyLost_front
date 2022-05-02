@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import cl from "./Header.module.css";
-import SwitchButton from "../SwitchButton/SwitchButton";
-import { useNavigate } from "react-router-dom";
-import RequireAuth from "../RequireAuth";
-import { Link } from "react-router-dom";
-const Header = () => {
-  const [date, setDate] = useState("Day");
+import ExpensesContext from "../../context/ExpensesContext";
+import MyButton from "../MyButton/MyButton";
 
-  function fff(event) {
-    setDate(event.target.textContent);
-  }
-  const navigate = useNavigate();
+const Header = () => {
+  const { currentDate, setCurrentDate } = useContext(ExpensesContext);
+
+  useEffect(() => {
+    console.log(currentDate);
+  });
+
   return (
     <section className={cl.header}>
+      <button>{currentDate} </button>
       <div className={cl.header__container}>
         <div className={cl.header__money}>
           <div className={cl.money__total}>
@@ -28,6 +28,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <button></button>
     </section>
   );
 };

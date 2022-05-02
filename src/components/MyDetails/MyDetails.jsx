@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CategoryContext from "../../context/CategoryContext";
 import ExpensesContext from "../../context/ExpensesContext";
 import cl from "./MyDetails.module.css";
-const MyDetails = ({ categoryName, money }) => {
+const MyDetails = ({ categoryName, money, items }) => {
   const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
   const { allExpenses } = useContext(ExpensesContext);
@@ -18,18 +18,19 @@ const MyDetails = ({ categoryName, money }) => {
   };
 
   const getTotal = () => {
-    let total = allExpenses
-      .filter((item) => {
-        if (
-          item.date === new Date().toLocaleDateString("en-US") &&
-          item.category === categoryName
-        ) {
-          return item;
-        }
-      })
-      .reduce((acc, cut) => {
-        return acc + cut.moneyAmount;
-      }, 0);
+    // let total = allExpenses
+    //   .filter((item) => {
+    //     if (
+    //       item.date === new Date().toLocaleDateString("en-US") &&
+    //       item.category === categoryName
+    //     ) {
+    //       return item;
+    //     }
+    //   })
+
+    let total = items.reduce((acc, cut) => {
+      return acc + cut.moneyAmount;
+    }, 0);
     setTotalAmount(total);
   };
 
@@ -58,22 +59,17 @@ const MyDetails = ({ categoryName, money }) => {
             <span>{totalAmount}</span>
           </div>
         </summary>
-        {allExpenses.map((item) =>
-          item.category === categoryName &&
-          item.date === new Date().toLocaleDateString("en-US") ? (
-            <div key={item._id} className={cl.expenses__body}>
-              <div className={cl.expenses__category}>
-                <div className={cl.imgcontainer}>
-                  <img src={`http://${categoryImg}`}></img>
-                </div>
-                <span>{item.date}</span>
+        {items.map((item) => (
+          <div key={item.id} className={cl.expenses__body}>
+            <div className={cl.expenses__category}>
+              <div className={cl.imgcontainer}>
+                <img src={`http://${categoryImg}`}></img>
               </div>
-              <span>{item.moneyAmount}</span>
+              <span>{item.date}</span>
             </div>
-          ) : (
-            ""
-          )
-        )}
+            <span>{item.moneyAmount}</span>
+          </div>
+        ))}
       </details>
     </div>
   );

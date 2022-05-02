@@ -9,32 +9,30 @@ import DateMode from "../components/DateMode";
 import CategoryContext from "../context/CategoryContext";
 
 const Main = () => {
-  const { category, setCategory } = useContext(CategoryContext);
+  // const { category, setCategory } = useContext(CategoryContext);
 
-  const categoryUrl = "http://localhost:3000/category/";
+  // const categoryUrl = "http://localhost:3000/category/";
 
-  const [fetchCategories] = useFetching(async () => {
-    await fetch(categoryUrl)
-      .then((res) => res.json())
-      .then((json) => setCategory(json.answer))
-      .then((data) => console.log(data));
-  });
+  // const [fetchCategories] = useFetching(async () => {
+  //   await fetch(categoryUrl)
+  //     .then((res) => res.json())
+  //     .then((json) => setCategory(json.answer));
+  // });
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-  // console.log(category);
+  // useEffect(() => {
+  //   fetchCategories();
+  // }, []);
+
   return (
     <div className="wrapper">
-      {/* <ExpensesDetailsProvider> */}
       <Header />
       <DateMode />
       <section className="main">
         <div className="newmain">
-          <ExpensesDetails category={category} />
+          {/* <ExpensesDetails category={category} /> */}
+          <ExpensesDetails />
         </div>
       </section>
-      {/* </ExpensesDetailsProvider> */}
     </div>
   );
 };

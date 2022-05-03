@@ -21,7 +21,13 @@ const Main = () => {
 
   // useEffect(() => {
   //   fetchCategories();
-  // }, []);
+  // }, []);\
+
+  useEffect(() => {
+    if (window.performance.navigation.type === 1) {
+      sessionStorage.removeItem("tC");
+    }
+  });
 
   return (
     <div className="wrapper">

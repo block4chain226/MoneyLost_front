@@ -12,6 +12,8 @@ export const ExpensesContextProvider = ({ children }) => {
   const [expenseId, setExpenseId] = useState(new Date().getTime());
   const [amount, setAmount] = useState("");
 
+  const [days, setDays] = useState(0);
+
   // const datenow = new Date().toLocaleDateString("en-US");
   const [categoryName, setCategoryName] = useState("");
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -37,7 +39,7 @@ export const ExpensesContextProvider = ({ children }) => {
         userId: sessionStorage.getItem("userId"),
         id: expenseId,
         category: categor,
-        date: new Date().toLocaleDateString("en-US"),
+        date: currentDate.toLocaleDateString("en-US"),
         moneyAmount: amount,
       }),
     };
@@ -48,7 +50,7 @@ export const ExpensesContextProvider = ({ children }) => {
     } catch (error) {}
   };
 
-  function byDay(element) {
+  function byDay() {
     console.log("byDay");
     //{
     // food:[
@@ -59,7 +61,7 @@ export const ExpensesContextProvider = ({ children }) => {
     // }
     const cat = {};
     allExpenses.forEach((element) => {
-      if (element.date === new Date().toLocaleDateString("en-US")) {
+      if (element.date === currentDate.toLocaleDateString("en-US")) {
         if (!cat[element.category]) {
           cat[element.category] = [element];
         } else {
@@ -68,19 +70,46 @@ export const ExpensesContextProvider = ({ children }) => {
       }
     });
 
+    if (sessionStorage.getItem("tC") !== null) {
+      const tempExpenses = JSON.parse(sessionStorage.getItem("tC"));
+      tempExpenses.map((element) => {
+        if (element.date === currentDate.toLocaleDateString("en-US")) {
+          if (!cat[element.category]) {
+            cat[element.category] = [element];
+          } else {
+            cat[element.category].push(element);
+          }
+        }
+      });
+    }
+
     setTitleCategory(cat);
   }
 
   function byMonth() {
     console.log("byMonth");
-    Object.values(allExpenses).map((element) => {
+
+    const now = new Date();
+
+    let month = currentDate.getMonth() + 1;
+    let firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+    let lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    console.log(firstDay.toLocaleDateString("en-US"));
+    const cat = {};
+    allExpenses.forEach((element) => {
       if (
-        !titleCategory.includes(element.category) &&
-        element.date === new Date().toLocaleDateString("en-US")
+        element.date >= firstDay.toLocaleDateString("en-US") &&
+        element.date <= lastDay.toLocaleDateString("en-US")
       ) {
-        setTitleCategory([...titleCategory, element.category]);
+        debugger;
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
       }
     });
+    setTitleCategory(cat);
   }
   function byYear() {
     console.log("byYear");
@@ -100,6 +129,8 @@ export const ExpensesContextProvider = ({ children }) => {
         setAllExpenses,
         dateMode,
         setDateMode,
+        days,
+        setDays,
         byDay,
         byMonth,
         byYear,

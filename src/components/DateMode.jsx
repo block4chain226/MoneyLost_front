@@ -4,22 +4,22 @@ import "../styles/App.css";
 import ExpensesContext from "../context/ExpensesContext";
 
 const DateMode = () => {
-  const { setDateMode, byDay, byMonth, byYear, setCallBack } =
+  const { setDateMode, byDay, byMonth, byYear, setCallBack, currentDate } =
     useContext(ExpensesContext);
 
   return (
     <div className="date-mod__date">
       <button
         onClick={() => {
-          setDateMode({ day: true, month: false, year: false });
-          setCallBack(byDay);
+          // setDateMode({ day: true, month: false, year: false });
+          setCallBack(byDay(currentDate));
         }}
       >
         Day
       </button>
       <button
         onClick={() => {
-          setDateMode({ day: false, month: true, year: false });
+          // setDateMode({ day: false, month: true, year: false });
           setCallBack(byMonth);
         }}
       >

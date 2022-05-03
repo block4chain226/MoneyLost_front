@@ -13,6 +13,7 @@ const ExpensesDetails = (props) => {
     callback,
     titleCategory,
     setTitleCategory,
+    currentDate,
     moneyAmount,
   } = useContext(ExpensesContext);
 

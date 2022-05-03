@@ -10,10 +10,11 @@ export const ExpensesContextProvider = ({ children }) => {
     isIncome: false,
   });
   const [expenseId, setExpenseId] = useState(new Date().getTime());
-  let [amount, setAmount] = useState("");
-  const datenow = new Date().toLocaleDateString("en-US");
+  const [amount, setAmount] = useState("");
+
+  // const datenow = new Date().toLocaleDateString("en-US");
   const [categoryName, setCategoryName] = useState("");
-  let [currentDate, setCurrentDate] = useState(datenow);
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [allExpenses, setAllExpenses] = useState([]);
 
   const [moneyAmount, setMoneyAmount] = useState(0);
@@ -58,7 +59,7 @@ export const ExpensesContextProvider = ({ children }) => {
     // }
     const cat = {};
     allExpenses.forEach((element) => {
-      if (element.date === currentDate) {
+      if (element.date === new Date().toLocaleDateString("en-US")) {
         if (!cat[element.category]) {
           cat[element.category] = [element];
         } else {
@@ -69,17 +70,6 @@ export const ExpensesContextProvider = ({ children }) => {
 
     setTitleCategory(cat);
   }
-  function Is() {
-    if (titleCategory.hasOwnProperty()) {
-      console.log(true);
-    } else {
-      console.log(false);
-    }
-  }
-
-  useEffect(() => {
-    Is();
-  }, []);
 
   function byMonth() {
     console.log("byMonth");
@@ -116,6 +106,8 @@ export const ExpensesContextProvider = ({ children }) => {
         callBack,
         setCallBack,
         titleCategory,
+        currentDate,
+        setCurrentDate,
         setTitleCategory,
         moneyAmount,
         setMoneyAmount,

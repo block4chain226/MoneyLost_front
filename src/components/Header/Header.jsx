@@ -6,17 +6,30 @@ import MyButton from "../MyButton/MyButton";
 const Header = () => {
   const { currentDate, setCurrentDate } = useContext(ExpensesContext);
 
-  useEffect(() => {
-    console.log(currentDate);
-  });
+  const getBackwardDate = () => {
+    const date = currentDate;
+    const daysAgo = new Date(date.getTime());
+    daysAgo.setDate(date.getDate() - 1);
+    setCurrentDate(daysAgo);
+    console.log("date: ", daysAgo.toLocaleDateString("en-US"));
+  };
+
+  const getForwardDate = () => {
+    if (currentDate < new Date()) {
+      const daysAgo = new Date(currentDate.getTime());
+      daysAgo.setDate(currentDate.getDate() + 1);
+      setCurrentDate(daysAgo);
+      console.log("date: ", daysAgo.toLocaleDateString("en-US"));
+    }
+  };
 
   return (
     <section className={cl.header}>
-      <button>{currentDate} </button>
+      <button onClick={getBackwardDate}> </button>
       <div className={cl.header__container}>
         <div className={cl.header__money}>
           <div className={cl.money__total}>
-            <h1>77877</h1>
+            <h1>78787</h1>
           </div>
           <div className={cl.money__expenses}>
             <h6>Today exp</h6>
@@ -28,7 +41,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <button></button>
+      <button onClick={getForwardDate}></button>
     </section>
   );
 };

@@ -18,16 +18,6 @@ const MyDetails = ({ categoryName, money, items }) => {
   };
 
   const getTotal = () => {
-    // let total = allExpenses
-    //   .filter((item) => {
-    //     if (
-    //       item.date === new Date().toLocaleDateString("en-US") &&
-    //       item.category === categoryName
-    //     ) {
-    //       return item;
-    //     }
-    //   })
-
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
     }, 0);

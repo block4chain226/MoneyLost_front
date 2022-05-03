@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
 import AddExpenses from "../AddExpenses/AddExpenses";
-
 import MyDetails from "../MyDetails/MyDetails";
 import cl from "./ExpensesDetails.module.css";
 import ExpensesContext from "../../context/ExpensesContext";

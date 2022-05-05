@@ -3,27 +3,34 @@ import { createContext } from "react";
 import { useState } from "react";
 
 const ExpensesContext = createContext();
-
+const now = new Date();
 export const ExpensesContextProvider = ({ children }) => {
   const [switchMode, setSwitchMode] = useState({
     isExpense: true,
     isIncome: false,
   });
   const [expenseId, setExpenseId] = useState(new Date().getTime());
-  let [amount, setAmount] = useState("");
-  const datenow = new Date().toLocaleDateString("en-US");
+  const [amount, setAmount] = useState("");
+
+  const [days, setDays] = useState(0);
+
+  // const datenow = new Date().toLocaleDateString("en-US");
   const [categoryName, setCategoryName] = useState("");
-  let [currentDate, setCurrentDate] = useState(datenow);
+
   const [allExpenses, setAllExpenses] = useState([]);
 
   const [moneyAmount, setMoneyAmount] = useState(0);
   const [callBack, setCallBack] = useState(() => byDay);
   const [titleCategory, setTitleCategory] = useState({});
-  const [dateMode, setDateMode] = useState({
-    day: true,
-    month: false,
-    year: false,
-  });
+
+  // firstDayOfMonth: new Date(now.getFullYear(), now.getMonth(), 1),
+  // lastDayOfMonth: new Date(now.getFullYear(), now.getMonth() + 1, 0),
+  const [month, setMonth] = useState(0);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState(currentDate);
+  const [currentYear, setCurrentYear] = useState(currentDate);
+  const [dateMode, setDateMode] = useState("Day");
+  const [dayExpenses, setDayExpenses] = useState(0);
 
   const addNewExpense = (categor) => {
     setExpenseId(new Date().getTime());
@@ -36,7 +43,7 @@ export const ExpensesContextProvider = ({ children }) => {
         userId: sessionStorage.getItem("userId"),
         id: expenseId,
         category: categor,
-        date: new Date().toLocaleDateString("en-US"),
+        date: currentDate.toLocaleDateString("en-US"),
         moneyAmount: amount,
       }),
     };
@@ -47,8 +54,9 @@ export const ExpensesContextProvider = ({ children }) => {
     } catch (error) {}
   };
 
-  function byDay(element) {
+  function byDay() {
     console.log("byDay");
+    setDateMode("Day");
     //{
     // food:[
     // {amount:dfgfdg,date:fdfv}
@@ -58,7 +66,7 @@ export const ExpensesContextProvider = ({ children }) => {
     // }
     const cat = {};
     allExpenses.forEach((element) => {
-      if (element.date === currentDate) {
+      if (element.date === currentDate.toLocaleDateString("en-US")) {
         if (!cat[element.category]) {
           cat[element.category] = [element];
         } else {
@@ -67,34 +75,75 @@ export const ExpensesContextProvider = ({ children }) => {
       }
     });
 
+    if (sessionStorage.getItem("tC") !== null) {
+      const tempExpenses = JSON.parse(sessionStorage.getItem("tC"));
+      tempExpenses.map((element) => {
+        if (element.date === currentDate.toLocaleDateString("en-US")) {
+          if (!cat[element.category]) {
+            cat[element.category] = [element];
+          } else {
+            cat[element.category].push(element);
+          }
+        }
+      });
+    }
+    // setDayExpenses(0);
+
     setTitleCategory(cat);
   }
-  function Is() {
-    if (titleCategory.hasOwnProperty()) {
-      console.log(true);
-    } else {
-      console.log(false);
-    }
-  }
 
-  useEffect(() => {
-    Is();
-  }, []);
+  const getTotalAmountByDay = () => {
+    let total = Object.entries(titleCategory).map((item) => {
+      return item[1].map((elem) => {
+        return elem;
+      });
+    });
+    total = total.flat();
+    const total2 = total.reduce((acc, elem) => {
+      return (acc += elem.moneyAmount);
+    }, 0);
+    setDayExpenses(total2);
+    console.log("total = ", total2);
+  };
 
   function byMonth() {
+    // debugger;
     console.log("byMonth");
-    Object.values(allExpenses).map((element) => {
+    setDateMode("Month");
+    const firstDayOfMonth = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth(),
+      1
+    );
+    const lastDayOfMonth = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() + 1,
+      0
+    );
+
+    const cat = {};
+    allExpenses.forEach((element) => {
       if (
-        !titleCategory.includes(element.category) &&
-        element.date === new Date().toLocaleDateString("en-US")
+        element.date >= firstDayOfMonth.toLocaleDateString("en-US") &&
+        element.date <= lastDayOfMonth.toLocaleDateString("en-US")
       ) {
-        setTitleCategory([...titleCategory, element.category]);
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
       }
     });
+    setTitleCategory(cat);
   }
   function byYear() {
     console.log("byYear");
+    setDateMode("Year");
   }
+
+  useEffect(() => {
+    getTotalAmountByDay();
+  }, [titleCategory]);
 
   return (
     <ExpensesContext.Provider
@@ -108,17 +157,28 @@ export const ExpensesContextProvider = ({ children }) => {
         addNewExpense,
         allExpenses,
         setAllExpenses,
+        days,
+        dayExpenses,
+        setDayExpenses,
+        setDays,
         dateMode,
-        setDateMode,
         byDay,
         byMonth,
         byYear,
         callBack,
         setCallBack,
         titleCategory,
+        setDateMode,
+        currentMonth,
+        setCurrentMonth,
+        currentDate,
+        setCurrentDate,
         setTitleCategory,
+        month,
+        setMonth,
         moneyAmount,
         setMoneyAmount,
+        getTotalAmountByDay,
       }}
     >
       {children}

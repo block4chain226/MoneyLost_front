@@ -7,40 +7,31 @@ const Header = () => {
   const {
     currentDate,
     setCurrentDate,
+    dateMode,
     byDay,
+    month,
+    setMonth,
     byMonth,
     byYear,
+    currentMonth,
+    setDayExpenses,
+    setCurrentMonth,
     setCallBack,
+    dayExpenses,
     days,
     setDays,
   } = useContext(ExpensesContext);
 
-  // const getBackwardDate = () => {
-  //   const date = currentDate;
-  //   const daysAgo = new Date(date.getTime());
-  //   daysAgo.setDate(date.getDate() - 1);
-  //   setCurrentDate(daysAgo);
-  //   setCallBack(byDay());
-  //   console.log("date: ", daysAgo.toLocaleDateString("en-US"));
-  // };
-
-  // const getForwardDate = () => {
-  //   const today = new Date();
-  //   console.log(today);
-  //   if (
-  //     currentDate.toLocaleDateString("en-US") <
-  //     today.toLocaleDateString("en-US")
-  //   ) {
-  //     const daysAgo = new Date(currentDate.getTime());
-  //     daysAgo.setDate(currentDate.getDate() + 1);
-  //     setCurrentDate(daysAgo);
-  //     setCallBack(byDay());
-  //     console.log("date: ", daysAgo.toLocaleDateString("en-US"));
-  //   }
-  // };
-
   const incrementDate = (e) => {
     e.preventDefault();
+    if (
+      dateMode === "Month" &&
+      currentMonth.toLocaleDateString("en-US") <
+        new Date().toLocaleDateString("en-US")
+    ) {
+      setMonth(30);
+      setDays((prevState) => prevState + 1);
+    }
     if (
       currentDate.toLocaleDateString("en-US") <
       new Date().toLocaleDateString("en-US")
@@ -49,24 +40,49 @@ const Header = () => {
     }
   };
 
-  const decrementDate = (e) => {
-    e.preventDefault();
+  const decrementDate = () => {
+    // e.preventDefault();
+    setMonth(-30);
+
     setDays((prevState) => prevState - 1);
   };
 
   useEffect(() => {
-    setCurrentDate(
-      (prevState) => new Date(Date.now() + days * 24 * 60 * 60 * 1000)
-    );
+    // debugger;
+    if (dateMode === "Day") {
+      setCurrentDate(
+        (prevState) => new Date(Date.now() + days * 24 * 60 * 60 * 1000)
+      );
+    }
+    if (dateMode === "Month") {
+      setCurrentMonth(
+        // (prevState) => new Date(currentMonth.getTime() - 30 * 1000 * 3600 * 24)
+        (prevState) =>
+          new Date(currentMonth.getTime() + month * 1000 * 3600 * 24)
+      );
+    }
   }, [days]);
 
   useEffect(() => {
     setCallBack(byDay);
-  }, [days, currentDate]);
+  }, [currentDate]);
+
+  useEffect(() => {
+    setDays(0);
+  }, [dateMode === "Day"]);
+
+  useEffect(() => {
+    setCallBack(byMonth);
+    // setDays(0);
+  }, [currentMonth]);
+
+  useEffect(() => {
+    setDayExpenses(0);
+  }, [currentDate]);
 
   return (
     <section className={cl.header}>
-      <button onClick={(e) => decrementDate(e)}> </button>
+      <button onClick={decrementDate}> </button>
       <div className={cl.header__container}>
         <div className={cl.header__money}>
           <div className={cl.money__total}>
@@ -74,11 +90,11 @@ const Header = () => {
           </div>
           <div className={cl.money__expenses}>
             <h6>Today exp</h6>
-            <h6>1000</h6>
+            <h6>{dayExpenses}</h6>
           </div>
           <div className={cl.money__income}>
             <h6>Money income</h6>
-            <h6>700</h6>
+            <h6></h6>
           </div>
         </div>
       </div>

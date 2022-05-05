@@ -4,14 +4,14 @@ import "../styles/App.css";
 import ExpensesContext from "../context/ExpensesContext";
 
 const DateMode = () => {
-  const { setDateMode, byDay, byMonth, byYear, setCallBack, currentDate } =
+  const { byDay, byMonth, setDateMode, byYear, setCallBack, currentDate } =
     useContext(ExpensesContext);
 
   return (
     <div className="date-mod__date">
       <button
         onClick={() => {
-          // setDateMode({ day: true, month: false, year: false });
+          setDateMode("Day");
           setCallBack(byDay(currentDate));
         }}
       >
@@ -19,7 +19,7 @@ const DateMode = () => {
       </button>
       <button
         onClick={() => {
-          // setDateMode({ day: false, month: true, year: false });
+          setDateMode("Month");
           setCallBack(byMonth);
         }}
       >
@@ -27,7 +27,7 @@ const DateMode = () => {
       </button>
       <button
         onClick={() => {
-          setDateMode({ day: false, month: false, year: true });
+          setDateMode("Year");
           setCallBack(byYear);
         }}
       >

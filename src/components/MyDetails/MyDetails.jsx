@@ -6,7 +6,8 @@ import cl from "./MyDetails.module.css";
 const MyDetails = ({ categoryName, money, items }) => {
   const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
-  const { allExpenses } = useContext(ExpensesContext);
+  const { allExpenses, dayExpenses, setDayExpenses } =
+    useContext(ExpensesContext);
   const [totalAmount, setTotalAmount] = useState();
 
   const getCategoryImgPath = () => {
@@ -18,20 +19,12 @@ const MyDetails = ({ categoryName, money, items }) => {
   };
 
   const getTotal = () => {
-    // let total = allExpenses
-    //   .filter((item) => {
-    //     if (
-    //       item.date === new Date().toLocaleDateString("en-US") &&
-    //       item.category === categoryName
-    //     ) {
-    //       return item;
-    //     }
-    //   })
-
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
     }, 0);
+
     setTotalAmount(total);
+    // setDayExpenses(dayExpenses + total);
   };
 
   useEffect(() => {

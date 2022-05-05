@@ -11,6 +11,7 @@ const Category = (props) => {
     setTitleCategory,
     allExpenses,
     setAllExpenses,
+    currentDate,
     setMoneyAmount,
   } = useContext(ExpensesContext);
 
@@ -28,20 +29,30 @@ const Category = (props) => {
   const updateAllExpenses = (categor) => {
     if (Object.keys(titleCategory).length !== 0) {
       const cat = {};
+      const newExpense = {
+        id: expenseId,
+        category: categor,
+        date: currentDate.toLocaleDateString("en-US"),
+        moneyAmount: +amount,
+      };
       Object.entries(titleCategory).map((element) => {
         console.log("ele", element);
         if (element[0] === categor) {
           cat[element[0]] = element;
           setTitleCategory(
             titleCategory,
-            titleCategory[categor].push({
-              id: expenseId,
-              category: categor,
-              date: new Date().toLocaleDateString("en-US"),
-              moneyAmount: +amount,
-            })
+            titleCategory[categor].push(newExpense)
           );
-          console.log("iuo", cat[element[0]]);
+          if (JSON.parse(sessionStorage.getItem("tC") !== null)) {
+            let expenses = JSON.parse(sessionStorage.getItem("tC"));
+            expenses.push(newExpense);
+            console.log("exp=", expenses);
+            sessionStorage.setItem("tC", JSON.stringify(expenses));
+          } else {
+            let expenses = [];
+            expenses.push(newExpense);
+            sessionStorage.setItem("tC", JSON.stringify(expenses));
+          }
         }
       });
     }
@@ -50,17 +61,25 @@ const Category = (props) => {
   const displayNewExpense = (categor) => {
     const cat = {};
     if (!titleCategory.hasOwnProperty(categor)) {
+      const newExpense = {
+        id: expenseId,
+        category: categor,
+        date: currentDate.toLocaleDateString("en-US"),
+        moneyAmount: +amount,
+      };
       cat[categor] = [];
       titleCategory[categor] = [];
-      setTitleCategory(
-        titleCategory,
-        titleCategory[categor].push({
-          id: expenseId,
-          category: categor,
-          date: new Date().toLocaleDateString("en-US"),
-          moneyAmount: +amount,
-        })
-      );
+      setTitleCategory(titleCategory, titleCategory[categor].push(newExpense));
+      if (JSON.parse(sessionStorage.getItem("tC") !== null)) {
+        let expenses = JSON.parse(sessionStorage.getItem("tC"));
+        expenses.push(newExpense);
+        console.log("exp=", expenses);
+        sessionStorage.setItem("tC", JSON.stringify(expenses));
+      } else {
+        let expenses = [];
+        expenses.push(newExpense);
+        sessionStorage.setItem("tC", JSON.stringify(expenses));
+      }
     }
   };
 

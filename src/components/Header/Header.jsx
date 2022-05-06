@@ -20,6 +20,7 @@ const Header = () => {
     dayExpenses,
     days,
     setDays,
+    dayIncome,
   } = useContext(ExpensesContext);
 
   const incrementDate = (e) => {
@@ -48,7 +49,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // debugger;
     if (dateMode === "Day") {
       setCurrentDate(
         (prevState) => new Date(Date.now() + days * 24 * 60 * 60 * 1000)
@@ -93,8 +93,8 @@ const Header = () => {
             <h6>{dayExpenses}</h6>
           </div>
           <div className={cl.money__income}>
-            <h6>Money income</h6>
-            <h6></h6>
+            <h6>Day Income</h6>
+            <h6>{dayIncome}</h6>
           </div>
         </div>
       </div>

@@ -4,9 +4,12 @@ import MyButton from "../MyButton/MyButton";
 import ExpensesContext from "../../context/ExpensesContext";
 
 const Category = (props) => {
-  const { amount, setAmount, setCategoryName, addNewExpense, expenseId } =
-    useContext(ExpensesContext);
   const {
+    amount,
+    setAmount,
+    setCategoryName,
+    addNewExpense,
+    expenseId,
     titleCategory,
     setTitleCategory,
     allExpenses,

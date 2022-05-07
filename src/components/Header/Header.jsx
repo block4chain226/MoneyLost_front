@@ -25,6 +25,7 @@ const Header = () => {
 
   const incrementDate = (e) => {
     e.preventDefault();
+
     if (
       dateMode === "Month" &&
       currentMonth.toLocaleDateString("en-US") <
@@ -34,8 +35,9 @@ const Header = () => {
       setDays((prevState) => prevState + 1);
     }
     if (
+      dateMode === "Day" &&
       currentDate.toLocaleDateString("en-US") <
-      new Date().toLocaleDateString("en-US")
+        new Date().toLocaleDateString("en-US")
     ) {
       setDays((prevState) => prevState + 1);
     }
@@ -86,7 +88,11 @@ const Header = () => {
       <div className={cl.header__container}>
         <div className={cl.header__money}>
           <div className={cl.money__total}>
-            <h1>{currentDate.toLocaleDateString("en-US")}</h1>
+            <h1>
+              {dateMode === "Day"
+                ? currentDate.toLocaleDateString("en-US")
+                : currentMonth.toLocaleDateString("en-US")}
+            </h1>
           </div>
           <div className={cl.money__expenses}>
             <h6>Today exp</h6>

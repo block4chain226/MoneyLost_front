@@ -60,7 +60,7 @@ const AddExpenses = (props) => {
         (res) => res.json()
       );
     } catch (error) {}
-    debugger;
+    // debugger;
     if (sessionStorage.getItem("income") !== null) {
       let income = JSON.parse(sessionStorage.getItem("income"));
       ////check if we have the same date income, if yes - need to update it

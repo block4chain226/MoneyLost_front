@@ -115,13 +115,14 @@ export const ExpensesContextProvider = ({ children }) => {
       currentMonth.getMonth() + 1,
       0
     );
-
     const cat = {};
     allExpenses.forEach((element) => {
       if (
-        element.date >= firstDayOfMonth.toLocaleDateString("en-US") &&
-        element.date <= lastDayOfMonth.toLocaleDateString("en-US")
+        new Date(element.date).getTime() >=
+          new Date(firstDayOfMonth).getTime() &&
+        new Date(element.date).getTime() <= new Date(lastDayOfMonth).getTime()
       ) {
+        console.log("elementDate = ", typeof new Date(element.date).getTime());
         if (!cat[element.category]) {
           cat[element.category] = [element];
         } else {
@@ -129,6 +130,7 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
+
     setTitleCategory(cat);
 
     ///Incomes
@@ -136,8 +138,9 @@ export const ExpensesContextProvider = ({ children }) => {
     let totalIncome = 0;
     allIncome.flat().forEach((element) => {
       if (
-        element.date >= firstDayOfMonth.toLocaleDateString("en-US") &&
-        element.date <= lastDayOfMonth.toLocaleDateString("en-US")
+        new Date(element.date).getTime() >=
+          new Date(firstDayOfMonth).getTime() &&
+        new Date(element.date).getTime() <= new Date(lastDayOfMonth).getTime()
       ) {
         totalIncome += +element.incomeAmount;
       }

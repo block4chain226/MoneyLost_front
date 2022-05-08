@@ -18,14 +18,19 @@ export const ExpensesContextProvider = ({ children }) => {
   const [moneyAmount, setMoneyAmount] = useState(0);
   const [callBack, setCallBack] = useState(() => byDay);
   const [titleCategory, setTitleCategory] = useState({});
+  const [startMonthCategory, setStartMonthCategory] = useState({});
+
   const [month, setMonth] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [currentMonth, setCurrentMonth] = useState(currentDate);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentYear, setCurrentYear] = useState(currentDate);
   const [dateMode, setDateMode] = useState("Day");
   const [dayExpenses, setDayExpenses] = useState(0);
   const [allIncome, setAllIncome] = useState([]);
   const [dayIncome, setDayIncome] = useState(0);
+
+  const lastMonth =
+    new Date(currentMonth.toLocaleDateString("en-US")).getMonth() + 1;
 
   const addNewExpense = (categor) => {
     setExpenseId(new Date().getTime());
@@ -63,19 +68,8 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
-    if (sessionStorage.getItem("tC") !== null) {
-      const tempExpenses = JSON.parse(sessionStorage.getItem("tC"));
-      tempExpenses.map((element) => {
-        if (element.date === currentDate.toLocaleDateString("en-US")) {
-          if (!cat[element.category]) {
-            cat[element.category] = [element];
-          } else {
-            cat[element.category].push(element);
-          }
-        }
-      });
-    }
-    setTitleCategory(cat);
+
+    restoreNewExpenses("tC", setTitleCategory, cat);
 
     ///Incomes
     // console.log("all ", allIncome);
@@ -88,6 +82,44 @@ export const ExpensesContextProvider = ({ children }) => {
 
     setDayIncome(totalIncome);
   }
+  ///think how to display newexpense only on lastMonth
+  const restoreNewExpenses = (sessionItem, setStateFunc, categoryObj) => {
+    if (dateMode === "Day") {
+      if (sessionStorage.getItem(sessionItem) !== null) {
+        const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
+        tempExpenses.map((element) => {
+          if (element.date === currentDate.toLocaleDateString("en-US")) {
+            if (!categoryObj[element.category]) {
+              categoryObj[element.category] = [element];
+            } else {
+              categoryObj[element.category].push(element);
+            }
+          }
+        });
+      }
+      setStateFunc(categoryObj);
+    }
+
+    if (dateMode === "Month") {
+      if (sessionStorage.getItem(sessionItem) !== null) {
+        const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
+        tempExpenses.map((element) => {
+          debugger;
+          if (
+            new Date(element.date).getMonth() + 1 ===
+            new Date(currentMonth.toLocaleDateString("en-US")).getMonth() + 1
+          ) {
+            if (!categoryObj[element.category]) {
+              categoryObj[element.category] = [element];
+            } else {
+              categoryObj[element.category].push(element);
+            }
+          }
+        });
+      }
+      setStateFunc(categoryObj);
+    }
+  };
 
   const getTotalExpensesByDay = () => {
     let total = Object.entries(titleCategory).map((item) => {
@@ -102,17 +134,13 @@ export const ExpensesContextProvider = ({ children }) => {
     setDayExpenses(total2);
   };
 
-  function byMonth() {
+  function byMonth(month = currentMonth) {
     console.log("byMonth");
     setDateMode("Month");
-    const firstDayOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      1
-    );
+    const firstDayOfMonth = new Date(month.getFullYear(), month.getMonth(), 1);
     const lastDayOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() + 1,
+      month.getFullYear(),
+      month.getMonth() + 1,
       0
     );
     const cat = {};
@@ -130,8 +158,8 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
-
-    setTitleCategory(cat);
+    //write start month to lastMonthCategoryTitle and if it not null get categories from it
+    restoreNewExpenses("tC", setTitleCategory, cat);
 
     ///Incomes
     // console.log("all ", allIncome);

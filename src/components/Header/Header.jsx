@@ -45,7 +45,9 @@ const Header = () => {
 
   const decrementDate = () => {
     // e.preventDefault();
-    setMonth(-30);
+    if (dateMode === "Month") {
+      setMonth(-30);
+    }
 
     setDays((prevState) => prevState - 1);
   };

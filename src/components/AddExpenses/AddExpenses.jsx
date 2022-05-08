@@ -40,8 +40,6 @@ const AddExpenses = (props) => {
     }
   };
 
-  const updateIncome = () => {};
-
   const AddNewIncome = () => {
     const newIncome = {
       userId: sessionStorage.getItem("userId"),

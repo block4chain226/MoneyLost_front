@@ -32,8 +32,7 @@ const ExpensesDetails = (props) => {
   const getAllIncomes = async () => {
     await fetch(`http://localhost:3000/income/${userId}`)
       .then((res) => res.json())
-      .then((data) => setAllIncome(data.answer))
-      .then((file) => console.log("income = ", file));
+      .then((data) => setAllIncome(data.answer));
   };
 
   useEffect(() => {

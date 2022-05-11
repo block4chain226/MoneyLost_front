@@ -101,13 +101,17 @@ export const ExpensesContextProvider = ({ children }) => {
     }
 
     if (dateMode === "Month") {
+      const curYear = new Date(
+        currentMonth.toLocaleDateString("en-US")
+      ).getFullYear();
       if (sessionStorage.getItem(sessionItem) !== null) {
         const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
         tempExpenses.map((element) => {
-          debugger;
           if (
             new Date(element.date).getMonth() + 1 ===
-            new Date(currentMonth.toLocaleDateString("en-US")).getMonth() + 1
+              new Date(currentMonth.toLocaleDateString("en-US")).getMonth() +
+                1 &&
+            new Date(element.date).getFullYear() === curYear
           ) {
             if (!categoryObj[element.category]) {
               categoryObj[element.category] = [element];
@@ -137,6 +141,9 @@ export const ExpensesContextProvider = ({ children }) => {
   function byMonth(month = currentMonth) {
     console.log("byMonth");
     setDateMode("Month");
+    const curYear = new Date(
+      currentMonth.toLocaleDateString("en-US")
+    ).getFullYear();
     const firstDayOfMonth = new Date(month.getFullYear(), month.getMonth(), 1);
     const lastDayOfMonth = new Date(
       month.getFullYear(),
@@ -148,9 +155,10 @@ export const ExpensesContextProvider = ({ children }) => {
       if (
         new Date(element.date).getTime() >=
           new Date(firstDayOfMonth).getTime() &&
-        new Date(element.date).getTime() <= new Date(lastDayOfMonth).getTime()
+        new Date(element.date).getTime() <=
+          new Date(lastDayOfMonth).getTime() &&
+        new Date(element.date).getFullYear() === curYear
       ) {
-        console.log("elementDate = ", typeof new Date(element.date).getTime());
         if (!cat[element.category]) {
           cat[element.category] = [element];
         } else {

@@ -34,10 +34,10 @@ const Header = () => {
       setMonth(30);
       setDays((prevState) => prevState + 1);
     }
+
     if (
       dateMode === "Day" &&
-      currentDate.toLocaleDateString("en-US") <
-        new Date().toLocaleDateString("en-US")
+      new Date(currentDate.getTime()).setUTCHours(0, 0, 0, 0) < today
     ) {
       setDays((prevState) => prevState + 1);
     }

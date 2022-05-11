@@ -121,8 +121,9 @@ const Header = () => {
             <h6 style={{ fontSize: "4vw" }}>Total </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
               {dateMode === "Day"
-                ? +dayIncome - +dayExpenses
-                : +dayIncome - +monthExpenses}
+                ? dateMode
+                : // ? +dayIncome - +dayExpenses
+                  +dayIncome - +monthExpenses}
             </h6>
           </div>
         </div>

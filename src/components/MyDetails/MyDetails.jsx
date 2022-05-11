@@ -6,7 +6,7 @@ import cl from "./MyDetails.module.css";
 const MyDetails = ({ categoryName, money, items }) => {
   const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
-  const { allExpenses, dayExpenses, setDayExpenses } =
+  const { allExpenses, dayExpenses, setDayExpenses, dateMode } =
     useContext(ExpensesContext);
   const [totalAmount, setTotalAmount] = useState();
 
@@ -22,7 +22,7 @@ const MyDetails = ({ categoryName, money, items }) => {
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
     }, 0);
-
+    // debugger;
     setTotalAmount(total);
     // setDayExpenses(dayExpenses + total);
   };

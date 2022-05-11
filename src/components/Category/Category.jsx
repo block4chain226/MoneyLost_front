@@ -21,6 +21,8 @@ const Category = (props) => {
     setAllExpenses,
     currentDate,
     setMoneyAmount,
+    isMonthUpdate,
+    setIsMonthUpdate,
   } = useContext(ExpensesContext);
 
   const postNewExpense = (categor) => {
@@ -35,6 +37,7 @@ const Category = (props) => {
   };
 
   const updateAllExpenses = (categor) => {
+    // debugger;
     if (Object.keys(titleCategory).length !== 0) {
       const cat = {};
       const newExpense = {
@@ -62,7 +65,7 @@ const Category = (props) => {
 
           if (
             dateMode === "Month" &&
-            newExpense.date !== currentDate.toLocaleDateString("en-US")
+            newExpense.date === currentDate.toLocaleDateString("en-US")
           ) {
             setTitleCategory(
               titleCategory,
@@ -75,6 +78,7 @@ const Category = (props) => {
           setMonthExpenses(+totalMonth);
 
           // if (dateMode === "Day") {
+
           if (JSON.parse(sessionStorage.getItem("tC") !== null)) {
             let expenses = JSON.parse(sessionStorage.getItem("tC"));
             expenses.push(newExpense);
@@ -85,6 +89,10 @@ const Category = (props) => {
             expenses.push(newExpense);
             sessionStorage.setItem("tC", JSON.stringify(expenses));
           }
+          // if (dateMode === "Month") {
+          //   setIsMonthUpdate(!isMonthUpdate.isUpdate);
+          // }
+
           // }
 
           // if (dateMode === "Month") {
@@ -94,8 +102,6 @@ const Category = (props) => {
       });
     }
   };
-
-  const updateLastMonthExpenses = (categor) => {};
 
   const displayNewExpense = (categor) => {
     const cat = {};
@@ -122,6 +128,9 @@ const Category = (props) => {
         expenses.push(newExpense);
         sessionStorage.setItem("tC", JSON.stringify(expenses));
       }
+      // if (dateMode === "Month") {
+      //   setIsMonthUpdate(!isMonthUpdate.isUpdate);
+      // }
     }
   };
 

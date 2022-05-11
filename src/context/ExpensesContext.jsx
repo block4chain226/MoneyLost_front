@@ -3,34 +3,34 @@ import { createContext } from "react";
 import { useState } from "react";
 
 const ExpensesContext = createContext();
-const now = new Date();
+
 export const ExpensesContextProvider = ({ children }) => {
   const [switchMode, setSwitchMode] = useState({
     isExpense: true,
     isIncome: false,
   });
+
   const [expenseId, setExpenseId] = useState(new Date().getTime());
   const [amount, setAmount] = useState("");
-
   const [days, setDays] = useState(0);
-
-  // const datenow = new Date().toLocaleDateString("en-US");
   const [categoryName, setCategoryName] = useState("");
-
   const [allExpenses, setAllExpenses] = useState([]);
-
   const [moneyAmount, setMoneyAmount] = useState(0);
   const [callBack, setCallBack] = useState(() => byDay);
   const [titleCategory, setTitleCategory] = useState({});
+  const [startMonthCategory, setStartMonthCategory] = useState({});
 
-  // firstDayOfMonth: new Date(now.getFullYear(), now.getMonth(), 1),
-  // lastDayOfMonth: new Date(now.getFullYear(), now.getMonth() + 1, 0),
   const [month, setMonth] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [currentMonth, setCurrentMonth] = useState(currentDate);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentYear, setCurrentYear] = useState(currentDate);
   const [dateMode, setDateMode] = useState("Day");
   const [dayExpenses, setDayExpenses] = useState(0);
+  const [allIncome, setAllIncome] = useState([]);
+  const [dayIncome, setDayIncome] = useState(0);
+
+  const lastMonth =
+    new Date(currentMonth.toLocaleDateString("en-US")).getMonth() + 1;
 
   const addNewExpense = (categor) => {
     setExpenseId(new Date().getTime());
@@ -55,15 +55,9 @@ export const ExpensesContextProvider = ({ children }) => {
   };
 
   function byDay() {
+    ///Expenses
     console.log("byDay");
     setDateMode("Day");
-    //{
-    // food:[
-    // {amount:dfgfdg,date:fdfv}
-    // {amount:dfgfdg,date:fdfv}
-    // {amount:dfgfdg,date:fdfv}
-    // ]
-    // }
     const cat = {};
     allExpenses.forEach((element) => {
       if (element.date === currentDate.toLocaleDateString("en-US")) {
@@ -75,24 +69,63 @@ export const ExpensesContextProvider = ({ children }) => {
       }
     });
 
-    if (sessionStorage.getItem("tC") !== null) {
-      const tempExpenses = JSON.parse(sessionStorage.getItem("tC"));
-      tempExpenses.map((element) => {
-        if (element.date === currentDate.toLocaleDateString("en-US")) {
-          if (!cat[element.category]) {
-            cat[element.category] = [element];
-          } else {
-            cat[element.category].push(element);
-          }
-        }
-      });
-    }
-    // setDayExpenses(0);
+    restoreNewExpenses("tC", setTitleCategory, cat);
 
-    setTitleCategory(cat);
+    ///Incomes
+    // console.log("all ", allIncome);
+    let totalIncome = 0;
+    allIncome.flat().forEach((element) => {
+      if (element.date === currentDate.toLocaleDateString("en-US")) {
+        totalIncome += +element.incomeAmount;
+      }
+    });
+
+    setDayIncome(totalIncome);
   }
+  ///think how to display newexpense only on lastMonth
+  const restoreNewExpenses = (sessionItem, setStateFunc, categoryObj) => {
+    if (dateMode === "Day") {
+      if (sessionStorage.getItem(sessionItem) !== null) {
+        const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
+        tempExpenses.map((element) => {
+          if (element.date === currentDate.toLocaleDateString("en-US")) {
+            if (!categoryObj[element.category]) {
+              categoryObj[element.category] = [element];
+            } else {
+              categoryObj[element.category].push(element);
+            }
+          }
+        });
+      }
+      setStateFunc(categoryObj);
+    }
 
-  const getTotalAmountByDay = () => {
+    if (dateMode === "Month") {
+      const curYear = new Date(
+        currentMonth.toLocaleDateString("en-US")
+      ).getFullYear();
+      if (sessionStorage.getItem(sessionItem) !== null) {
+        const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
+        tempExpenses.map((element) => {
+          if (
+            new Date(element.date).getMonth() + 1 ===
+              new Date(currentMonth.toLocaleDateString("en-US")).getMonth() +
+                1 &&
+            new Date(element.date).getFullYear() === curYear
+          ) {
+            if (!categoryObj[element.category]) {
+              categoryObj[element.category] = [element];
+            } else {
+              categoryObj[element.category].push(element);
+            }
+          }
+        });
+      }
+      setStateFunc(categoryObj);
+    }
+  };
+
+  const getTotalExpensesByDay = () => {
     let total = Object.entries(titleCategory).map((item) => {
       return item[1].map((elem) => {
         return elem;
@@ -103,29 +136,28 @@ export const ExpensesContextProvider = ({ children }) => {
       return (acc += elem.moneyAmount);
     }, 0);
     setDayExpenses(total2);
-    console.log("total = ", total2);
   };
 
-  function byMonth() {
-    // debugger;
+  function byMonth(month = currentMonth) {
     console.log("byMonth");
     setDateMode("Month");
-    const firstDayOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      1
-    );
+    const curYear = new Date(
+      currentMonth.toLocaleDateString("en-US")
+    ).getFullYear();
+    const firstDayOfMonth = new Date(month.getFullYear(), month.getMonth(), 1);
     const lastDayOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() + 1,
+      month.getFullYear(),
+      month.getMonth() + 1,
       0
     );
-
     const cat = {};
     allExpenses.forEach((element) => {
       if (
-        element.date >= firstDayOfMonth.toLocaleDateString("en-US") &&
-        element.date <= lastDayOfMonth.toLocaleDateString("en-US")
+        new Date(element.date).getTime() >=
+          new Date(firstDayOfMonth).getTime() &&
+        new Date(element.date).getTime() <=
+          new Date(lastDayOfMonth).getTime() &&
+        new Date(element.date).getFullYear() === curYear
       ) {
         if (!cat[element.category]) {
           cat[element.category] = [element];
@@ -134,7 +166,23 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
-    setTitleCategory(cat);
+    //write start month to lastMonthCategoryTitle and if it not null get categories from it
+    restoreNewExpenses("tC", setTitleCategory, cat);
+
+    ///Incomes
+    // console.log("all ", allIncome);
+    let totalIncome = 0;
+    allIncome.flat().forEach((element) => {
+      if (
+        new Date(element.date).getTime() >=
+          new Date(firstDayOfMonth).getTime() &&
+        new Date(element.date).getTime() <= new Date(lastDayOfMonth).getTime()
+      ) {
+        totalIncome += +element.incomeAmount;
+      }
+    });
+
+    setDayIncome(totalIncome);
   }
   function byYear() {
     console.log("byYear");
@@ -142,8 +190,8 @@ export const ExpensesContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    getTotalAmountByDay();
-  }, [titleCategory]);
+    getTotalExpensesByDay();
+  }, [titleCategory, amount]);
 
   return (
     <ExpensesContext.Provider
@@ -157,6 +205,8 @@ export const ExpensesContextProvider = ({ children }) => {
         addNewExpense,
         allExpenses,
         setAllExpenses,
+        allIncome,
+        setAllIncome,
         days,
         dayExpenses,
         setDayExpenses,
@@ -178,7 +228,9 @@ export const ExpensesContextProvider = ({ children }) => {
         setMonth,
         moneyAmount,
         setMoneyAmount,
-        getTotalAmountByDay,
+        getTotalExpensesByDay,
+        dayIncome,
+        setDayIncome,
       }}
     >
       {children}

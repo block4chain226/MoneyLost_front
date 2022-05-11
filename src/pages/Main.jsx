@@ -26,6 +26,7 @@ const Main = () => {
   useEffect(() => {
     if (window.performance.navigation.type === 1) {
       sessionStorage.removeItem("tC");
+      sessionStorage.removeItem("income");
     }
   });
 

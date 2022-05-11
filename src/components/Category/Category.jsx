@@ -4,12 +4,16 @@ import MyButton from "../MyButton/MyButton";
 import ExpensesContext from "../../context/ExpensesContext";
 
 const Category = (props) => {
-  const { amount, setAmount, setCategoryName, addNewExpense, expenseId } =
-    useContext(ExpensesContext);
   const {
+    amount,
+    setAmount,
+    setCategoryName,
+    addNewExpense,
+    expenseId,
     titleCategory,
     setTitleCategory,
     allExpenses,
+    dateMode,
     setAllExpenses,
     currentDate,
     setMoneyAmount,
@@ -32,17 +36,39 @@ const Category = (props) => {
       const newExpense = {
         id: expenseId,
         category: categor,
-        date: currentDate.toLocaleDateString("en-US"),
+        date:
+          dateMode === "Day"
+            ? currentDate.toLocaleDateString("en-US")
+            : new Date().toLocaleDateString("en-US"),
         moneyAmount: +amount,
       };
+      console.log("datemode", newExpense);
+      if (dateMode === "Day") {
+      }
       Object.entries(titleCategory).map((element) => {
-        console.log("ele", element);
+        console.log("ele", Object.keys(titleCategory));
+
         if (element[0] === categor) {
           cat[element[0]] = element;
-          setTitleCategory(
-            titleCategory,
-            titleCategory[categor].push(newExpense)
-          );
+
+          if (dateMode === "Day") {
+            setTitleCategory(
+              titleCategory,
+              titleCategory[categor].push(newExpense)
+            );
+          }
+
+          if (
+            dateMode === "Month" &&
+            newExpense.date !== currentDate.toLocaleDateString("en-US")
+          ) {
+            setTitleCategory(
+              titleCategory,
+              titleCategory[categor].push(newExpense)
+            );
+          }
+
+          // if (dateMode === "Day") {
           if (JSON.parse(sessionStorage.getItem("tC") !== null)) {
             let expenses = JSON.parse(sessionStorage.getItem("tC"));
             expenses.push(newExpense);
@@ -53,10 +79,17 @@ const Category = (props) => {
             expenses.push(newExpense);
             sessionStorage.setItem("tC", JSON.stringify(expenses));
           }
+          // }
+
+          // if (dateMode === "Month") {
+
+          // }
         }
       });
     }
   };
+
+  const updateLastMonthExpenses = (categor) => {};
 
   const displayNewExpense = (categor) => {
     const cat = {};
@@ -64,7 +97,10 @@ const Category = (props) => {
       const newExpense = {
         id: expenseId,
         category: categor,
-        date: currentDate.toLocaleDateString("en-US"),
+        date:
+          dateMode === "Day"
+            ? currentDate.toLocaleDateString("en-US")
+            : new Date().toLocaleDateString("en-US"),
         moneyAmount: +amount,
       };
       cat[categor] = [];

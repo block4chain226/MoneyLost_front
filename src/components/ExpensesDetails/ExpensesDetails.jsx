@@ -15,6 +15,8 @@ const ExpensesDetails = (props) => {
     setTitleCategory,
     currentDate,
     moneyAmount,
+    setAllIncome,
+    allIncome,
   } = useContext(ExpensesContext);
 
   const { category } = useContext(CategoryContext);
@@ -27,13 +29,22 @@ const ExpensesDetails = (props) => {
       .then((data) => setAllExpenses(data.answer));
   };
 
+  const getAllIncomes = async () => {
+    await fetch(`http://localhost:3000/income/${userId}`)
+      .then((res) => res.json())
+      .then((data) => setAllIncome(data.answer));
+  };
+
   useEffect(() => {
     getAllExpenses();
+  }, []);
+  useEffect(() => {
+    getAllIncomes();
   }, []);
 
   useEffect(() => {
     byDay();
-  }, [allExpenses]);
+  }, [allExpenses, allIncome]);
 
   return (
     <div className={cl.expenses}>

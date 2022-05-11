@@ -43,8 +43,7 @@ const Category = (props) => {
         moneyAmount: +amount,
       };
       console.log("datemode", newExpense);
-      if (dateMode === "Day") {
-      }
+
       Object.entries(titleCategory).map((element) => {
         console.log("ele", Object.keys(titleCategory));
 

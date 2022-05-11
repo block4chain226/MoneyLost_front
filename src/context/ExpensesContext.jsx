@@ -26,6 +26,7 @@ export const ExpensesContextProvider = ({ children }) => {
   const [currentYear, setCurrentYear] = useState(currentDate);
   const [dateMode, setDateMode] = useState("Day");
   const [dayExpenses, setDayExpenses] = useState(0);
+  const [monthExpenses, setMonthExpenses] = useState(0);
   const [allIncome, setAllIncome] = useState([]);
   const [dayIncome, setDayIncome] = useState(0);
 
@@ -130,17 +131,19 @@ export const ExpensesContextProvider = ({ children }) => {
     }
   };
 
-  const getTotalExpensesByDay = () => {
+  const getTotalExpenses = () => {
     let total = Object.entries(titleCategory).map((item) => {
       return item[1].map((elem) => {
         return elem;
       });
     });
-    total = total.flat();
-    const total2 = total.reduce((acc, elem) => {
+
+    total = total.flat().reduce((acc, elem) => {
       return (acc += elem.moneyAmount);
     }, 0);
-    setDayExpenses(total2);
+
+    dateMode === "Day" ? setDayExpenses(total) : setMonthExpenses(total);
+    // setDayExpenses(total);
   };
 
   function byMonth(month = currentMonth) {
@@ -196,7 +199,7 @@ export const ExpensesContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    getTotalExpensesByDay();
+    getTotalExpenses();
   }, [titleCategory, amount]);
 
   return (
@@ -214,6 +217,7 @@ export const ExpensesContextProvider = ({ children }) => {
         allIncome,
         setAllIncome,
         days,
+        monthExpenses,
         dayExpenses,
         setDayExpenses,
         setDays,
@@ -234,7 +238,7 @@ export const ExpensesContextProvider = ({ children }) => {
         setMonth,
         moneyAmount,
         setMoneyAmount,
-        getTotalExpensesByDay,
+        getTotalExpenses,
         dayIncome,
         setDayIncome,
       }}

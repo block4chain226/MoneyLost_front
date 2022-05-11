@@ -16,6 +16,7 @@ const Header = () => {
     currentMonth,
     setDayIncome,
     setDayExpenses,
+    monthExpenses,
     setCurrentMonth,
     setCallBack,
     dayExpenses,
@@ -106,7 +107,9 @@ const Header = () => {
             <h6 style={{ fontSize: "4vw" }}>
               {dateMode === "Day" ? "Today expenses" : "Month expenses"}{" "}
             </h6>
-            <h6 style={{ fontSize: "3.5vw" }}>{dayExpenses}</h6>
+            <h6 style={{ fontSize: "3.5vw" }}>
+              {dateMode === "Day" ? dayExpenses : monthExpenses}
+            </h6>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>
@@ -116,7 +119,11 @@ const Header = () => {
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>Total </h6>
-            <h6 style={{ fontSize: "3.5vw" }}>{+dayIncome - +dayExpenses}</h6>
+            <h6 style={{ fontSize: "3.5vw" }}>
+              {dateMode === "Day"
+                ? +dayIncome - +dayExpenses
+                : +dayIncome - +monthExpenses}
+            </h6>
           </div>
         </div>
       </div>

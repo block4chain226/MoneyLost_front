@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useContext } from "react";
 import cl from "./Category.module.css";
 import MyButton from "../MyButton/MyButton";
 import ExpensesContext from "../../context/ExpensesContext";
@@ -12,6 +14,8 @@ const Category = (props) => {
     expenseId,
     titleCategory,
     setTitleCategory,
+    monthExpenses,
+    setMonthExpenses,
     allExpenses,
     dateMode,
     setAllExpenses,
@@ -42,7 +46,6 @@ const Category = (props) => {
             : new Date().toLocaleDateString("en-US"),
         moneyAmount: +amount,
       };
-      console.log("datemode", newExpense);
 
       Object.entries(titleCategory).map((element) => {
         console.log("ele", Object.keys(titleCategory));
@@ -66,6 +69,10 @@ const Category = (props) => {
               titleCategory[categor].push(newExpense)
             );
           }
+
+          let totalMonth = monthExpenses;
+          totalMonth = totalMonth + newExpense.moneyAmount;
+          setMonthExpenses(+totalMonth);
 
           // if (dateMode === "Day") {
           if (JSON.parse(sessionStorage.getItem("tC") !== null)) {

@@ -54,10 +54,10 @@ export const ExpensesContextProvider = ({ children }) => {
       );
     } catch (error) {}
 
-    // if (dateMode === "Month") {
-    //   let ccc = dayExpenses;
-    //   setDayExpenses(ccc + amount);
-    // }
+    if (dateMode === "Month") {
+      let ccc = monthExpenses;
+      setMonthExpenses(ccc + amount);
+    }
   };
 
   function byDay() {
@@ -112,6 +112,7 @@ export const ExpensesContextProvider = ({ children }) => {
       ).getFullYear();
       if (sessionStorage.getItem(sessionItem) !== null) {
         const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
+
         tempExpenses.map((element) => {
           if (
             new Date(element.date).getMonth() + 1 ===
@@ -132,6 +133,8 @@ export const ExpensesContextProvider = ({ children }) => {
   };
 
   const getTotalExpenses = () => {
+    if (dateMode === "Day") {
+    }
     let total = Object.entries(titleCategory).map((item) => {
       return item[1].map((elem) => {
         return elem;
@@ -142,6 +145,9 @@ export const ExpensesContextProvider = ({ children }) => {
       return (acc += elem.moneyAmount);
     }, 0);
 
+    if (dateMode === "Month") {
+      total += +amount;
+    }
     dateMode === "Day" ? setDayExpenses(total) : setMonthExpenses(total);
     // setDayExpenses(total);
   };
@@ -200,7 +206,7 @@ export const ExpensesContextProvider = ({ children }) => {
 
   useEffect(() => {
     getTotalExpenses();
-  }, [titleCategory, amount]);
+  }, [titleCategory]);
 
   return (
     <ExpensesContext.Provider
@@ -236,6 +242,7 @@ export const ExpensesContextProvider = ({ children }) => {
         setTitleCategory,
         month,
         setMonth,
+        setMonthExpenses,
         moneyAmount,
         setMoneyAmount,
         getTotalExpenses,

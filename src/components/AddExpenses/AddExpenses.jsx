@@ -66,6 +66,12 @@ const AddExpenses = (props) => {
             totalDayIncome += +element.incomeAmount;
           }
         });
+
+        if (totalDayIncome === dayIncome) {
+          totalDayIncome += +amount;
+          console.log("!!!");
+        }
+
         setDayIncome(totalDayIncome);
         // JSON.parse(sessionStorage.getItem("income")).map((element) => {
         //   if (element.date === currentDate.toLocaleDateString("en-US")) {
@@ -172,10 +178,17 @@ const AddExpenses = (props) => {
         incomeAmount: dateMode === "Day" ? +total : +totalLastMonthIncome,
       });
 
+      // /////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+      allIncome.push({
+        userId: sessionStorage.getItem("userId"),
+        date: new Date().toLocaleDateString("en-US"),
+        incomeAmount: amount,
+      });
+
       sessionStorage.setItem("income", JSON.stringify(income));
       // totalLastMonthIncome = 0;
       if (dateMode === "Month") {
-        debugger;
         income.splice(income.length - 2, 1);
         sessionStorage.setItem("income", JSON.stringify(income));
         allIncome.push({
@@ -194,6 +207,11 @@ const AddExpenses = (props) => {
 
       if (dateMode === "Day") {
         incomeAmount = +dayIncome + +amount;
+        allIncome.push({
+          userId: sessionStorage.getItem("userId"),
+          date: new Date().toLocaleDateString("en-US"),
+          incomeAmount: amount,
+        });
       } else {
         console.log(new Date().toLocaleDateString("en-US"));
         allIncome.map((element) => {
@@ -208,6 +226,7 @@ const AddExpenses = (props) => {
             incomeAmount = incomeAmount + +element.incomeAmount;
           }
         });
+
         allIncome.push({
           userId: sessionStorage.getItem("userId"),
           date: new Date().toLocaleDateString("en-US"),
@@ -232,7 +251,7 @@ const AddExpenses = (props) => {
 
   useEffect(() => {
     displayNewIncome();
-  });
+  }, []);
 
   const bottom = props.position;
   return (

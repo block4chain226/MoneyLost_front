@@ -52,6 +52,11 @@ export const ExpensesContextProvider = ({ children }) => {
         (res) => res.json()
       );
     } catch (error) {}
+
+    // if (dateMode === "Month") {
+    //   let ccc = dayExpenses;
+    //   setDayExpenses(ccc + amount);
+    // }
   };
 
   function byDay() {
@@ -182,6 +187,7 @@ export const ExpensesContextProvider = ({ children }) => {
       }
     });
 
+    // debugger;
     setDayIncome(totalIncome);
   }
   function byYear() {

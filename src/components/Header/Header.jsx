@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 import cl from "./Header.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
 import MyButton from "../MyButton/MyButton";
+import DateContext from "../../context/DateContext";
 
 const Header = () => {
   const {
-    currentDate,
-    setCurrentDate,
-    dateMode,
+    // currentDate,
+    // setCurrentDate,
+    // dateMode,
     byDay,
     month,
     setMonth,
@@ -24,6 +25,8 @@ const Header = () => {
     setDays,
     dayIncome,
   } = useContext(ExpensesContext);
+  const { dateMode, setDateMode, currentDate, setCurrentDate } =
+    useContext(DateContext);
 
   const incrementDate = (e) => {
     e.preventDefault();
@@ -37,15 +40,15 @@ const Header = () => {
     }
 
     if (
-      dateMode === "Day" &&
+      dateMode.day &&
       new Date(currentDate.getTime()).setUTCHours(0, 0, 0, 0) < today
     ) {
       setDays((prevState) => prevState + 1);
     }
   };
 
-  const decrementDate = () => {
-    // e.preventDefault();
+  const decrementDate = (e) => {
+    e.preventDefault();
     if (dateMode === "Month") {
       setMonth(-30);
     }
@@ -54,7 +57,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (dateMode === "Day") {
+    if (dateMode.day) {
       setCurrentDate(
         (prevState) => new Date(Date.now() + days * 24 * 60 * 60 * 1000)
       );
@@ -74,16 +77,12 @@ const Header = () => {
 
   useEffect(() => {
     setDays(0);
-  }, [dateMode === "Day"]);
+  }, [dateMode.day]);
 
   useEffect(() => {
     setCallBack(byMonth);
     // setDays(0);
   }, [currentMonth]);
-
-  useEffect(() => {
-    setDayExpenses(0);
-  }, [currentDate]);
 
   return (
     <section className={cl.header}>
@@ -92,7 +91,7 @@ const Header = () => {
         <div className={cl.header__money}>
           <div className={cl.money__info}>
             <h2 style={{ width: "350px", fontSize: "8vw" }}>
-              {dateMode === "Day"
+              {dateMode.day
                 ? currentDate.toLocaleDateString("en-us", { weekday: "long" }) +
                   ", " +
                   currentDate.toLocaleDateString("en-us", { day: "numeric" }) +
@@ -105,23 +104,23 @@ const Header = () => {
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>
-              {dateMode === "Day" ? "Today expenses" : "Month expenses"}{" "}
+              {dateMode.day ? "Today expenses" : "Month expenses"}{" "}
             </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
-              {dateMode === "Day" ? dayExpenses : monthExpenses}
+              {dateMode.day ? dayExpenses : monthExpenses}
             </h6>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>
-              {dateMode === "Day" ? "Day income" : "Month income"}{" "}
+              {dateMode.day ? "Day income" : "Month income"}{" "}
             </h6>
             <h6 style={{ fontSize: "3.5vw" }}>{dayIncome}</h6>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>Total </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
-              {dateMode === "Day"
-                ? dateMode
+              {dateMode.day
+                ? dateMode.day
                 : // ? +dayIncome - +dayExpenses
                   +dayIncome - +monthExpenses}
             </h6>

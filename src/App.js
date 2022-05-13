@@ -8,6 +8,7 @@ import RequireAuth from "./components/RequireAuth";
 import { AuthProvider } from "./context/AuthProvider";
 import { CategoryContextProvider } from "./context/CategoryContext";
 import { ExpensesContextProvider } from "./context/ExpensesContext";
+import { DateContextProvider } from "./context/DateContext";
 
 function App() {
   return (
@@ -20,11 +21,13 @@ function App() {
           element={
             <RequireAuth>
               <AuthProvider>
-                <CategoryContextProvider>
-                  <ExpensesContextProvider>
-                    <Main />
-                  </ExpensesContextProvider>
-                </CategoryContextProvider>
+                <DateContextProvider>
+                  <CategoryContextProvider>
+                    <ExpensesContextProvider>
+                      <Main />
+                    </ExpensesContextProvider>
+                  </CategoryContextProvider>
+                </DateContextProvider>
               </AuthProvider>
             </RequireAuth>
           }

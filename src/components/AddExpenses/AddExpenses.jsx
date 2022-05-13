@@ -6,6 +6,7 @@ import SwitchButton from "../SwitchButton/SwitchButton";
 import MyButton from "../MyButton/MyButton";
 import useAuth from "../hooks/useAuth";
 import ExpensesContext from "../../context/ExpensesContext";
+import DateContext from "../../context/DateContext";
 
 //AddExpenses body
 const AddExpenses = (props) => {
@@ -30,9 +31,12 @@ const AddExpenses = (props) => {
     allIncome,
     currentMonth,
     setDayIncome,
-    currentDate,
-    dateMode,
+    // currentDate,
+    // dateMode,
   } = useContext(ExpensesContext);
+
+  const { dateMode, setDateMode, currentDate, setCurrentDate } =
+    useContext(DateContext);
 
   function showCategory(callback) {
     setIsCategory(callback);

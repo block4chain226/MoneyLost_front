@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import CategoryContext from "../../context/CategoryContext";
+import DateContext from "../../context/DateContext";
 import ExpensesContext from "../../context/ExpensesContext";
 import cl from "./MyDetails.module.css";
 const MyDetails = ({ categoryName, money, items }) => {
   const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
-  const { allExpenses, dayExpenses, setDayExpenses, dateMode } =
+
+  const { allExpenses, dayExpenses, setDayExpenses } =
     useContext(ExpensesContext);
+
+  const { dateMode, currentDate, setCurrentDate } = useContext(DateContext);
+
   const [totalAmount, setTotalAmount] = useState();
 
   const getCategoryImgPath = () => {
@@ -22,8 +27,10 @@ const MyDetails = ({ categoryName, money, items }) => {
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
     }, 0);
-    // debugger;
     setTotalAmount(total);
+    let dayExp = dayExpenses;
+    dayExp += total;
+    setDayExpenses((total) => total + dayExp);
     // setDayExpenses(dayExpenses + total);
   };
 

@@ -4,20 +4,27 @@ import MyDetails from "../MyDetails/MyDetails";
 import cl from "./ExpensesDetails.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
 import CategoryContext from "../../context/CategoryContext";
+import DateContext from "../../context/DateContext";
 
 const ExpensesDetails = (props) => {
   const {
     allExpenses,
     setAllExpenses,
     byDay,
+    byDayRef,
+    dayExpenses,
+    setDayExpenses,
     callback,
     titleCategory,
     setTitleCategory,
-    currentDate,
+    dayTitleCategory,
+    // currentDate,
     moneyAmount,
     setAllIncome,
     allIncome,
   } = useContext(ExpensesContext);
+  const { dateMode, setDateMode, currentDate, setCurrentDate } =
+    useContext(DateContext);
 
   const { category } = useContext(CategoryContext);
 
@@ -36,15 +43,23 @@ const ExpensesDetails = (props) => {
   };
 
   useEffect(() => {
+    byDayRef(currentDate);
+  }, [currentDate]);
+
+  useEffect(() => {
+    setDayExpenses(0);
+  }, [currentDate]);
+
+  useEffect(() => {
     getAllExpenses();
   }, []);
   useEffect(() => {
     getAllIncomes();
   }, []);
 
-  useEffect(() => {
-    byDay();
-  }, [allExpenses, allIncome]);
+  // useEffect(() => {
+  //   byDay();
+  // }, [allExpenses, allIncome]);
 
   return (
     <div className={cl.expenses}>
@@ -52,7 +67,7 @@ const ExpensesDetails = (props) => {
         <div className={cl.expenses__container}>
           <div className={cl.expenses}>
             <ul>
-              {Object.entries(titleCategory).map((item) => {
+              {Object.entries(dayTitleCategory).map((item) => {
                 return (
                   <MyDetails
                     key={item[1][0].id}
@@ -62,19 +77,10 @@ const ExpensesDetails = (props) => {
                   />
                 );
               })}
-              {/* {Object.values(titleCategory).map((item) => (
-                <h1>{item}</h1>
-                // <MyDetails
-                //   key={item.toString()}
-                //   money={moneyAmount}
-                //   categoryName={item}
-                // />
-              ))} */}
             </ul>
           </div>
         </div>
       </div>
-      {/* <AddExpenses position="bottom" category={props.category}></AddExpenses> */}
       <AddExpenses position="bottom" category={category}></AddExpenses>
     </div>
   );

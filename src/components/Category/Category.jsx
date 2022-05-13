@@ -4,6 +4,7 @@ import { useContext } from "react";
 import cl from "./Category.module.css";
 import MyButton from "../MyButton/MyButton";
 import ExpensesContext from "../../context/ExpensesContext";
+import DateContext from "../../context/DateContext";
 
 const Category = (props) => {
   const {
@@ -17,13 +18,16 @@ const Category = (props) => {
     monthExpenses,
     setMonthExpenses,
     allExpenses,
-    dateMode,
+    // dateMode,
     setAllExpenses,
-    currentDate,
+    // currentDate,
     setMoneyAmount,
     isMonthUpdate,
     setIsMonthUpdate,
   } = useContext(ExpensesContext);
+
+  const { dateMode, setDateMode, currentDate, setCurrentDate } =
+    useContext(DateContext);
 
   const postNewExpense = (categor) => {
     setCategoryName(categor);

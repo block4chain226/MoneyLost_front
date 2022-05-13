@@ -186,7 +186,7 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
-
+    console.log("ref");
     setDayTitleCategory(cat);
   }
 

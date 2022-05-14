@@ -15,7 +15,6 @@ export const ExpensesContextProvider = ({ children }) => {
   const [amount, setAmount] = useState("");
   const [days, setDays] = useState(0);
   const [categoryName, setCategoryName] = useState("");
-  const [callBack, setCallBack] = useState(() => byDayRef);
   const [startMonthCategory, setStartMonthCategory] = useState({});
   const [month, setMonth] = useState(0);
   // const [currentDate, setCurrentDate] = useState(new Date());
@@ -193,6 +192,23 @@ export const ExpensesContextProvider = ({ children }) => {
     setDayTitleCategory(cat);
   }
 
+  function byMonthRef() {
+    console.log("byMonthref");
+    const cat = {};
+    allExpenses.forEach((element) => {
+      if (
+        new Date(element.date).getTime() ===
+        new Date(currentDate.toLocaleDateString("en-US")).getTime()
+      ) {
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
+      }
+    });
+  }
+
   // useEffect(() => {
   //   byDayRef(currentDate);
   // }, [currentDate]);
@@ -247,6 +263,7 @@ export const ExpensesContextProvider = ({ children }) => {
     // debugger;
     setDayIncome(totalIncome);
   }
+
   function byYear() {
     console.log("byYear");
     setDateMode("Year");
@@ -260,9 +277,9 @@ export const ExpensesContextProvider = ({ children }) => {
   //   getTotalExpenses();
   // }, [titleCategory]);
 
-  useEffect(() => {
-    byMonth();
-  }, [monthExpenses]);
+  // useEffect(() => {
+  //   byMonth();
+  // }, [monthExpenses]);
 
   useEffect(() => {
     setCurrentDate(new Date());
@@ -294,8 +311,6 @@ export const ExpensesContextProvider = ({ children }) => {
         // byDay,
         byMonth,
         byYear,
-        callBack,
-        setCallBack,
         titleCategory,
         setDateMode,
         currentMonth,

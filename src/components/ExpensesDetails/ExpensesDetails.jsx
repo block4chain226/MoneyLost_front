@@ -14,7 +14,7 @@ const ExpensesDetails = (props) => {
     byDayRef,
     dayExpenses,
     setDayExpenses,
-    callback,
+
     titleCategory,
     setTitleCategory,
     dayTitleCategory,

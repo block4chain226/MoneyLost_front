@@ -69,7 +69,7 @@ const AddExpenses = (props) => {
         moneyAmount: +amount,
       },
     ]);
-    debugger;
+
     const dayExp = +amount + dayExpenses;
     setDayExpenses(dayExp);
     setIsUpdate(true);

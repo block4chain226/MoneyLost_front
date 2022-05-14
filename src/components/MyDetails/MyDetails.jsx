@@ -22,12 +22,12 @@ const MyDetails = ({ categoryName, money, items }) => {
       }
     });
   };
-  // debugger;
+
   const getTotal = () => {
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
     }, 0);
-    // debugger;
+
     setTotalAmount(total);
     if (!isUpdate) {
       let dayExp = dayExpenses;

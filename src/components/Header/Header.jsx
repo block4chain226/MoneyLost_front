@@ -20,7 +20,7 @@ const Header = () => {
     setDayExpenses,
     monthExpenses,
     setCurrentMonth,
-    setCallBack,
+
     dayExpenses,
     days,
     setDays,
@@ -35,7 +35,7 @@ const Header = () => {
     const curMon = new Date(currentMonth.getTime()).setUTCHours(0, 0, 0, 0);
     console.log("type = ", typeof curMon);
 
-    if (dateMode === "Month" && curMon < today && curMon !== today) {
+    if (dateMode.month && curMon < today && curMon !== today) {
       setMonth(30);
       setDays((prevState) => prevState + 1);
     }
@@ -50,7 +50,7 @@ const Header = () => {
 
   const decrementDate = (e) => {
     e.preventDefault();
-    if (dateMode === "Month") {
+    if (dateMode.month) {
       setMonth(-30);
     }
 
@@ -63,7 +63,7 @@ const Header = () => {
         (prevState) => new Date(Date.now() + days * 24 * 60 * 60 * 1000)
       );
     }
-    if (dateMode === "Month") {
+    if (dateMode.month) {
       setCurrentMonth(
         // (prevState) => new Date(currentMonth.getTime() - 30 * 1000 * 3600 * 24)
         (prevState) =>
@@ -73,17 +73,8 @@ const Header = () => {
   }, [days]);
 
   useEffect(() => {
-    setCallBack(byDay);
-  }, [currentDate]);
-
-  useEffect(() => {
     setDays(0);
   }, [dateMode.day]);
-
-  useEffect(() => {
-    setCallBack(byMonth);
-    // setDays(0);
-  }, [currentMonth]);
 
   return (
     <section className={cl.header}>

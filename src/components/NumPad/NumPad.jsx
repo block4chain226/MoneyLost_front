@@ -6,6 +6,8 @@ import ExpensesContext from "../../context/ExpensesContext";
 
 const NumPad = () => {
   let { amount, setAmount } = useContext(ExpensesContext);
+  const [isTyping, setIsTyping] = useState(false);
+
   // let newAmount;
   function deleteChar() {
     if (amount) {

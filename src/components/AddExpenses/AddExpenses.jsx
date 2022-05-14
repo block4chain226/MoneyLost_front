@@ -26,11 +26,19 @@ const AddExpenses = (props) => {
 
   const {
     switchMode,
+    allExpenses,
+    setAllExpenses,
     amount,
     dayIncome,
     allIncome,
     currentMonth,
     setDayIncome,
+    byDayRef,
+    setMoneyAmount,
+    addNewExpense,
+    setDayExpenses,
+    dayExpenses,
+    setIsUpdate,
     // currentDate,
     // dateMode,
   } = useContext(ExpensesContext);
@@ -41,6 +49,33 @@ const AddExpenses = (props) => {
   function showCategory(callback) {
     setIsCategory(callback);
   }
+
+  const postNewExpense = (categor) => {
+    addNewExpense(categor);
+
+    updateExpenses(dateMode, amount, categor);
+  };
+
+  const updateExpenses = (dateMode, amount, categor) => {
+    setAllExpenses([
+      ...allExpenses,
+      {
+        userId: sessionStorage.getItem("userId"),
+        // id: expenseId,
+        category: categor,
+        date: dateMode.day
+          ? currentDate.toLocaleDateString("en-US")
+          : new Date().toLocaleDateString("en-US"),
+        moneyAmount: +amount,
+      },
+    ]);
+    debugger;
+    const dayExp = +amount + dayExpenses;
+    setDayExpenses(dayExp);
+    setIsUpdate(true);
+    setMenu({ isOpen: !menu.isOpen });
+    setIsCategory(false);
+  };
 
   function toggleMenu() {
     setMenu({ isOpen: !menu.isOpen });
@@ -254,6 +289,10 @@ const AddExpenses = (props) => {
   };
 
   useEffect(() => {
+    byDayRef(currentDate);
+  }, [allExpenses]);
+
+  useEffect(() => {
     displayNewIncome();
   }, []);
 
@@ -270,6 +309,7 @@ const AddExpenses = (props) => {
           <Category
             toggleMenu={toggleMenu}
             showCategory={showCategory}
+            postNewExpense={postNewExpense}
             category={props.category}
           />
         ) : (

@@ -19,6 +19,7 @@ const ExpensesDetails = (props) => {
     setTitleCategory,
     dayTitleCategory,
     // currentDate,
+    amount,
     moneyAmount,
     setAllIncome,
     allIncome,
@@ -44,7 +45,7 @@ const ExpensesDetails = (props) => {
 
   useEffect(() => {
     byDayRef(currentDate);
-  }, [currentDate]);
+  }, [currentDate, allExpenses]);
 
   useEffect(() => {
     setDayExpenses(0);
@@ -71,7 +72,7 @@ const ExpensesDetails = (props) => {
                 return (
                   <MyDetails
                     key={item[1][0].id}
-                    money={moneyAmount}
+                    money={amount}
                     categoryName={item[0]}
                     items={item[1]}
                   />

@@ -26,6 +26,7 @@ const NumPad = () => {
         step="0.01"
         min="0"
         max="10"
+        isT
         onChange={(event) => {
           setAmount(event.target.value);
         }}

@@ -15,6 +15,7 @@ const Header = () => {
     byMonth,
     byYear,
     currentMonth,
+    amount,
     setDayIncome,
     setDayExpenses,
     monthExpenses,

@@ -30,9 +30,11 @@ export const ExpensesContextProvider = ({ children }) => {
   /////////////////////////////////////////////////////////////////////////////////////////
 
   let [dayExpenses, setDayExpenses] = useState(0);
+
   const [monthExpenses, setMonthExpenses] = useState(0);
   const [allExpenses, setAllExpenses] = useState([]);
   const [moneyAmount, setMoneyAmount] = useState(0);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const [dayTitleCategory, setDayTitleCategory] = useState({});
 
@@ -174,6 +176,7 @@ export const ExpensesContextProvider = ({ children }) => {
   function byDayRef(date) {
     console.log("byDayref");
     const cat = {};
+
     allExpenses.forEach((element) => {
       if (
         new Date(element.date).getTime() ===
@@ -186,7 +189,7 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
-    console.log("ref");
+
     setDayTitleCategory(cat);
   }
 
@@ -249,6 +252,10 @@ export const ExpensesContextProvider = ({ children }) => {
     setDateMode("Year");
   }
 
+  useEffect(() => {
+    setIsUpdate(false);
+  }, [currentDate]);
+
   // useEffect(() => {
   //   getTotalExpenses();
   // }, [titleCategory]);
@@ -271,6 +278,7 @@ export const ExpensesContextProvider = ({ children }) => {
         categoryName,
         setCategoryName,
         addNewExpense,
+
         allExpenses,
         byDayRef,
         dayTitleCategory,
@@ -305,6 +313,8 @@ export const ExpensesContextProvider = ({ children }) => {
         setDayIncome,
         isMonthUpdate,
         setIsMonthUpdate,
+        isUpdate,
+        setIsUpdate,
       }}
     >
       {children}

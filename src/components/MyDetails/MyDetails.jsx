@@ -8,8 +8,15 @@ const MyDetails = ({ categoryName, money, items }) => {
   const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
 
-  const { allExpenses, dayExpenses, setDayExpenses, amount, isUpdate } =
-    useContext(ExpensesContext);
+  const {
+    allExpenses,
+    dayExpenses,
+    setDayExpenses,
+    monthExpenses,
+    setMonthExpenses,
+    amount,
+    isUpdate,
+  } = useContext(ExpensesContext);
 
   const { dateMode, currentDate, setCurrentDate } = useContext(DateContext);
 
@@ -22,24 +29,22 @@ const MyDetails = ({ categoryName, money, items }) => {
       }
     });
   };
-
   const getTotal = () => {
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
     }, 0);
 
     setTotalAmount(total);
-    if (!isUpdate) {
+    if (!isUpdate && dateMode.day) {
       let dayExp = dayExpenses;
       dayExp += total;
       setDayExpenses((total) => total + dayExp);
+    } else if (!isUpdate && dateMode.month) {
+      let monthExp = monthExpenses;
+      monthExp += total;
+      setMonthExpenses((total) => total + monthExp);
     }
   };
-
-  // const setTotalExpenses = () => {
-
-  //   setDayExpenses((prev) => prev + totalAmount);
-  // };
 
   useEffect(() => {
     getTotal();

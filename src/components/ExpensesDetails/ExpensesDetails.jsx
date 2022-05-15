@@ -12,9 +12,11 @@ const ExpensesDetails = (props) => {
     setAllExpenses,
     byDay,
     byDayRef,
+    byMonthRef,
+    month,
     dayExpenses,
     setDayExpenses,
-
+    setMonthExpenses,
     titleCategory,
     setTitleCategory,
     dayTitleCategory,
@@ -22,9 +24,10 @@ const ExpensesDetails = (props) => {
     amount,
     moneyAmount,
     setAllIncome,
+    monthTitleCategory,
     allIncome,
   } = useContext(ExpensesContext);
-  const { dateMode, setDateMode, currentDate, setCurrentDate } =
+  const { dateMode, setDateMode, currentMonth, currentDate, setCurrentDate } =
     useContext(DateContext);
 
   const { category } = useContext(CategoryContext);
@@ -44,12 +47,20 @@ const ExpensesDetails = (props) => {
   };
 
   useEffect(() => {
-    byDayRef(currentDate);
-  }, [currentDate, allExpenses]);
+    setDayExpenses(0);
+  }, [currentDate, dateMode]);
 
   useEffect(() => {
-    setDayExpenses(0);
-  }, [currentDate]);
+    setMonthExpenses(0);
+  }, [currentMonth, dateMode]);
+
+  useEffect(() => {
+    byDayRef(currentDate);
+  }, [currentDate, dateMode, allExpenses]);
+
+  useEffect(() => {
+    byMonthRef();
+  }, [currentMonth, dateMode, allExpenses]);
 
   useEffect(() => {
     getAllExpenses();
@@ -68,7 +79,9 @@ const ExpensesDetails = (props) => {
         <div className={cl.expenses__container}>
           <div className={cl.expenses}>
             <ul>
-              {Object.entries(dayTitleCategory).map((item) => {
+              {Object.entries(
+                dateMode.day ? dayTitleCategory : monthTitleCategory
+              ).map((item) => {
                 return (
                   <MyDetails
                     key={item[1][0].id}

@@ -5,7 +5,7 @@ import ExpensesContext from "../context/ExpensesContext";
 import DateContext from "../context/DateContext";
 
 const DateMode = () => {
-  const { byDayRef, byMonth, byYear } = useContext(ExpensesContext);
+  const { byDayRef, byMonthRef, byYearRef } = useContext(ExpensesContext);
   const { setDateMode, currentDate } = useContext(DateContext);
 
   return (

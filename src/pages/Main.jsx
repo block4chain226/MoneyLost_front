@@ -13,7 +13,6 @@ const Main = () => {
   const { byDayRef, currentDate } = useContext(ExpensesContext);
 
   useEffect(() => {
-    debugger;
     byDayRef(currentDate);
   }, []);
 

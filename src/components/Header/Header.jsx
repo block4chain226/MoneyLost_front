@@ -14,26 +14,33 @@ const Header = () => {
     setMonth,
     byMonth,
     byYear,
-    currentMonth,
+
     amount,
     setDayIncome,
     setDayExpenses,
     monthExpenses,
-    setCurrentMonth,
 
     dayExpenses,
     days,
     setDays,
     dayIncome,
+    setIsUpdate,
   } = useContext(ExpensesContext);
-  const { dateMode, setDateMode, currentDate, setCurrentDate } =
-    useContext(DateContext);
+  const {
+    currentMonth,
+    setCurrentMonth,
+    dateMode,
+    setDateMode,
+    currentDate,
+    setCurrentDate,
+    setCurrentYear,
+    currentYear,
+  } = useContext(DateContext);
 
   const incrementDate = (e) => {
     e.preventDefault();
     const today = new Date(new Date().getTime()).setUTCHours(0, 0, 0, 0);
     const curMon = new Date(currentMonth.getTime()).setUTCHours(0, 0, 0, 0);
-    console.log("type = ", typeof curMon);
 
     if (dateMode.month && curMon < today && curMon !== today) {
       setMonth(30);
@@ -65,7 +72,6 @@ const Header = () => {
     }
     if (dateMode.month) {
       setCurrentMonth(
-        // (prevState) => new Date(currentMonth.getTime() - 30 * 1000 * 3600 * 24)
         (prevState) =>
           new Date(currentMonth.getTime() + month * 1000 * 3600 * 24)
       );
@@ -75,6 +81,10 @@ const Header = () => {
   useEffect(() => {
     setDays(0);
   }, [dateMode.day]);
+
+  useEffect(() => {
+    setIsUpdate(false);
+  }, [currentDate, currentMonth, currentYear]);
 
   return (
     <section className={cl.header}>

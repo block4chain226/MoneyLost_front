@@ -37,14 +37,21 @@ const AddExpenses = (props) => {
     setMoneyAmount,
     addNewExpense,
     setDayExpenses,
+    byMonthRef,
     dayExpenses,
     setIsUpdate,
-    // currentDate,
-    // dateMode,
+    setMonthExpenses,
+    monthExpenses,
   } = useContext(ExpensesContext);
 
-  const { dateMode, setDateMode, currentDate, setCurrentDate } =
-    useContext(DateContext);
+  const {
+    dateMode,
+    setDateMode,
+    currentDate,
+    setCurrentDate,
+    currentMonthNumber,
+    lastMonth,
+  } = useContext(DateContext);
 
   function showCategory(callback) {
     setIsCategory(callback);
@@ -69,9 +76,18 @@ const AddExpenses = (props) => {
         moneyAmount: +amount,
       },
     ]);
+    debugger;
+    if (dateMode.day) {
+      const dayExp = +amount + dayExpenses;
+      setDayExpenses(dayExp);
+    } else if (dateMode.month && currentMonthNumber === lastMonth) {
+      const monthExp = +amount + monthExpenses;
+      setMonthExpenses(monthExp);
+    } else if (dateMode.month && currentMonthNumber !== lastMonth) {
+      const monthExp = monthExpenses;
+      setMonthExpenses(monthExp);
+    }
 
-    const dayExp = +amount + dayExpenses;
-    setDayExpenses(dayExp);
     setIsUpdate(true);
     setMenu({ isOpen: !menu.isOpen });
     setIsCategory(false);
@@ -290,6 +306,10 @@ const AddExpenses = (props) => {
 
   useEffect(() => {
     byDayRef(currentDate);
+  }, [allExpenses]);
+
+  useEffect(() => {
+    byMonthRef(currentMonth);
   }, [allExpenses]);
 
   useEffect(() => {

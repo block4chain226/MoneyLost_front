@@ -5,6 +5,7 @@ import cl from "./ExpensesDetails.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
 import CategoryContext from "../../context/CategoryContext";
 import DateContext from "../../context/DateContext";
+import IncomeContext from "../../context/IncomeContext";
 
 const ExpensesDetails = (props) => {
   const {
@@ -20,12 +21,11 @@ const ExpensesDetails = (props) => {
     titleCategory,
     setTitleCategory,
     dayTitleCategory,
-    // currentDate,
     amount,
     moneyAmount,
-    setAllIncome,
+    setYearExpenses,
+    currentYear,
     monthTitleCategory,
-    allIncome,
   } = useContext(ExpensesContext);
   const { dateMode, setDateMode, currentMonth, currentDate, setCurrentDate } =
     useContext(DateContext);
@@ -40,12 +40,6 @@ const ExpensesDetails = (props) => {
       .then((data) => setAllExpenses(data.answer));
   };
 
-  const getAllIncomes = async () => {
-    await fetch(`http://localhost:3000/income/${userId}`)
-      .then((res) => res.json())
-      .then((data) => setAllIncome(data.answer));
-  };
-
   useEffect(() => {
     setDayExpenses(0);
   }, [currentDate, dateMode]);
@@ -53,6 +47,10 @@ const ExpensesDetails = (props) => {
   useEffect(() => {
     setMonthExpenses(0);
   }, [currentMonth, dateMode]);
+
+  useEffect(() => {
+    setYearExpenses(0);
+  }, [currentYear, dateMode]);
 
   useEffect(() => {
     byDayRef(currentDate);
@@ -65,13 +63,6 @@ const ExpensesDetails = (props) => {
   useEffect(() => {
     getAllExpenses();
   }, []);
-  useEffect(() => {
-    getAllIncomes();
-  }, []);
-
-  // useEffect(() => {
-  //   byDay();
-  // }, [allExpenses, allIncome]);
 
   return (
     <div className={cl.expenses}>

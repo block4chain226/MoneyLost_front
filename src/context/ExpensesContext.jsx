@@ -21,7 +21,7 @@ export const ExpensesContextProvider = ({ children }) => {
   // const [currentMonth, setCurrentMonth] = useState(new Date());
   // const [currentYear, setCurrentYear] = useState(currentDate);
   // const [dateMode, setDateMode] = useState("Day");
-  const [allIncome, setAllIncome] = useState([]);
+  // const [allIncome, setAllIncome] = useState([]);
   const [dayIncome, setDayIncome] = useState(0);
   const [isMonthUpdate, setIsMonthUpdate] = useState({ isUpdate: false });
   const [titleCategory, setTitleCategory] = useState({});
@@ -31,6 +31,7 @@ export const ExpensesContextProvider = ({ children }) => {
   let [dayExpenses, setDayExpenses] = useState(0);
 
   const [monthExpenses, setMonthExpenses] = useState(0);
+  const [yearExpenses, setYearExpenses] = useState(0);
   const [allExpenses, setAllExpenses] = useState([]);
   const [moneyAmount, setMoneyAmount] = useState(0);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -126,6 +127,7 @@ export const ExpensesContextProvider = ({ children }) => {
 
   function byDayRef(date) {
     console.log("byDayref");
+
     const cat = {};
 
     allExpenses.forEach((element) => {
@@ -145,7 +147,6 @@ export const ExpensesContextProvider = ({ children }) => {
   }
 
   function byMonthRef(month = currentMonth) {
-    console.log("byMonthref");
     const curYear = new Date(
       currentMonth.toLocaleDateString("en-US")
     ).getFullYear();
@@ -238,14 +239,6 @@ export const ExpensesContextProvider = ({ children }) => {
     setIsUpdate(false);
   }, [currentDate]);
 
-  // useEffect(() => {
-  //   getTotalExpenses();
-  // }, [titleCategory]);
-
-  // useEffect(() => {
-  //   byMonth();
-  // }, [monthExpenses]);
-
   useEffect(() => {
     setCurrentDate(new Date());
   }, [isMonthUpdate]);
@@ -267,8 +260,7 @@ export const ExpensesContextProvider = ({ children }) => {
 
         dayTitleCategory,
         setAllExpenses,
-        allIncome,
-        setAllIncome,
+
         days,
         monthExpenses,
         dayExpenses,
@@ -299,6 +291,8 @@ export const ExpensesContextProvider = ({ children }) => {
         setIsUpdate,
         monthTitleCategory,
         setMonthTitleCategory,
+        setYearExpenses,
+        setMonthExpenses,
       }}
     >
       {children}

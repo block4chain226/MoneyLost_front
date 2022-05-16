@@ -3,6 +3,7 @@ import cl from "./Header.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
 import MyButton from "../MyButton/MyButton";
 import DateContext from "../../context/DateContext";
+import IncomeContext from "../../context/IncomeContext";
 
 const Header = () => {
   const {
@@ -16,16 +17,18 @@ const Header = () => {
     byYear,
 
     amount,
-    setDayIncome,
+
     setDayExpenses,
     monthExpenses,
 
     dayExpenses,
     days,
     setDays,
-    dayIncome,
+    setYearExpenses,
+    setMonthExpenses,
     setIsUpdate,
   } = useContext(ExpensesContext);
+
   const {
     currentMonth,
     setCurrentMonth,
@@ -36,6 +39,19 @@ const Header = () => {
     setCurrentYear,
     currentYear,
   } = useContext(DateContext);
+
+  const {
+    allIncome,
+    dayIncome,
+    monthIncome,
+    getAllIncomes,
+    getDayIncomes,
+    getMonthIncomes,
+    getYearIncomes,
+    setDayIncome,
+    setMonthIncome,
+    setYearIncome,
+  } = useContext(IncomeContext);
 
   const incrementDate = (e) => {
     e.preventDefault();
@@ -79,8 +95,30 @@ const Header = () => {
   }, [days]);
 
   useEffect(() => {
+    getAllIncomes();
+  }, []);
+
+  useEffect(() => {
     setDays(0);
   }, [dateMode.day]);
+
+  useEffect(() => {
+    if (dateMode.day) {
+      getDayIncomes();
+    }
+  }, [currentDate, dateMode, allIncome]);
+
+  useEffect(() => {
+    if (dateMode.month) {
+      getMonthIncomes();
+    }
+  }, [currentMonth, dateMode, allIncome]);
+
+  useEffect(() => {
+    if (dateMode.year) {
+      getYearIncomes();
+    }
+  }, [currentYear, dateMode, allIncome]);
 
   useEffect(() => {
     setIsUpdate(false);
@@ -116,15 +154,16 @@ const Header = () => {
             <h6 style={{ fontSize: "4vw" }}>
               {dateMode.day ? "Day income" : "Month income"}{" "}
             </h6>
-            <h6 style={{ fontSize: "3.5vw" }}>{dayIncome}</h6>
+            <h6 style={{ fontSize: "3.5vw" }}>
+              {dateMode.day ? dayIncome : monthIncome}
+            </h6>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>Total </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
               {dateMode.day
-                ? dateMode.day
-                : // ? +dayIncome - +dayExpenses
-                  +dayIncome - +monthExpenses}
+                ? +dayIncome - +dayExpenses
+                : +monthIncome - +monthExpenses}
             </h6>
           </div>
         </div>

@@ -8,12 +8,18 @@ import { useEffect } from "react";
 import DateMode from "../components/DateMode";
 import CategoryContext from "../context/CategoryContext";
 import ExpensesContext from "../context/ExpensesContext";
+import IncomeContext from "../context/IncomeContext";
 
 const Main = () => {
   const { byDayRef, currentDate } = useContext(ExpensesContext);
+  const { getDayIncomes } = useContext(IncomeContext);
 
   useEffect(() => {
     byDayRef(currentDate);
+  }, []);
+
+  useEffect(() => {
+    getDayIncomes();
   }, []);
 
   useEffect(() => {

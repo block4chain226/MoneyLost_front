@@ -9,6 +9,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import { CategoryContextProvider } from "./context/CategoryContext";
 import { ExpensesContextProvider } from "./context/ExpensesContext";
 import { DateContextProvider } from "./context/DateContext";
+import { IncomeContextProvider } from "./context/IncomeContext";
 
 function App() {
   return (
@@ -24,7 +25,9 @@ function App() {
                 <DateContextProvider>
                   <CategoryContextProvider>
                     <ExpensesContextProvider>
-                      <Main />
+                      <IncomeContextProvider>
+                        <Main />
+                      </IncomeContextProvider>
                     </ExpensesContextProvider>
                   </CategoryContextProvider>
                 </DateContextProvider>

@@ -26,11 +26,15 @@ const ExpensesDetails = (props) => {
     setYearExpenses,
     currentYear,
     monthTitleCategory,
+    byYearRef,
+    yearTitleCategory,
   } = useContext(ExpensesContext);
   const { dateMode, setDateMode, currentMonth, currentDate, setCurrentDate } =
     useContext(DateContext);
 
   const { category } = useContext(CategoryContext);
+
+  const [title, setTitle] = useState({});
 
   const userId = sessionStorage.getItem("userId");
 
@@ -41,24 +45,50 @@ const ExpensesDetails = (props) => {
   };
 
   useEffect(() => {
-    setDayExpenses(0);
+    if (dateMode.day) {
+      setDayExpenses(0);
+    }
   }, [currentDate, dateMode]);
 
   useEffect(() => {
-    setMonthExpenses(0);
+    if (dateMode.month) {
+      setMonthExpenses(0);
+    }
   }, [currentMonth, dateMode]);
 
   useEffect(() => {
-    setYearExpenses(0);
+    if (dateMode.year) {
+      setYearExpenses(0);
+    }
   }, [currentYear, dateMode]);
 
   useEffect(() => {
-    byDayRef(currentDate);
+    if (dateMode.day) {
+      byDayRef(currentDate);
+    }
   }, [currentDate, dateMode, allExpenses]);
 
   useEffect(() => {
-    byMonthRef();
+    if (dateMode.month) {
+      byMonthRef();
+    }
   }, [currentMonth, dateMode, allExpenses]);
+
+  useEffect(() => {
+    if (dateMode.year) {
+      byYearRef();
+    }
+  }, [currentYear, dateMode, allExpenses]);
+
+  useEffect(() => {
+    if (dateMode.day) {
+      setTitle(dayTitleCategory);
+    } else if (dateMode.month) {
+      setTitle(monthTitleCategory);
+    } else if (dateMode.year) {
+      setTitle(yearTitleCategory);
+    }
+  }, [dayTitleCategory, monthTitleCategory, yearTitleCategory]);
 
   useEffect(() => {
     getAllExpenses();
@@ -71,7 +101,8 @@ const ExpensesDetails = (props) => {
           <div className={cl.expenses}>
             <ul>
               {Object.entries(
-                dateMode.day ? dayTitleCategory : monthTitleCategory
+                title
+                // dateMode.day ? dayTitleCategory : monthTitleCategory
               ).map((item) => {
                 return (
                   <MyDetails

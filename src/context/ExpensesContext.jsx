@@ -38,6 +38,7 @@ export const ExpensesContextProvider = ({ children }) => {
 
   const [dayTitleCategory, setDayTitleCategory] = useState({});
   const [monthTitleCategory, setMonthTitleCategory] = useState({});
+  const [yearTitleCategory, setYearTitleCategory] = useState({});
 
   const {
     dateMode,
@@ -45,6 +46,7 @@ export const ExpensesContextProvider = ({ children }) => {
     currentDate,
     currentMonth,
     setCurrentMonth,
+    currentYear,
     setCurrentDate,
   } = useContext(DateContext);
 
@@ -175,64 +177,27 @@ export const ExpensesContextProvider = ({ children }) => {
     setMonthTitleCategory(cat);
   }
 
-  // useEffect(() => {
-  //   byDayRef(currentDate);
-  // }, [currentDate]);
+  function byYearRef() {
+    console.log(new Date(currentYear, 0, 1));
+    console.log(new Date(currentYear, 11, 31));
 
-  // function byMonth(month = currentMonth) {
-  //   console.log("byMonth");
-
-  //   setDateMode("Month");
-  //   const curYear = new Date(
-  //     currentMonth.toLocaleDateString("en-US")
-  //   ).getFullYear();
-  //   const firstDayOfMonth = new Date(month.getFullYear(), month.getMonth(), 1);
-  //   const lastDayOfMonth = new Date(
-  //     month.getFullYear(),
-  //     month.getMonth() + 1,
-  //     0
-  //   );
-  //   const cat = {};
-
-  //   allExpenses.forEach((element) => {
-  //     if (
-  //       new Date(element.date).getTime() >=
-  //         new Date(firstDayOfMonth).getTime() &&
-  //       new Date(element.date).getTime() <=
-  //         new Date(lastDayOfMonth).getTime() &&
-  //       new Date(element.date).getFullYear() === curYear
-  //     ) {
-  //       if (!cat[element.category]) {
-  //         cat[element.category] = [element];
-  //       } else {
-  //         cat[element.category].push(element);
-  //       }
-  //     }
-  //   });
-
-  //   //write start month to lastMonthCategoryTitle and if it not null get categories from it
-  //   restoreNewExpenses("tC", setTitleCategory, cat);
-
-  //   ///Incomes
-  //   // console.log("all ", allIncome);
-  //   let totalIncome = 0;
-  //   allIncome.flat().forEach((element) => {
-  //     if (
-  //       new Date(element.date).getTime() >=
-  //         new Date(firstDayOfMonth).getTime() &&
-  //       new Date(element.date).getTime() <= new Date(lastDayOfMonth).getTime()
-  //     ) {
-  //       totalIncome += +element.incomeAmount;
-  //     }
-  //   });
-
-  //   // debugger;
-  //   setDayIncome(totalIncome);
-  // }
-
-  function byYear() {
-    console.log("byYear");
-    setDateMode("Year");
+    const cat = {};
+    allExpenses.forEach((element) => {
+      if (
+        new Date(element.date).getTime() >=
+          new Date(new Date(currentYear, 0, 1)).getTime() &&
+        new Date(element.date).getTime() <=
+          new Date(new Date(currentYear, 11, 31)).getTime() &&
+        new Date(element.date).getFullYear() === currentYear
+      ) {
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
+      }
+    });
+    setYearTitleCategory(cat);
   }
 
   useEffect(() => {
@@ -269,7 +234,7 @@ export const ExpensesContextProvider = ({ children }) => {
         dateMode,
         // byDay,
         // byMonth,
-        byYear,
+
         titleCategory,
         setDateMode,
         currentMonth,
@@ -293,6 +258,8 @@ export const ExpensesContextProvider = ({ children }) => {
         setMonthTitleCategory,
         setYearExpenses,
         setMonthExpenses,
+        byYearRef,
+        yearTitleCategory,
       }}
     >
       {children}

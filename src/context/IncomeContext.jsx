@@ -91,8 +91,37 @@ export const IncomeContextProvider = ({ children }) => {
     setMonthIncome(totalMonthInc);
   };
 
-  const getYearIncomes = () => {};
-  console.log(allIncome);
+  const getYearIncomes = () => {
+    let totalYearInc = 0;
+    const curYear = new Date(
+      currentMonth.toLocaleDateString("en-US")
+    ).getFullYear();
+    const firstDayOfMonth = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth(),
+      1
+    );
+    const lastDayOfMonth = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() + 1,
+      0
+    );
+
+    allIncome.map((element) => {
+      if (
+        new Date(element.date).getTime() >=
+          new Date(firstDayOfMonth).getTime() &&
+        new Date(element.date).getTime() <=
+          new Date(lastDayOfMonth).getTime() &&
+        new Date(element.date).getFullYear() === curYear
+      ) {
+        totalYearInc += +element.incomeAmount;
+      }
+    });
+
+    setMonthIncome(totalYearInc);
+  };
+
   return (
     <IncomeContext.Provider
       value={{

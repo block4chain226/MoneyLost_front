@@ -26,7 +26,7 @@ const DateMode = () => {
       </button>
       <button
         onClick={() => {
-          setDateMode("Year");
+          setDateMode({ day: false, month: false, year: true });
         }}
       >
         Year

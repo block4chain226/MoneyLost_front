@@ -7,17 +7,12 @@ import IncomeContext from "../../context/IncomeContext";
 
 const Header = () => {
   const {
-    // currentDate,
-    // setCurrentDate,
-    // dateMode,
     byDay,
     month,
     setMonth,
     byMonth,
     byYear,
-
     amount,
-
     setDayExpenses,
     monthExpenses,
 
@@ -76,6 +71,9 @@ const Header = () => {
     if (dateMode.month) {
       setMonth(-30);
     }
+    if (dateMode.year) {
+      setMonth(-365);
+    }
 
     setDays((prevState) => prevState - 1);
   };
@@ -87,6 +85,12 @@ const Header = () => {
       );
     }
     if (dateMode.month) {
+      setCurrentMonth(
+        (prevState) =>
+          new Date(currentMonth.getTime() + month * 1000 * 3600 * 24)
+      );
+    }
+    if (dateMode.year) {
       setCurrentMonth(
         (prevState) =>
           new Date(currentMonth.getTime() + month * 1000 * 3600 * 24)

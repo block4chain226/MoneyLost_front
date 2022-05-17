@@ -62,23 +62,11 @@ const ExpensesDetails = (props) => {
     }
   }, [currentYear, dateMode]);
 
-  // useEffect(() => {
-  //   if (dateMode.day) {
-  //     byDayRef(currentDate);
-  //   }
-  // }, [currentDate, dateMode, allExpenses]);
-
-  // useEffect(() => {
-  //   if (dateMode.month) {
-  //     byMonthRef();
-  //   }
-  // }, [currentMonth, dateMode, allExpenses]);
-
-  // useEffect(() => {
-  //   if (dateMode.year) {
-  //     byYearRef();
-  //   }
-  // }, [currentYear, dateMode, allExpenses]);
+  useEffect(() => {
+    if (dateMode.year) {
+      setYearExpenses(0);
+    }
+  }, [currentYear, dateMode]);
 
   useEffect(() => {
     if (dateMode.day) {

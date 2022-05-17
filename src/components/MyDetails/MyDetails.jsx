@@ -14,6 +14,8 @@ const MyDetails = ({ categoryName, money, items }) => {
     setDayExpenses,
     monthExpenses,
     setMonthExpenses,
+    yearExpenses,
+    setYearExpenses,
     amount,
     isUpdate,
   } = useContext(ExpensesContext);
@@ -43,6 +45,10 @@ const MyDetails = ({ categoryName, money, items }) => {
       let monthExp = monthExpenses;
       monthExp += total;
       setMonthExpenses((total) => total + monthExp);
+    } else if (!isUpdate && dateMode.year) {
+      let yearExp = yearExpenses;
+      yearExp += total;
+      setYearExpenses((total) => total + yearExp);
     }
   };
 

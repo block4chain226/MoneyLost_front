@@ -13,7 +13,8 @@ export const IncomeContextProvider = ({ children }) => {
   const [yearIncome, setYearIncome] = useState(0);
 
   const { amount } = useContext(ExpensesContext);
-  const { currentDate, currentMonth, dateMode } = useContext(DateContext);
+  const { currentDate, currentYear, currentMonth, dateMode } =
+    useContext(DateContext);
 
   const getAllIncomes = async () => {
     await fetch(`http://localhost:3000/income/${userId}`)
@@ -110,16 +111,15 @@ export const IncomeContextProvider = ({ children }) => {
     allIncome.map((element) => {
       if (
         new Date(element.date).getTime() >=
-          new Date(firstDayOfMonth).getTime() &&
+          new Date(new Date(currentYear.getFullYear(), 0, 1)).getTime() &&
         new Date(element.date).getTime() <=
-          new Date(lastDayOfMonth).getTime() &&
-        new Date(element.date).getFullYear() === curYear
+          new Date(new Date(currentYear.getFullYear(), 11, 31)).getTime()
       ) {
         totalYearInc += +element.incomeAmount;
       }
     });
 
-    setMonthIncome(totalYearInc);
+    setYearIncome(totalYearInc);
   };
 
   return (

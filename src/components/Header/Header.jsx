@@ -21,6 +21,7 @@ const Header = () => {
     setDays,
     setYearExpenses,
     setMonthExpenses,
+    yearExpenses,
     setIsUpdate,
   } = useContext(ExpensesContext);
 
@@ -46,6 +47,7 @@ const Header = () => {
     getDayIncomes,
     getMonthIncomes,
     getYearIncomes,
+    yearIncome,
     setDayIncome,
     setMonthIncome,
     setYearIncome,
@@ -134,6 +136,12 @@ const Header = () => {
     setIsUpdate(false);
   }, [currentDate, currentMonth, currentYear]);
 
+  useEffect(() => {
+    if (dateMode.year) {
+      setYearExpenses(0);
+    }
+  }, [currentYear, dateMode]);
+
   return (
     <section className={cl.header}>
       <button onClick={decrementDate}> </button>
@@ -156,18 +164,34 @@ const Header = () => {
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>
-              {dateMode.day ? "Today expenses" : "Month expenses"}{" "}
+              {dateMode.day
+                ? "Today expenses"
+                : dateMode.month
+                ? "Month expenses"
+                : "Year expenses"}{" "}
             </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
-              {dateMode.day ? dayExpenses : monthExpenses}
+              {dateMode.day
+                ? dayExpenses
+                : dateMode.month
+                ? monthExpenses
+                : yearExpenses}
             </h6>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>
-              {dateMode.day ? "Day income" : "Month income"}{" "}
+              {dateMode.day
+                ? "Day income"
+                : dateMode.month
+                ? "Month income"
+                : "Year income"}{" "}
             </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
-              {dateMode.day ? dayIncome : monthIncome}
+              {dateMode.day
+                ? dayIncome
+                : dateMode.month
+                ? monthIncome
+                : yearIncome}
             </h6>
           </div>
           <div className={cl.money__expenses}>
@@ -175,7 +199,9 @@ const Header = () => {
             <h6 style={{ fontSize: "3.5vw" }}>
               {dateMode.day
                 ? +dayIncome - +dayExpenses
-                : +monthIncome - +monthExpenses}
+                : dateMode.month
+                ? +monthIncome - +monthExpenses
+                : +yearIncome - +yearExpenses}
             </h6>
           </div>
         </div>

@@ -84,49 +84,6 @@ export const ExpensesContextProvider = ({ children }) => {
     }
   };
 
-  const restoreNewExpenses = (sessionItem, setStateFunc, categoryObj) => {
-    if (dateMode.day) {
-      if (sessionStorage.getItem(sessionItem) !== null) {
-        const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
-        tempExpenses.map((element) => {
-          if (element.date === currentDate.toLocaleDateString("en-US")) {
-            if (!categoryObj[element.category]) {
-              categoryObj[element.category] = [element];
-            } else {
-              categoryObj[element.category].push(element);
-            }
-          }
-        });
-      }
-      setStateFunc(categoryObj);
-    }
-
-    if (dateMode === "Month") {
-      const curYear = new Date(
-        currentMonth.toLocaleDateString("en-US")
-      ).getFullYear();
-      if (sessionStorage.getItem(sessionItem) !== null) {
-        const tempExpenses = JSON.parse(sessionStorage.getItem(sessionItem));
-
-        tempExpenses.map((element) => {
-          if (
-            new Date(element.date).getMonth() + 1 ===
-              new Date(currentMonth.toLocaleDateString("en-US")).getMonth() +
-                1 &&
-            new Date(element.date).getFullYear() === curYear
-          ) {
-            if (!categoryObj[element.category]) {
-              categoryObj[element.category] = [element];
-            } else {
-              categoryObj[element.category].push(element);
-            }
-          }
-        });
-      }
-      setStateFunc(categoryObj);
-    }
-  };
-
   function byDayRef(date) {
     console.log("byDayref");
 
@@ -199,7 +156,6 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
-    debugger;
     setYearTitleCategory(cat);
   }
 
@@ -281,6 +237,8 @@ export const ExpensesContextProvider = ({ children }) => {
         setMonthExpenses,
         byYearRef,
         yearTitleCategory,
+        yearExpenses,
+        setYearExpenses,
       }}
     >
       {children}

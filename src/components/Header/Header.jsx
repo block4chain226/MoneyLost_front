@@ -33,8 +33,11 @@ const Header = () => {
     setCurrentDate,
     setCurrentYear,
     currentYear,
+    lastMonth,
+    year,
+    setYear,
   } = useContext(DateContext);
-
+  //30122020
   const {
     allIncome,
     dayIncome,
@@ -57,6 +60,10 @@ const Header = () => {
       setMonth(30);
       setDays((prevState) => prevState + 1);
     }
+    if (dateMode.year && currentYear.getFullYear() < new Date().getFullYear()) {
+      setYear(365);
+      setDays((prevState) => prevState + 1);
+    }
 
     if (
       dateMode.day &&
@@ -72,7 +79,7 @@ const Header = () => {
       setMonth(-30);
     }
     if (dateMode.year) {
-      setMonth(-365);
+      setYear(-365);
     }
 
     setDays((prevState) => prevState - 1);
@@ -91,9 +98,8 @@ const Header = () => {
       );
     }
     if (dateMode.year) {
-      setCurrentMonth(
-        (prevState) =>
-          new Date(currentMonth.getTime() + month * 1000 * 3600 * 24)
+      setCurrentYear(
+        (prevState) => new Date(currentYear.getTime() + year * 1000 * 3600 * 24)
       );
     }
   }, [days]);
@@ -141,9 +147,11 @@ const Header = () => {
                   currentDate.toLocaleDateString("en-us", { day: "numeric" }) +
                   " " +
                   currentDate.toLocaleDateString("en-us", { month: "long" })
-                : currentMonth.toLocaleDateString("en-us", { month: "long" }) +
+                : dateMode.month
+                ? currentMonth.toLocaleDateString("en-us", { month: "long" }) +
                   " " +
-                  currentMonth.getFullYear()}
+                  currentMonth.getFullYear()
+                : currentYear.getFullYear()}
             </h2>
           </div>
           <div className={cl.money__expenses}>

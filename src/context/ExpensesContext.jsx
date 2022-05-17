@@ -178,17 +178,19 @@ export const ExpensesContextProvider = ({ children }) => {
   }
 
   function byYearRef() {
-    console.log(new Date(currentYear, 0, 1));
-    console.log(new Date(currentYear, 11, 31));
+    console.log(new Date(new Date(currentYear.getFullYear(), 0, 1)).getTime());
+    console.log(
+      new Date(new Date(currentYear.getFullYear(), 11, 31)).getTime()
+    );
 
     const cat = {};
+
     allExpenses.forEach((element) => {
       if (
         new Date(element.date).getTime() >=
-          new Date(new Date(currentYear, 0, 1)).getTime() &&
+          new Date(new Date(currentYear.getFullYear(), 0, 1)).getTime() &&
         new Date(element.date).getTime() <=
-          new Date(new Date(currentYear, 11, 31)).getTime() &&
-        new Date(element.date).getFullYear() === currentYear
+          new Date(new Date(currentYear.getFullYear(), 11, 31)).getTime()
       ) {
         if (!cat[element.category]) {
           cat[element.category] = [element];

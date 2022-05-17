@@ -199,8 +199,27 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
+    debugger;
     setYearTitleCategory(cat);
   }
+
+  useEffect(() => {
+    if (dateMode.day) {
+      byDayRef(currentDate);
+    }
+  }, [currentDate, dateMode, allExpenses]);
+
+  useEffect(() => {
+    if (dateMode.month) {
+      byMonthRef();
+    }
+  }, [currentMonth, dateMode, allExpenses]);
+
+  useEffect(() => {
+    if (dateMode.year) {
+      byYearRef();
+    }
+  }, [currentYear, dateMode, allExpenses]);
 
   useEffect(() => {
     setIsUpdate(false);

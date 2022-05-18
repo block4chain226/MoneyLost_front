@@ -20,7 +20,8 @@ const MyDetails = ({ categoryName, money, items }) => {
     isUpdate,
   } = useContext(ExpensesContext);
 
-  const { dateMode, currentDate, setCurrentDate } = useContext(DateContext);
+  const { dateMode, currentDate, setCurrentDate, currentYear } =
+    useContext(DateContext);
 
   const [totalAmount, setTotalAmount] = useState();
 

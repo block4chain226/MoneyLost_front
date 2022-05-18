@@ -39,10 +39,13 @@ const AddExpenses = (props) => {
     addNewExpense,
     setDayExpenses,
     byMonthRef,
+    byYearRef,
     dayExpenses,
     setIsUpdate,
     setMonthExpenses,
+    yearExpenses,
     monthExpenses,
+    setYearExpenses,
   } = useContext(ExpensesContext);
 
   const {
@@ -52,6 +55,7 @@ const AddExpenses = (props) => {
     setCurrentDate,
     currentMonthNumber,
     lastMonth,
+    currentYear,
   } = useContext(DateContext);
 
   const { addNewIncome } = useContext(IncomeContext);
@@ -88,6 +92,18 @@ const AddExpenses = (props) => {
     } else if (dateMode.month && currentMonthNumber !== lastMonth) {
       const monthExp = monthExpenses;
       setMonthExpenses(monthExp);
+    } else if (
+      dateMode.year &&
+      currentYear.getFullYear() === new Date().getFullYear()
+    ) {
+      const yearExp = +amount + yearExpenses;
+      setYearExpenses(yearExp);
+    } else if (
+      dateMode.year &&
+      currentYear.getFullYear() !== new Date().getFullYear()
+    ) {
+      const yearExp = yearExpenses;
+      setYearExpenses(yearExp);
     }
 
     setIsUpdate(true);
@@ -109,6 +125,10 @@ const AddExpenses = (props) => {
 
   useEffect(() => {
     byMonthRef(currentMonth);
+  }, [allExpenses]);
+
+  useEffect(() => {
+    byYearRef(currentMonth);
   }, [allExpenses]);
 
   const bottom = props.position;

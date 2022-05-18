@@ -63,6 +63,9 @@ const Header = () => {
       setDays((prevState) => prevState + 1);
     }
     if (dateMode.year && currentYear.getFullYear() < new Date().getFullYear()) {
+      // setCurrentYear(
+      //   new Date(new Date().setFullYear(currentYear.getFullYear() + 1))
+      // );
       setYear(365);
       setDays((prevState) => prevState + 1);
     }
@@ -101,7 +104,10 @@ const Header = () => {
     }
     if (dateMode.year) {
       setCurrentYear(
+        ///Problem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         (prevState) => new Date(currentYear.getTime() + year * 1000 * 3600 * 24)
+        // (prevState) =>
+        //   new Date(new Date().setFullYear(currentYear.getFullYear() - 1))
       );
     }
   }, [days]);
@@ -135,12 +141,6 @@ const Header = () => {
   useEffect(() => {
     setIsUpdate(false);
   }, [currentDate, currentMonth, currentYear]);
-
-  useEffect(() => {
-    if (dateMode.year) {
-      setYearExpenses(0);
-    }
-  }, [currentYear, dateMode]);
 
   return (
     <section className={cl.header}>

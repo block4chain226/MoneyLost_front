@@ -24,13 +24,18 @@ const ExpensesDetails = (props) => {
     amount,
     moneyAmount,
     setYearExpenses,
-    currentYear,
     monthTitleCategory,
     byYearRef,
     yearTitleCategory,
   } = useContext(ExpensesContext);
-  const { dateMode, setDateMode, currentMonth, currentDate, setCurrentDate } =
-    useContext(DateContext);
+  const {
+    dateMode,
+    setDateMode,
+    currentMonth,
+    currentDate,
+    currentYear,
+    setCurrentDate,
+  } = useContext(DateContext);
 
   const { category } = useContext(CategoryContext);
 
@@ -55,12 +60,6 @@ const ExpensesDetails = (props) => {
       setMonthExpenses(0);
     }
   }, [currentMonth, dateMode]);
-
-  useEffect(() => {
-    if (dateMode.year) {
-      setYearExpenses(0);
-    }
-  }, [currentYear, dateMode]);
 
   useEffect(() => {
     if (dateMode.year) {

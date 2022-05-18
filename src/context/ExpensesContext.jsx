@@ -77,11 +77,6 @@ export const ExpensesContextProvider = ({ children }) => {
         (res) => res.json()
       );
     } catch (error) {}
-
-    if (dateMode === "Month") {
-      let ccc = monthExpenses;
-      setMonthExpenses(ccc + amount);
-    }
   };
 
   function byDayRef(date) {
@@ -135,11 +130,6 @@ export const ExpensesContextProvider = ({ children }) => {
   }
 
   function byYearRef() {
-    console.log(new Date(new Date(currentYear.getFullYear(), 0, 1)).getTime());
-    console.log(
-      new Date(new Date(currentYear.getFullYear(), 11, 31)).getTime()
-    );
-
     const cat = {};
 
     allExpenses.forEach((element) => {
@@ -156,6 +146,7 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
+
     setYearTitleCategory(cat);
   }
 
@@ -214,8 +205,8 @@ export const ExpensesContextProvider = ({ children }) => {
 
         titleCategory,
         setDateMode,
-        currentMonth,
-        setCurrentMonth,
+        // currentMonth,
+        // setCurrentMonth,
         currentDate,
         setCurrentDate,
         setTitleCategory,

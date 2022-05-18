@@ -23,10 +23,10 @@ export const DateContextProvider = ({ children }) => {
   const [month, setMonth] = useState(new Date());
   const [year, setYear] = useState(new Date());
 
-  const currentMonthNumber =
-    new Date(currentMonth.toLocaleDateString("en-US")).getMonth() + 1;
-  const lastMonth =
-    new Date(new Date().toLocaleDateString("en-US")).getMonth() + 1;
+  // const currentMonthNumber =
+  //   new Date(currentMonth.toLocaleDateString("en-US")).getMonth() + 1;
+  // const lastMonth =
+  //   new Date(new Date().toLocaleDateString("en-US")).getMonth() + 1;
 
   return (
     <DateContext.Provider
@@ -41,13 +41,13 @@ export const DateContextProvider = ({ children }) => {
         setCurrentDate,
         month,
         setMonth,
-        currentMonthNumber,
-        lastMonth,
+        // currentMonthNumber,
+        // lastMonth,
         firstDayYear,
         setFirstDayYear,
         lastDayYear,
         setLastDayYear,
-        lastMonth,
+        // lastMonth,
         year,
         setYear,
       }}

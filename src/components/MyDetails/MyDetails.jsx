@@ -45,10 +45,12 @@ const MyDetails = ({ categoryName, money, items }) => {
     } else if (!isUpdate && dateMode.month) {
       let monthExp = monthExpenses;
       monthExp += total;
+
       setMonthExpenses((total) => total + monthExp);
     } else if (!isUpdate && dateMode.year) {
       let yearExp = yearExpenses;
       yearExp += total;
+      // debugger;
       setYearExpenses((total) => total + yearExp);
     }
   };

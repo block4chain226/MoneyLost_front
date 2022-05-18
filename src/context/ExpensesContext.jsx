@@ -126,6 +126,7 @@ export const ExpensesContextProvider = ({ children }) => {
         }
       }
     });
+
     setMonthTitleCategory(cat);
   }
 

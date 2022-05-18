@@ -5,42 +5,23 @@ import cl from "./ExpensesDetails.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
 import CategoryContext from "../../context/CategoryContext";
 import DateContext from "../../context/DateContext";
-import IncomeContext from "../../context/IncomeContext";
 
 const ExpensesDetails = (props) => {
   const {
-    allExpenses,
     setAllExpenses,
-    byDay,
-    byDayRef,
-    byMonthRef,
-    month,
-    dayExpenses,
     setDayExpenses,
     setMonthExpenses,
-    titleCategory,
-    setTitleCategory,
     dayTitleCategory,
     amount,
-    moneyAmount,
     setYearExpenses,
     monthTitleCategory,
-    byYearRef,
     yearTitleCategory,
   } = useContext(ExpensesContext);
-  const {
-    dateMode,
-    setDateMode,
-    currentMonth,
-    currentDate,
-    currentYear,
-    setCurrentDate,
-  } = useContext(DateContext);
+  const { dateMode, currentMonth, currentDate, currentYear } =
+    useContext(DateContext);
 
   const { category } = useContext(CategoryContext);
-
   const [title, setTitle] = useState({});
-
   const userId = sessionStorage.getItem("userId");
 
   const getAllExpenses = async () => {
@@ -68,16 +49,6 @@ const ExpensesDetails = (props) => {
   }, [currentYear, dateMode]);
 
   useEffect(() => {
-    if (dateMode.day) {
-      setTitle(dayTitleCategory);
-    } else if (dateMode.month) {
-      setTitle(monthTitleCategory);
-    } else if (dateMode.year) {
-      setTitle(yearTitleCategory);
-    }
-  }, [dayTitleCategory, monthTitleCategory, yearTitleCategory]);
-
-  useEffect(() => {
     getAllExpenses();
   }, []);
 
@@ -88,8 +59,11 @@ const ExpensesDetails = (props) => {
           <div className={cl.expenses}>
             <ul>
               {Object.entries(
-                title
-                // dateMode.day ? dayTitleCategory : monthTitleCategory
+                dateMode.day
+                  ? dayTitleCategory
+                  : dateMode.month
+                  ? monthTitleCategory
+                  : yearTitleCategory
               ).map((item) => {
                 return (
                   <MyDetails

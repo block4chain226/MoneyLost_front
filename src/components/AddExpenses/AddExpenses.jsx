@@ -4,38 +4,21 @@ import NumPad from "../NumPad/NumPad";
 import Category from "../Category/Category";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import MyButton from "../MyButton/MyButton";
-import useAuth from "../hooks/useAuth";
 import ExpensesContext from "../../context/ExpensesContext";
 import DateContext from "../../context/DateContext";
 import IncomeContext from "../../context/IncomeContext";
 
-//AddExpenses body
 const AddExpenses = (props) => {
   const [isCategory, setIsCategory] = useState(false);
   const [menu, setMenu] = useState({ isOpen: false });
-  const { auth } = useAuth();
-  const firstDayOfLastMonth = new Date(
-    new Date().getFullYear(),
-    new Date().getMonth(),
-    1
-  );
-  const lastDayOfLastMonth = new Date(
-    new Date().getFullYear(),
-    new Date().getMonth() + 1,
-    0
-  );
 
   const {
     switchMode,
     allExpenses,
     setAllExpenses,
     amount,
-    dayIncome,
-    allIncome,
     currentMonth,
-    setDayIncome,
     byDayRef,
-    setMoneyAmount,
     addNewExpense,
     setDayExpenses,
     byMonthRef,
@@ -48,15 +31,8 @@ const AddExpenses = (props) => {
     setYearExpenses,
   } = useContext(ExpensesContext);
 
-  const {
-    dateMode,
-    setDateMode,
-    currentDate,
-    setCurrentDate,
-    currentMonthNumber,
-    lastMonth,
-    currentYear,
-  } = useContext(DateContext);
+  const { dateMode, currentDate, currentMonthNumber, lastMonth, currentYear } =
+    useContext(DateContext);
 
   const { addNewIncome } = useContext(IncomeContext);
 
@@ -74,7 +50,6 @@ const AddExpenses = (props) => {
       ...allExpenses,
       {
         userId: sessionStorage.getItem("userId"),
-        // id: expenseId,
         category: categor,
         date: dateMode.day
           ? currentDate.toLocaleDateString("en-US")

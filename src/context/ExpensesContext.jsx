@@ -15,15 +15,8 @@ export const ExpensesContextProvider = ({ children }) => {
   const [amount, setAmount] = useState("");
   const [days, setDays] = useState(0);
   const [categoryName, setCategoryName] = useState("");
-  const [startMonthCategory, setStartMonthCategory] = useState({});
   const [month, setMonth] = useState(0);
-  // const [currentDate, setCurrentDate] = useState(new Date());
-  // const [currentMonth, setCurrentMonth] = useState(new Date());
-  // const [currentYear, setCurrentYear] = useState(currentDate);
-  // const [dateMode, setDateMode] = useState("Day");
-  // const [allIncome, setAllIncome] = useState([]);
   const [dayIncome, setDayIncome] = useState(0);
-  const [isMonthUpdate, setIsMonthUpdate] = useState({ isUpdate: false });
   const [titleCategory, setTitleCategory] = useState({});
 
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -45,13 +38,9 @@ export const ExpensesContextProvider = ({ children }) => {
     setDateMode,
     currentDate,
     currentMonth,
-    setCurrentMonth,
     currentYear,
     setCurrentDate,
   } = useContext(DateContext);
-
-  const lastMonth =
-    new Date(currentMonth.toLocaleDateString("en-US")).getMonth() + 1;
 
   const addNewExpense = (categor) => {
     setExpenseId(new Date().getTime());
@@ -173,10 +162,6 @@ export const ExpensesContextProvider = ({ children }) => {
     setIsUpdate(false);
   }, [currentDate]);
 
-  useEffect(() => {
-    setCurrentDate(new Date());
-  }, [isMonthUpdate]);
-
   return (
     <ExpensesContext.Provider
       value={{
@@ -187,27 +172,19 @@ export const ExpensesContextProvider = ({ children }) => {
         categoryName,
         setCategoryName,
         addNewExpense,
-
         allExpenses,
         byDayRef,
         byMonthRef,
-
         dayTitleCategory,
         setAllExpenses,
-
         days,
         monthExpenses,
         dayExpenses,
         setDayExpenses,
         setDays,
         dateMode,
-        // byDay,
-        // byMonth,
-
         titleCategory,
         setDateMode,
-        // currentMonth,
-        // setCurrentMonth,
         currentDate,
         setCurrentDate,
         setTitleCategory,
@@ -216,11 +193,8 @@ export const ExpensesContextProvider = ({ children }) => {
         setMonthExpenses,
         moneyAmount,
         setMoneyAmount,
-        // getTotalExpenses,
         dayIncome,
         setDayIncome,
-        isMonthUpdate,
-        setIsMonthUpdate,
         isUpdate,
         setIsUpdate,
         monthTitleCategory,

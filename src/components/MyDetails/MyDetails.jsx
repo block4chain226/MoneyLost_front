@@ -9,19 +9,16 @@ const MyDetails = ({ categoryName, money, items }) => {
   const [categoryImg, setCategoryImg] = useState();
 
   const {
-    allExpenses,
     dayExpenses,
     setDayExpenses,
     monthExpenses,
     setMonthExpenses,
     yearExpenses,
     setYearExpenses,
-    amount,
     isUpdate,
   } = useContext(ExpensesContext);
 
-  const { dateMode, currentDate, setCurrentDate, currentYear } =
-    useContext(DateContext);
+  const { dateMode } = useContext(DateContext);
 
   const [totalAmount, setTotalAmount] = useState();
 
@@ -36,11 +33,11 @@ const MyDetails = ({ categoryName, money, items }) => {
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
     }, 0);
-
     setTotalAmount(total);
     if (!isUpdate && dateMode.day) {
       let dayExp = dayExpenses;
       dayExp += total;
+
       setDayExpenses((total) => total + dayExp);
     } else if (!isUpdate && dateMode.month) {
       let monthExp = monthExpenses;
@@ -50,7 +47,6 @@ const MyDetails = ({ categoryName, money, items }) => {
     } else if (!isUpdate && dateMode.year) {
       let yearExp = yearExpenses;
       yearExp += total;
-      // debugger;
       setYearExpenses((total) => total + yearExp);
     }
   };

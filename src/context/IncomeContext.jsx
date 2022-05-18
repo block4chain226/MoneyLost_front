@@ -11,7 +11,6 @@ export const IncomeContextProvider = ({ children }) => {
   const [dayIncome, setDayIncome] = useState(0);
   const [monthIncome, setMonthIncome] = useState(0);
   const [yearIncome, setYearIncome] = useState(0);
-
   const { amount } = useContext(ExpensesContext);
   const { currentDate, currentYear, currentMonth, dateMode } =
     useContext(DateContext);

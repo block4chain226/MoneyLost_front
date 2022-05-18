@@ -1,26 +1,17 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import cl from "./Header.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
-import MyButton from "../MyButton/MyButton";
 import DateContext from "../../context/DateContext";
 import IncomeContext from "../../context/IncomeContext";
 
 const Header = () => {
   const {
-    byDay,
     month,
     setMonth,
-    byMonth,
-    byYear,
-    amount,
-    setDayExpenses,
     monthExpenses,
-
     dayExpenses,
     days,
     setDays,
-    setYearExpenses,
-    setMonthExpenses,
     yearExpenses,
     setIsUpdate,
   } = useContext(ExpensesContext);
@@ -29,16 +20,14 @@ const Header = () => {
     currentMonth,
     setCurrentMonth,
     dateMode,
-    setDateMode,
     currentDate,
     setCurrentDate,
     setCurrentYear,
     currentYear,
-    lastMonth,
     year,
     setYear,
   } = useContext(DateContext);
-  //30122020
+
   const {
     allIncome,
     dayIncome,
@@ -48,9 +37,6 @@ const Header = () => {
     getMonthIncomes,
     getYearIncomes,
     yearIncome,
-    setDayIncome,
-    setMonthIncome,
-    setYearIncome,
   } = useContext(IncomeContext);
 
   const incrementDate = (e) => {
@@ -63,9 +49,6 @@ const Header = () => {
       setDays((prevState) => prevState + 1);
     }
     if (dateMode.year && currentYear.getFullYear() < new Date().getFullYear()) {
-      // setCurrentYear(
-      //   new Date(new Date().setFullYear(currentYear.getFullYear() + 1))
-      // );
       setYear(365);
       setDays((prevState) => prevState + 1);
     }
@@ -85,9 +68,6 @@ const Header = () => {
     }
     if (dateMode.year) {
       setYear(-365);
-      // setCurrentYear(
-      //   new Date(new Date().setFullYear(currentYear.getFullYear() - 1))
-      // );
     }
 
     setDays((prevState) => prevState - 1);
@@ -107,10 +87,7 @@ const Header = () => {
     }
     if (dateMode.year) {
       setCurrentYear(
-        ///Problem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         (prevState) => new Date(currentYear.getTime() + year * 1000 * 3600 * 24)
-        // (prevState) =>
-        //   new Date(new Date().setFullYear(currentYear.getFullYear()))
       );
     }
   }, [days]);
@@ -151,7 +128,7 @@ const Header = () => {
 
   useEffect(() => {
     setIsUpdate(false);
-  }, [currentDate, currentMonth, currentYear]);
+  }, [currentDate, currentMonth, currentYear, dateMode]);
 
   return (
     <section className={cl.header}>

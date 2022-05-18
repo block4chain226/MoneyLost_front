@@ -63,10 +63,10 @@ const Header = () => {
       setDays((prevState) => prevState + 1);
     }
     if (dateMode.year && currentYear.getFullYear() < new Date().getFullYear()) {
-      // setCurrentYear(
-      //   new Date(new Date().setFullYear(currentYear.getFullYear() + 1))
-      // );
-      setYear(365);
+      setCurrentYear(
+        new Date(new Date().setFullYear(currentYear.getFullYear() + 1))
+      );
+      // setYear(365);
       setDays((prevState) => prevState + 1);
     }
 
@@ -84,7 +84,10 @@ const Header = () => {
       setMonth(-30);
     }
     if (dateMode.year) {
-      setYear(-365);
+      // setYear(-365);
+      setCurrentYear(
+        new Date(new Date().setFullYear(currentYear.getFullYear() - 1))
+      );
     }
 
     setDays((prevState) => prevState - 1);
@@ -103,12 +106,12 @@ const Header = () => {
       );
     }
     if (dateMode.year) {
-      setCurrentYear(
-        ///Problem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        (prevState) => new Date(currentYear.getTime() + year * 1000 * 3600 * 24)
-        // (prevState) =>
-        //   new Date(new Date().setFullYear(currentYear.getFullYear() - 1))
-      );
+      // setCurrentYear(
+      //   ///Problem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      //   // (prevState) => new Date(currentYear.getTime() + year * 1000 * 3600 * 24)
+      //   (prevState) =>
+      //     new Date(new Date().setFullYear(currentYear.getFullYear()))
+      // );
     }
   }, [days]);
 

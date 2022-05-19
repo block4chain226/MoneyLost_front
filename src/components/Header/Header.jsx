@@ -5,16 +5,8 @@ import DateContext from "../../context/DateContext";
 import IncomeContext from "../../context/IncomeContext";
 
 const Header = () => {
-  const {
-    month,
-    setMonth,
-    monthExpenses,
-    dayExpenses,
-    days,
-    setDays,
-    yearExpenses,
-    setIsUpdate,
-  } = useContext(ExpensesContext);
+  const { monthExpenses, dayExpenses, yearExpenses, setIsUpdate } =
+    useContext(ExpensesContext);
 
   const {
     currentMonth,
@@ -23,9 +15,15 @@ const Header = () => {
     currentDate,
     setCurrentDate,
     setCurrentYear,
+    days,
+    setDays,
     currentYear,
+    month,
+    setMonth,
     year,
     setYear,
+    decrementDate,
+    incrementDate,
   } = useContext(DateContext);
 
   const {
@@ -38,40 +36,6 @@ const Header = () => {
     getYearIncomes,
     yearIncome,
   } = useContext(IncomeContext);
-
-  const incrementDate = (e) => {
-    e.preventDefault();
-    const today = new Date(new Date().getTime()).setUTCHours(0, 0, 0, 0);
-    const curMon = new Date(currentMonth.getTime()).setUTCHours(0, 0, 0, 0);
-
-    if (dateMode.month && curMon < today && curMon !== today) {
-      setMonth(30);
-      setDays((prevState) => prevState + 1);
-    }
-    if (dateMode.year && currentYear.getFullYear() < new Date().getFullYear()) {
-      setYear(365);
-      setDays((prevState) => prevState + 1);
-    }
-
-    if (
-      dateMode.day &&
-      new Date(currentDate.getTime()).setUTCHours(0, 0, 0, 0) < today
-    ) {
-      setDays((prevState) => prevState + 1);
-    }
-  };
-
-  const decrementDate = (e) => {
-    e.preventDefault();
-    if (dateMode.month) {
-      setMonth(-30);
-    }
-    if (dateMode.year) {
-      setYear(-365);
-    }
-
-    setDays((prevState) => prevState - 1);
-  };
 
   useEffect(() => {
     if (dateMode.day) {

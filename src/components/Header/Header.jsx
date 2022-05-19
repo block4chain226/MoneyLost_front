@@ -37,6 +37,27 @@ const Header = () => {
     yearIncome,
   } = useContext(IncomeContext);
 
+  const [touchStart, setTouchStart] = React.useState(0);
+  const [touchEnd, setTouchEnd] = React.useState(0);
+
+  function handleTouchStart(e) {
+    setTouchStart(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchMove(e) {
+    setTouchEnd(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchEnd() {
+    if (touchStart - touchEnd > 200) {
+      incrementDate();
+    }
+
+    if (touchStart - touchEnd < 200) {
+      decrementDate();
+    }
+  }
+
   useEffect(() => {
     if (dateMode.day) {
       setCurrentDate(
@@ -89,8 +110,11 @@ const Header = () => {
   }, [currentDate, currentMonth, currentYear]);
 
   return (
-    <section className={cl.header}>
-      <button onClick={decrementDate}> </button>
+    <section
+      className={cl.header}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className={cl.header__container}>
         <div className={cl.header__money}>
           <div className={cl.money__info}>
@@ -152,7 +176,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <button onClick={(e) => incrementDate(e)}></button>
     </section>
   );
 };

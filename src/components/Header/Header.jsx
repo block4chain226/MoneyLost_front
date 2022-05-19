@@ -128,7 +128,7 @@ const Header = () => {
 
   useEffect(() => {
     setIsUpdate(false);
-  }, [currentDate, currentMonth, currentYear, dateMode]);
+  }, [currentDate, currentMonth, currentYear]);
 
   return (
     <section className={cl.header}>

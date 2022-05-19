@@ -22,6 +22,8 @@ export const DateContextProvider = ({ children }) => {
   const [month, setMonth] = useState(new Date());
   const [year, setYear] = useState(new Date());
 
+  const currentMonthNumber = currentMonth.getMonth();
+
   return (
     <DateContext.Provider
       value={{
@@ -41,6 +43,7 @@ export const DateContextProvider = ({ children }) => {
         setLastDayYear,
         year,
         setYear,
+        currentMonthNumber,
       }}
     >
       {children}

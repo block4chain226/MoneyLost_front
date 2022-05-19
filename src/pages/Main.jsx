@@ -12,12 +12,8 @@ import IncomeContext from "../context/IncomeContext";
 import DateContext from "../context/DateContext";
 
 const Main = () => {
-  const { byDayRef, currentDate } = useContext(ExpensesContext);
+  // const { byDayRef, currentDate } = useContext(ExpensesContext);
   const { getDayIncomes } = useContext(IncomeContext);
-
-  useEffect(() => {
-    byDayRef(currentDate);
-  }, []);
 
   useEffect(() => {
     getDayIncomes();

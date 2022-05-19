@@ -26,7 +26,7 @@ export const DateContextProvider = ({ children }) => {
   const currentMonthNumber = currentMonth.getMonth();
 
   const incrementDate = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const today = new Date(new Date().getTime()).setUTCHours(0, 0, 0, 0);
     const curMon = new Date(currentMonth.getTime()).setUTCHours(0, 0, 0, 0);
 
@@ -48,7 +48,7 @@ export const DateContextProvider = ({ children }) => {
   };
 
   const decrementDate = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (dateMode.month) {
       setMonth(-30);
     }

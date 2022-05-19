@@ -35,93 +35,93 @@ const ExpensesDetails = (props) => {
       .then((data) => setAllExpenses(data.answer));
   };
 
-  // function byDayRef(date) {
-  //   const cat = {};
+  function byDayRef(date) {
+    const cat = {};
 
-  //   allExpenses.forEach((element) => {
-  //     if (
-  //       new Date(element.date).getTime() ===
-  //       new Date(currentDate.toLocaleDateString("en-US")).getTime()
-  //     ) {
-  //       if (!cat[element.category]) {
-  //         cat[element.category] = [element];
-  //       } else {
-  //         cat[element.category].push(element);
-  //       }
-  //     }
-  //   });
+    allExpenses.forEach((element) => {
+      if (
+        new Date(element.date).getTime() ===
+        new Date(currentDate.toLocaleDateString("en-US")).getTime()
+      ) {
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
+      }
+    });
 
-  //   setDayTitleCategory(cat);
-  // }
+    setDayTitleCategory(cat);
+  }
 
-  // function byMonthRef(month = currentMonth) {
-  //   const curYear = new Date(
-  //     currentMonth.toLocaleDateString("en-US")
-  //   ).getFullYear();
-  //   const firstDayOfMonth = new Date(month.getFullYear(), month.getMonth(), 1);
-  //   const lastDayOfMonth = new Date(
-  //     month.getFullYear(),
-  //     month.getMonth() + 1,
-  //     0
-  //   );
-  //   const cat = {};
-  //   allExpenses.forEach((element) => {
-  //     if (
-  //       new Date(element.date).getTime() >=
-  //         new Date(firstDayOfMonth).getTime() &&
-  //       new Date(element.date).getTime() <=
-  //         new Date(lastDayOfMonth).getTime() &&
-  //       new Date(element.date).getFullYear() === curYear
-  //     ) {
-  //       if (!cat[element.category]) {
-  //         cat[element.category] = [element];
-  //       } else {
-  //         cat[element.category].push(element);
-  //       }
-  //     }
-  //   });
+  function byMonthRef(month = currentMonth) {
+    const curYear = new Date(
+      currentMonth.toLocaleDateString("en-US")
+    ).getFullYear();
+    const firstDayOfMonth = new Date(month.getFullYear(), month.getMonth(), 1);
+    const lastDayOfMonth = new Date(
+      month.getFullYear(),
+      month.getMonth() + 1,
+      0
+    );
+    const cat = {};
+    allExpenses.forEach((element) => {
+      if (
+        new Date(element.date).getTime() >=
+          new Date(firstDayOfMonth).getTime() &&
+        new Date(element.date).getTime() <=
+          new Date(lastDayOfMonth).getTime() &&
+        new Date(element.date).getFullYear() === curYear
+      ) {
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
+      }
+    });
 
-  //   setMonthTitleCategory(cat);
-  // }
+    setMonthTitleCategory(cat);
+  }
 
-  // function byYearRef() {
-  //   const cat = {};
+  function byYearRef() {
+    const cat = {};
 
-  //   allExpenses.forEach((element) => {
-  //     if (
-  //       new Date(element.date).getTime() >=
-  //         new Date(new Date(currentYear.getFullYear(), 0, 1)).getTime() &&
-  //       new Date(element.date).getTime() <=
-  //         new Date(new Date(currentYear.getFullYear(), 11, 31)).getTime()
-  //     ) {
-  //       if (!cat[element.category]) {
-  //         cat[element.category] = [element];
-  //       } else {
-  //         cat[element.category].push(element);
-  //       }
-  //     }
-  //   });
+    allExpenses.forEach((element) => {
+      if (
+        new Date(element.date).getTime() >=
+          new Date(new Date(currentYear.getFullYear(), 0, 1)).getTime() &&
+        new Date(element.date).getTime() <=
+          new Date(new Date(currentYear.getFullYear(), 11, 31)).getTime()
+      ) {
+        if (!cat[element.category]) {
+          cat[element.category] = [element];
+        } else {
+          cat[element.category].push(element);
+        }
+      }
+    });
 
-  //   setYearTitleCategory(cat);
-  // }
+    setYearTitleCategory(cat);
+  }
 
-  // useEffect(() => {
-  //   if (dateMode.month) {
-  //     byMonthRef();
-  //   }
-  // }, [currentMonth, dateMode, allExpenses]);
+  useEffect(() => {
+    if (dateMode.month) {
+      byMonthRef();
+    }
+  }, [currentMonth, dateMode, allExpenses]);
 
-  // useEffect(() => {
-  //   if (dateMode.year) {
-  //     byYearRef();
-  //   }
-  // }, [currentYear, dateMode, allExpenses]);
+  useEffect(() => {
+    if (dateMode.year) {
+      byYearRef();
+    }
+  }, [currentYear, dateMode, allExpenses]);
 
-  // useEffect(() => {
-  //   if (dateMode.day) {
-  //     byDayRef(currentDate);
-  //   }
-  // }, [currentDate, dateMode, allExpenses]);
+  useEffect(() => {
+    if (dateMode.day) {
+      byDayRef(currentDate);
+    }
+  }, [currentDate, dateMode, allExpenses]);
 
   // ////////////////////////////////////
   // useEffect(() => {

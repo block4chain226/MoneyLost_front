@@ -17,12 +17,8 @@ const AddExpenses = (props) => {
     allExpenses,
     setAllExpenses,
     amount,
-    currentMonth,
-    // byDayRef,
     addNewExpense,
     setDayExpenses,
-    // byMonthRef,
-    // byYearRef,
     dayExpenses,
     setIsUpdate,
     setMonthExpenses,
@@ -93,18 +89,6 @@ const AddExpenses = (props) => {
   function toggleMenu() {
     setMenu({ isOpen: !menu.isOpen });
   }
-
-  // useEffect(() => {
-  //   byDayRef(currentDate);
-  // }, [allExpenses]);
-
-  // useEffect(() => {
-  //   byMonthRef(currentMonth);
-  // }, [allExpenses]);
-
-  // useEffect(() => {
-  //   byYearRef(currentMonth);
-  // }, [allExpenses]);
 
   const bottom = props.position;
   return (

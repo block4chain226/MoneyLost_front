@@ -1,60 +1,41 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import cl from "./Header.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
-import MyButton from "../MyButton/MyButton";
 import DateContext from "../../context/DateContext";
+import IncomeContext from "../../context/IncomeContext";
 
 const Header = () => {
+  const { monthExpenses, dayExpenses, yearExpenses, setIsUpdate } =
+    useContext(ExpensesContext);
+
   const {
-    // currentDate,
-    // setCurrentDate,
-    // dateMode,
-    byDay,
-    month,
-    setMonth,
-    byMonth,
-    byYear,
     currentMonth,
-    setDayIncome,
-    setDayExpenses,
-    monthExpenses,
     setCurrentMonth,
-    setCallBack,
-    dayExpenses,
+    dateMode,
+    currentDate,
+    setCurrentDate,
+    setCurrentYear,
     days,
     setDays,
+    currentYear,
+    month,
+    setMonth,
+    year,
+    setYear,
+    decrementDate,
+    incrementDate,
+  } = useContext(DateContext);
+
+  const {
+    allIncome,
     dayIncome,
-  } = useContext(ExpensesContext);
-  const { dateMode, setDateMode, currentDate, setCurrentDate } =
-    useContext(DateContext);
-
-  const incrementDate = (e) => {
-    e.preventDefault();
-    const today = new Date(new Date().getTime()).setUTCHours(0, 0, 0, 0);
-    const curMon = new Date(currentMonth.getTime()).setUTCHours(0, 0, 0, 0);
-    console.log("type = ", typeof curMon);
-
-    if (dateMode === "Month" && curMon < today && curMon !== today) {
-      setMonth(30);
-      setDays((prevState) => prevState + 1);
-    }
-
-    if (
-      dateMode.day &&
-      new Date(currentDate.getTime()).setUTCHours(0, 0, 0, 0) < today
-    ) {
-      setDays((prevState) => prevState + 1);
-    }
-  };
-
-  const decrementDate = (e) => {
-    e.preventDefault();
-    if (dateMode === "Month") {
-      setMonth(-30);
-    }
-
-    setDays((prevState) => prevState - 1);
-  };
+    monthIncome,
+    getAllIncomes,
+    getDayIncomes,
+    getMonthIncomes,
+    getYearIncomes,
+    yearIncome,
+  } = useContext(IncomeContext);
 
   useEffect(() => {
     if (dateMode.day) {
@@ -62,27 +43,50 @@ const Header = () => {
         (prevState) => new Date(Date.now() + days * 24 * 60 * 60 * 1000)
       );
     }
-    if (dateMode === "Month") {
+    if (dateMode.month) {
       setCurrentMonth(
-        // (prevState) => new Date(currentMonth.getTime() - 30 * 1000 * 3600 * 24)
         (prevState) =>
           new Date(currentMonth.getTime() + month * 1000 * 3600 * 24)
+      );
+    }
+    if (dateMode.year) {
+      setCurrentYear(
+        (prevState) => new Date(currentYear.getTime() + year * 1000 * 3600 * 24)
       );
     }
   }, [days]);
 
   useEffect(() => {
-    setCallBack(byDay);
-  }, [currentDate]);
+    getAllIncomes();
+  }, []);
 
   useEffect(() => {
-    setDays(0);
-  }, [dateMode.day]);
+    if (dateMode.day) {
+      setDays(0);
+    }
+    if (dateMode.month) {
+      setMonth(0);
+    }
+    if (dateMode.year) {
+      setYear(0);
+    }
+  }, [dateMode]);
 
   useEffect(() => {
-    setCallBack(byMonth);
-    // setDays(0);
-  }, [currentMonth]);
+    if (dateMode.day) {
+      getDayIncomes();
+    }
+    if (dateMode.month) {
+      getMonthIncomes();
+    }
+    if (dateMode.year) {
+      getYearIncomes();
+    }
+  }, [currentDate, currentMonth, currentYear, dateMode, allIncome]);
+
+  useEffect(() => {
+    setIsUpdate(false);
+  }, [currentDate, currentMonth, currentYear]);
 
   return (
     <section className={cl.header}>
@@ -97,32 +101,53 @@ const Header = () => {
                   currentDate.toLocaleDateString("en-us", { day: "numeric" }) +
                   " " +
                   currentDate.toLocaleDateString("en-us", { month: "long" })
-                : currentMonth.toLocaleDateString("en-us", { month: "long" }) +
+                : dateMode.month
+                ? currentMonth.toLocaleDateString("en-us", { month: "long" }) +
                   " " +
-                  currentMonth.getFullYear()}
+                  currentMonth.getFullYear()
+                : currentYear.getFullYear()}
             </h2>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>
-              {dateMode.day ? "Today expenses" : "Month expenses"}{" "}
+              {dateMode.day
+                ? "Today expenses"
+                : dateMode.month
+                ? "Month expenses"
+                : "Year expenses"}{" "}
             </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
-              {dateMode.day ? dayExpenses : monthExpenses}
+              {dateMode.day
+                ? dayExpenses
+                : dateMode.month
+                ? monthExpenses
+                : yearExpenses}
             </h6>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>
-              {dateMode.day ? "Day income" : "Month income"}{" "}
+              {dateMode.day
+                ? "Day income"
+                : dateMode.month
+                ? "Month income"
+                : "Year income"}{" "}
             </h6>
-            <h6 style={{ fontSize: "3.5vw" }}>{dayIncome}</h6>
+            <h6 style={{ fontSize: "3.5vw" }}>
+              {dateMode.day
+                ? dayIncome
+                : dateMode.month
+                ? monthIncome
+                : yearIncome}
+            </h6>
           </div>
           <div className={cl.money__expenses}>
             <h6 style={{ fontSize: "4vw" }}>Total </h6>
             <h6 style={{ fontSize: "3.5vw" }}>
               {dateMode.day
-                ? dateMode.day
-                : // ? +dayIncome - +dayExpenses
-                  +dayIncome - +monthExpenses}
+                ? +dayIncome - +dayExpenses
+                : dateMode.month
+                ? +monthIncome - +monthExpenses
+                : +yearIncome - +yearExpenses}
             </h6>
           </div>
         </div>

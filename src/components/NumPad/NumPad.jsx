@@ -6,6 +6,8 @@ import ExpensesContext from "../../context/ExpensesContext";
 
 const NumPad = () => {
   let { amount, setAmount } = useContext(ExpensesContext);
+  const [isTyping, setIsTyping] = useState(false);
+
   // let newAmount;
   function deleteChar() {
     if (amount) {
@@ -26,6 +28,7 @@ const NumPad = () => {
         step="0.01"
         min="0"
         max="10"
+        isT
         onChange={(event) => {
           setAmount(event.target.value);
         }}

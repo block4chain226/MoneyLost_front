@@ -1,143 +1,9 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useContext } from "react";
+import React from "react";
+
 import cl from "./Category.module.css";
 import MyButton from "../MyButton/MyButton";
-import ExpensesContext from "../../context/ExpensesContext";
-import DateContext from "../../context/DateContext";
 
 const Category = (props) => {
-  const {
-    amount,
-    setAmount,
-    setCategoryName,
-    addNewExpense,
-    expenseId,
-    titleCategory,
-    setTitleCategory,
-    monthExpenses,
-    setMonthExpenses,
-    allExpenses,
-    // dateMode,
-    setAllExpenses,
-    // currentDate,
-    setMoneyAmount,
-    isMonthUpdate,
-    setIsMonthUpdate,
-  } = useContext(ExpensesContext);
-
-  const { dateMode, setDateMode, currentDate, setCurrentDate } =
-    useContext(DateContext);
-
-  const postNewExpense = (categor) => {
-    setCategoryName(categor);
-    addNewExpense(categor);
-    updateAllExpenses(categor);
-    displayNewExpense(categor);
-    setMoneyAmount(amount);
-    props.toggleMenu();
-    props.showCategory(false);
-    setAmount("");
-  };
-
-  const updateAllExpenses = (categor) => {
-    // debugger;
-    if (Object.keys(titleCategory).length !== 0) {
-      const cat = {};
-      const newExpense = {
-        id: expenseId,
-        category: categor,
-        date:
-          dateMode === "Day"
-            ? currentDate.toLocaleDateString("en-US")
-            : new Date().toLocaleDateString("en-US"),
-        moneyAmount: +amount,
-      };
-
-      Object.entries(titleCategory).map((element) => {
-        console.log("ele", Object.keys(titleCategory));
-
-        if (element[0] === categor) {
-          cat[element[0]] = element;
-
-          if (dateMode === "Day") {
-            setTitleCategory(
-              titleCategory,
-              titleCategory[categor].push(newExpense)
-            );
-          }
-
-          if (
-            dateMode === "Month" &&
-            newExpense.date === currentDate.toLocaleDateString("en-US")
-          ) {
-            setTitleCategory(
-              titleCategory,
-              titleCategory[categor].push(newExpense)
-            );
-          }
-
-          let totalMonth = monthExpenses;
-          totalMonth = totalMonth + newExpense.moneyAmount;
-          setMonthExpenses(+totalMonth);
-
-          // if (dateMode === "Day") {
-
-          if (JSON.parse(sessionStorage.getItem("tC") !== null)) {
-            let expenses = JSON.parse(sessionStorage.getItem("tC"));
-            expenses.push(newExpense);
-            console.log("exp=", expenses);
-            sessionStorage.setItem("tC", JSON.stringify(expenses));
-          } else {
-            let expenses = [];
-            expenses.push(newExpense);
-            sessionStorage.setItem("tC", JSON.stringify(expenses));
-          }
-          // if (dateMode === "Month") {
-          //   setIsMonthUpdate(!isMonthUpdate.isUpdate);
-          // }
-
-          // }
-
-          // if (dateMode === "Month") {
-
-          // }
-        }
-      });
-    }
-  };
-
-  const displayNewExpense = (categor) => {
-    const cat = {};
-    if (!titleCategory.hasOwnProperty(categor)) {
-      const newExpense = {
-        id: expenseId,
-        category: categor,
-        date:
-          dateMode === "Day"
-            ? currentDate.toLocaleDateString("en-US")
-            : new Date().toLocaleDateString("en-US"),
-        moneyAmount: +amount,
-      };
-      cat[categor] = [];
-      titleCategory[categor] = [];
-      setTitleCategory(titleCategory, titleCategory[categor].push(newExpense));
-      if (JSON.parse(sessionStorage.getItem("tC") !== null)) {
-        let expenses = JSON.parse(sessionStorage.getItem("tC"));
-        expenses.push(newExpense);
-        console.log("exp=", expenses);
-        sessionStorage.setItem("tC", JSON.stringify(expenses));
-      } else {
-        let expenses = [];
-        expenses.push(newExpense);
-        sessionStorage.setItem("tC", JSON.stringify(expenses));
-      }
-      // if (dateMode === "Month") {
-      //   setIsMonthUpdate(!isMonthUpdate.isUpdate);
-      // }
-    }
-  };
-
   return (
     <div className={cl.category}>
       <MyButton onClick={() => props.showCategory(false)}>Back</MyButton>
@@ -147,7 +13,7 @@ const Category = (props) => {
             <div className={cl.category__img}>
               <button
                 onClick={() => {
-                  postNewExpense(item.name);
+                  props.postNewExpense(item.name);
                 }}
               >
                 <img src={`http:${item.path}`}></img>

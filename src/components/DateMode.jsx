@@ -5,7 +5,7 @@ import ExpensesContext from "../context/ExpensesContext";
 import DateContext from "../context/DateContext";
 
 const DateMode = () => {
-  const { byDay, byMonth, byYear, setCallBack } = useContext(ExpensesContext);
+  // const { byDayRef, byMonthRef, byYearRef } = useContext(ExpensesContext);
   const { setDateMode, currentDate } = useContext(DateContext);
 
   return (
@@ -13,23 +13,20 @@ const DateMode = () => {
       <button
         onClick={() => {
           setDateMode({ day: true, month: false, year: false });
-          setCallBack(byDay(currentDate));
         }}
       >
         Day
       </button>
       <button
         onClick={() => {
-          setDateMode("Month");
-          setCallBack(byMonth);
+          setDateMode({ day: false, month: true, year: false });
         }}
       >
         Month
       </button>
       <button
         onClick={() => {
-          setDateMode("Year");
-          setCallBack(byYear);
+          setDateMode({ day: false, month: false, year: true });
         }}
       >
         Year

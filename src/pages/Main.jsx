@@ -7,21 +7,17 @@ import { useFetching } from "../components/hooks/useFetching";
 import { useEffect } from "react";
 import DateMode from "../components/DateMode";
 import CategoryContext from "../context/CategoryContext";
+import ExpensesContext from "../context/ExpensesContext";
+import IncomeContext from "../context/IncomeContext";
+import DateContext from "../context/DateContext";
 
 const Main = () => {
-  // const { category, setCategory } = useContext(CategoryContext);
+  // const { byDayRef, currentDate } = useContext(ExpensesContext);
+  const { getDayIncomes } = useContext(IncomeContext);
 
-  // const categoryUrl = "http://localhost:3000/category/";
-
-  // const [fetchCategories] = useFetching(async () => {
-  //   await fetch(categoryUrl)
-  //     .then((res) => res.json())
-  //     .then((json) => setCategory(json.answer));
-  // });
-
-  // useEffect(() => {
-  //   fetchCategories();
-  // }, []);\
+  useEffect(() => {
+    getDayIncomes();
+  }, []);
 
   useEffect(() => {
     if (window.performance.navigation.type === 1) {

@@ -37,6 +37,31 @@ const Header = () => {
     yearIncome,
   } = useContext(IncomeContext);
 
+  const [touchStart, setTouchStart] = React.useState(0);
+  const [touchEnd, setTouchEnd] = React.useState(0);
+
+  function handleTouchStart(e) {
+    console.log("start");
+    setTouchStart(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchMove(e) {
+    console.log("end");
+    setTouchEnd(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchEnd() {
+    if (touchStart - touchEnd > 150) {
+      // do your stuff here for left swipe
+      alert("left");
+    }
+
+    if (touchStart - touchEnd < 150) {
+      // do your stuff here for right swipe
+      alert("right");
+    }
+  }
+
   useEffect(() => {
     if (dateMode.day) {
       setCurrentDate(
@@ -89,8 +114,14 @@ const Header = () => {
   }, [currentDate, currentMonth, currentYear]);
 
   return (
-    <section className={cl.header}>
-      <button onClick={decrementDate}> </button>
+    <section
+      className={cl.header}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      <button className={cl.left} onClick={decrementDate}>
+        {" "}
+      </button>
       <div className={cl.header__container}>
         <div className={cl.header__money}>
           <div className={cl.money__info}>

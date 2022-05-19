@@ -41,24 +41,20 @@ const Header = () => {
   const [touchEnd, setTouchEnd] = React.useState(0);
 
   function handleTouchStart(e) {
-    console.log("start");
     setTouchStart(e.targetTouches[0].clientX);
   }
 
   function handleTouchMove(e) {
-    console.log("end");
     setTouchEnd(e.targetTouches[0].clientX);
   }
 
   function handleTouchEnd() {
-    if (touchStart - touchEnd > 150) {
-      // do your stuff here for left swipe
-      alert("left");
+    if (touchStart - touchEnd > 200) {
+      incrementDate();
     }
 
-    if (touchStart - touchEnd < 150) {
-      // do your stuff here for right swipe
-      alert("right");
+    if (touchStart - touchEnd < 200) {
+      decrementDate();
     }
   }
 
@@ -119,9 +115,6 @@ const Header = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <button className={cl.left} onClick={decrementDate}>
-        {" "}
-      </button>
       <div className={cl.header__container}>
         <div className={cl.header__money}>
           <div className={cl.money__info}>
@@ -183,7 +176,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <button onClick={(e) => incrementDate(e)}></button>
     </section>
   );
 };

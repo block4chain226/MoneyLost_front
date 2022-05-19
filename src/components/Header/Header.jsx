@@ -76,19 +76,13 @@ const Header = () => {
     if (dateMode.day) {
       getDayIncomes();
     }
-  }, [currentDate, dateMode, allIncome]);
-
-  useEffect(() => {
     if (dateMode.month) {
       getMonthIncomes();
     }
-  }, [currentMonth, dateMode, allIncome]);
-
-  useEffect(() => {
     if (dateMode.year) {
       getYearIncomes();
     }
-  }, [currentYear, dateMode, allIncome]);
+  }, [currentDate, currentMonth, currentYear, dateMode, allIncome]);
 
   useEffect(() => {
     setIsUpdate(false);

@@ -33,14 +33,8 @@ export const ExpensesContextProvider = ({ children }) => {
   const [monthTitleCategory, setMonthTitleCategory] = useState({});
   const [yearTitleCategory, setYearTitleCategory] = useState({});
 
-  const {
-    dateMode,
-    setDateMode,
-    currentDate,
-    currentMonth,
-    currentYear,
-    setCurrentDate,
-  } = useContext(DateContext);
+  const { dateMode, setDateMode, currentDate, setCurrentDate } =
+    useContext(DateContext);
 
   const addNewExpense = (categor) => {
     setExpenseId(new Date().getTime());

@@ -93,19 +93,6 @@ export const IncomeContextProvider = ({ children }) => {
 
   const getYearIncomes = () => {
     let totalYearInc = 0;
-    const curYear = new Date(
-      currentMonth.toLocaleDateString("en-US")
-    ).getFullYear();
-    const firstDayOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      1
-    );
-    const lastDayOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() + 1,
-      0
-    );
 
     allIncome.map((element) => {
       if (

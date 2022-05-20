@@ -6,14 +6,7 @@
   text-align: center;
   flex-direction: column;
   position: relative;
-  background: linear-gradient(210.55deg, #ebf2f9 19.14%, #c6d7eb 154.68%);
-  border: 1px solid;
-  border-image-source: linear-gradient(
-    244.98deg,
-    #ffffff 29.81%,
-    rgba(219, 230, 242, 0) 53.04%,
-    #8f9fae 100%
-  );
+  background: #eaf2fa;
 }
 
 .header h2,

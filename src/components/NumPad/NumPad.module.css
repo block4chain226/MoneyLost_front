@@ -4,20 +4,55 @@
   display: flex;
   /* flex: 1; */
   flex-direction: column;
-  /* padding-bottom: 25%; */
+  margin-bottom: 20px;
 }
+
 .numpadrow {
   display: flex;
   width: 90%;
   height: 25%;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
-.numpadrow button {
+
+.container {
   width: 33.3%;
   height: 100%;
-  background: transparent;
-  border: 0px solid teal;
+  /* display: flex;
+  justify-self: center;
+  align-items: center; */
 }
+
+/* .numpadrow button {
+  width: 46px;
+  height: 46px;
+  background: #edf2f8;
+  box-shadow: -5px -5px 10px rgb(255 255 255 / 80%),
+    10px 10px 23px rgb(136 165 191 / 36%);
+  filter: blur(0.4px);
+  border-radius: 42px;
+  border: 0;
+} */
+
+.numpadrow button {
+  /* width: 35%;
+  height: 100%; */
+  background: #edf2f8;
+  box-shadow: -5px -5px 10px rgb(255 255 255 / 80%),
+    10px 10px 23px rgb(136 165 191 / 36%);
+  filter: blur(0.4px);
+  /* border-radius: 50%;
+  border: 0;
+  font-size: 4vw; */
+  border: 0;
+  border-radius: 42px;
+  width: 50%;
+  height: 0;
+  padding-bottom: 50%;
+  font-size: 4vw;
+  display: inline-block;
+}
+
 .numpad input {
   padding: 5px 10px;
   font-size: 4vw;

@@ -1,11 +1,17 @@
 .neoBtn {
-  width: 56px;
-  height: 56px;
+  /* width: 56px;
+  height: 56px; */
   background: #edf2f8;
-  box-shadow: -8px -4px 16px rgba(255, 255, 255, 0.7),
-    6px 4px 24px rgba(136, 165, 191, 0.36);
+  box-shadow: -5px -5px 10px rgb(255 255 255 / 80%),
+    10px 10px 23px rgb(136 165 191 / 36%);
   filter: blur(0.4px);
   border-radius: 42px;
+
+  width: 50%;
+  height: 0;
+  padding-bottom: 50%;
+  font-size: 4vw;
+  display: inline-block;
 }
 
 button:focus {
@@ -16,8 +22,8 @@ button:focus {
       )
       /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
     #e3edf7;
-  box-shadow: -8px -4px 16px rgba(255, 255, 255, 0.6),
-    6px 4px 24px rgba(136, 165, 191, 0.36);
+  box-shadow: -5px -5px 10px rgb(255 255 255 / 80%),
+    10px 10px 23px rgb(136 165 191 / 36%);
   filter: blur(0.3px);
   border-radius: 42px;
 }

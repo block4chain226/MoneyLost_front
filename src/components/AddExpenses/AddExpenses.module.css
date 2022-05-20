@@ -26,9 +26,8 @@
   background-color: #fff;
   flex-direction: column;
   border-radius: 10px;
-  height: 54%;
+  height: 55%;
   transition: all 0.5s;
-  border: 0.5px solid teal;
 }
 .category {
   display: flex;

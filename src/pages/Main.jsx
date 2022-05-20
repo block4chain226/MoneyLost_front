@@ -29,12 +29,9 @@ const Main = () => {
   return (
     <div className="wrapper">
       <Header />
-      <DateMode />
+      {/* <DateMode /> */}
       <section className="main">
-        <div className="newmain">
-          {/* <ExpensesDetails category={category} /> */}
-          <ExpensesDetails />
-        </div>
+        <ExpensesDetails />
       </section>
     </div>
   );

@@ -1,12 +1,14 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: teal;
+.body {
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
+  font-family: "Poppins", sans-serif;
+  background-color: #ebf3fb;
 }
 .wrapper {
   display: flex;
   flex-direction: column;
-  background-color: teal;
+  /* background: linear-gradient(230deg, #ebf2f9 19.14%, #c6d7eb 154.68%); */
+  background-color: #ebf3fb;
   height: 100vh;
   position: relative;
   max-width: 100%;
@@ -14,7 +16,7 @@ body {
 }
 
 .main {
-  height: 60%;
+  height: 55%;
   bottom: 0;
   width: -webkit-fill-available;
   /* position: absolute; */
@@ -23,8 +25,7 @@ body {
   border-top-left-radius: 12px;
   overflow: scroll;
 }
-.newmain {
-}
+
 .expenses__add-expenses {
   width: 100%;
   position: absolute;
@@ -49,10 +50,10 @@ body {
 .date-mod__date button {
   background-color: transparent;
   border: 0;
-  color: rgb(177, 177, 177);
-  font-size: 24px;
+  color: #31456a;
+  font-size: 20px;
   opacity: 0.8;
 }
 .date-mod__date button:focus {
-  color: #fff;
+  /* color: #fff; */
 }

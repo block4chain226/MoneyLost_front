@@ -3,6 +3,7 @@ import cl from "./Header.module.css";
 import ExpensesContext from "../../context/ExpensesContext";
 import DateContext from "../../context/DateContext";
 import IncomeContext from "../../context/IncomeContext";
+import DateMode from "../DateMode";
 
 const Header = () => {
   const { monthExpenses, dayExpenses, yearExpenses, setIsUpdate } =
@@ -176,6 +177,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <DateMode />
     </section>
   );
 };

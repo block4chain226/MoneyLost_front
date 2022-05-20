@@ -1,36 +1,35 @@
 import React from "react";
 import { useContext } from "react";
 import "../styles/App.css";
-import ExpensesContext from "../context/ExpensesContext";
 import DateContext from "../context/DateContext";
+import NeoButton from "./NeoButton/NeoButton";
 
 const DateMode = () => {
-  // const { byDayRef, byMonthRef, byYearRef } = useContext(ExpensesContext);
-  const { setDateMode, currentDate } = useContext(DateContext);
+  const { setDateMode } = useContext(DateContext);
 
   return (
     <div className="date-mod__date">
-      <button
+      <NeoButton
         onClick={() => {
           setDateMode({ day: true, month: false, year: false });
         }}
       >
         Day
-      </button>
-      <button
+      </NeoButton>
+      <NeoButton
         onClick={() => {
           setDateMode({ day: false, month: true, year: false });
         }}
       >
-        Month
-      </button>
-      <button
+        Mon
+      </NeoButton>
+      <NeoButton
         onClick={() => {
           setDateMode({ day: false, month: false, year: true });
         }}
       >
         Year
-      </button>
+      </NeoButton>
     </div>
   );
 };

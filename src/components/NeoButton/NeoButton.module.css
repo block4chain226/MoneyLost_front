@@ -1,23 +1,6 @@
-.switch {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  border-radius: 10px;
-  height: 10%;
-  /* background-color: #d5d5d5; */
-  background-color: #fff;
-  margin-bottom: 10px;
-}
-
-.switch button {
-  width: 47%;
-  font-size: 4vw;
-  height: 80%;
-  /* background-color: #d5d5d5; */
-  border: 0px;
-  transition: all 0.7s;
-
+.neoBtn {
+  width: 56px;
+  height: 56px;
   background: #edf2f8;
   box-shadow: -8px -4px 16px rgba(255, 255, 255, 0.7),
     6px 4px 24px rgba(136, 165, 191, 0.36);
@@ -25,9 +8,7 @@
   border-radius: 42px;
 }
 
-.switch .checkb {
-  /* background-color: #ffffff;
-  border-radius: 10px; */
+button:focus {
   background: radial-gradient(
         315.18% 315.18% at -124.11% -101.79%,
         #b9cce2 11.1%,

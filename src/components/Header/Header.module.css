@@ -3,11 +3,30 @@
   height: 45%;
   padding-top: 3%;
   display: flex;
-  /* background: rgb(222, 201, 238);
-  background-color: teal; */
   text-align: center;
+  flex-direction: column;
   position: relative;
   background: linear-gradient(210.55deg, #ebf2f9 19.14%, #c6d7eb 154.68%);
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    244.98deg,
+    #ffffff 29.81%,
+    rgba(219, 230, 242, 0) 53.04%,
+    #8f9fae 100%
+  );
+}
+
+.header h2,
+h6 {
+  top: 50%;
+  left: 50%;
+  font-family: "Poppins", sans-serif;
+  /* font-size: 150px; */
+  color: #31456a;
+  text-shadow: -8px -8px 12px rgba(255, 255, 255, 0.4),
+    8px 8px 12px rgba(0, 0, 0, 0.08);
+  caret-color: #262626;
+  outline: none;
 }
 
 .header__container {
@@ -15,13 +34,15 @@
   flex-direction: column;
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 12%;
 }
 .header__money {
-  margin-top: 20%;
+  margin-top: 15%;
   text-align: left;
   display: flex;
   width: 200px;
   flex-direction: column;
+  margin-bottom: 15%;
 }
 .money__total {
   letter-spacing: 3px;

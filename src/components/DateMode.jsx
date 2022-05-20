@@ -15,7 +15,7 @@ const DateMode = () => {
             setDateMode({ day: true, month: false, year: false });
           }}
         >
-          Day
+          <span>Day</span>
         </NeoButton>
       </div>
       <div className="header-btn-container">
@@ -24,7 +24,7 @@ const DateMode = () => {
             setDateMode({ day: false, month: true, year: false });
           }}
         >
-          Mon
+          <span>Mon</span>
         </NeoButton>
       </div>
       <div className="header-btn-container">
@@ -33,7 +33,7 @@ const DateMode = () => {
             setDateMode({ day: false, month: false, year: true });
           }}
         >
-          Year
+          <span>Year</span>
         </NeoButton>
       </div>
     </div>

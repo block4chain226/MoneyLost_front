@@ -1,17 +1,12 @@
 .neoBtn {
-  /* width: 56px;
-  height: 56px; */
   background: #edf2f8;
   box-shadow: -5px -5px 10px rgb(255 255 255 / 80%),
     10px 10px 23px rgb(136 165 191 / 36%);
   filter: blur(0.4px);
   border-radius: 42px;
-
-  width: 50%;
-  height: 0;
-  padding-bottom: 50%;
+  width: 50px;
+  height: 50px;
   font-size: 4vw;
-  display: inline-block;
 }
 
 button:focus {

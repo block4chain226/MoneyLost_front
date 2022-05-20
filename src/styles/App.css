@@ -58,7 +58,6 @@ body {
   border-radius: 10px;
 }
 .date-mod__date {
-  padding: 0px 20px;
   display: flex;
   justify-content: space-between;
   background-color: #eaf2fa;

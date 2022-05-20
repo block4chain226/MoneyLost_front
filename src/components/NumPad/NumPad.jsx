@@ -169,7 +169,7 @@ const NumPad = () => {
           </button>
         </div>
       </div>
-      {/* <MyButton onClick={() => showCategory(true)}>submit</MyButton> */}
+      <MyButton>submit</MyButton>
     </div>
   );
 };

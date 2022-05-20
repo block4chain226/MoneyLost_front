@@ -4,6 +4,8 @@
   width: 90%;
   margin: 0 auto;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 .container span {
@@ -16,7 +18,8 @@
   display: flex;
   /* justify-content: center; */
   flex-direction: column;
-  height: 130%;
+  /* height: 130%; */
+  flex: 1;
 }
 .body {
   width: 100%;

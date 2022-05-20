@@ -11,10 +11,10 @@
 .switch button {
   width: 47%;
   font-size: 4vw;
-  height: 80%;
+  height: 5vh;
   /* background-color: #d5d5d5; */
   border: 0px;
-  transition: all 0.7s;
+  transition: all 0.8s;
 
   background: #edf2f8;
   box-shadow: -8px -12px 26px rgb(255 255 255 / 80%),

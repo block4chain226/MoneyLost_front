@@ -108,13 +108,13 @@ const AddExpenses = (props) => {
           <div className={cl.content}>
             <SwitchButton />
             <NumPad />
-            <MyButton
+            {/* <MyButton
               onClick={() =>
                 switchMode.isExpense ? setIsCategory(true) : postNewIncome()
               }
             >
               submit
-            </MyButton>
+            </MyButton> */}
           </div>
         )}
       </div>

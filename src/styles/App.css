@@ -34,6 +34,7 @@ body {
 
 .header-btn-container {
   width: 33.3%;
+  text-align: center;
 }
 
 .numpad-btn-container {
@@ -60,10 +61,10 @@ body {
   padding: 0px 20px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  background-color: #eaf2fa;
 }
 .date-mod__date button {
-  background-color: transparent;
+  /* background-color: transparent; */
   border: 0;
   color: #31456a;
   opacity: 0.8;

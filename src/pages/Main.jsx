@@ -29,7 +29,7 @@ const Main = () => {
   return (
     <div className="wrapper">
       <Header />
-      {/* <DateMode /> */}
+      <DateMode />
       <section className="main">
         <ExpensesDetails />
       </section>

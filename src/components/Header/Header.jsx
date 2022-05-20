@@ -177,7 +177,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <DateMode />
+      {/* <DateMode /> */}
     </section>
   );
 };

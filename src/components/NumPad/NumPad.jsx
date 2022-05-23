@@ -6,9 +6,10 @@ import "../../styles/App.css";
 import ExpensesContext from "../../context/ExpensesContext";
 // import button from "../button/button";
 
-const NumPad = () => {
+const NumPad = ({ setIsCategory, postNewIncome }) => {
   let { amount, setAmount } = useContext(ExpensesContext);
   const [isTyping, setIsTyping] = useState(false);
+  const { switchMode } = useContext(ExpensesContext);
 
   // let newAmount;
   function deleteChar() {
@@ -169,7 +170,14 @@ const NumPad = () => {
           </button>
         </div>
       </div>
-      <MyButton>submit</MyButton>
+      <button
+        className={cl.submit}
+        onClick={() =>
+          switchMode.isExpense ? setIsCategory(true) : postNewIncome()
+        }
+      >
+        submit
+      </button>
     </div>
   );
 };

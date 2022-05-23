@@ -32,6 +32,8 @@ export const ExpensesContextProvider = ({ children }) => {
   const [dayTitleCategory, setDayTitleCategory] = useState({});
   const [monthTitleCategory, setMonthTitleCategory] = useState({});
   const [yearTitleCategory, setYearTitleCategory] = useState({});
+  const [deleteExpenseId, setDeleteExpenseId] = useState(null);
+  const [editExpenseId, setEditExpenseId] = useState(null);
 
   const { dateMode, setDateMode, currentDate, setCurrentDate } =
     useContext(DateContext);
@@ -108,6 +110,10 @@ export const ExpensesContextProvider = ({ children }) => {
         yearExpenses,
         setYearTitleCategory,
         setYearExpenses,
+        deleteExpenseId,
+        setDeleteExpenseId,
+        editExpenseId,
+        setEditExpenseId,
       }}
     >
       {children}

@@ -25,12 +25,18 @@ const AddExpenses = (props) => {
     yearExpenses,
     monthExpenses,
     setYearExpenses,
+    deleteExpenseId,
+    setDeleteExpenseId,
+    editExpenseId,
+    setEditExpenseId,
   } = useContext(ExpensesContext);
 
-  const { dateMode, currentDate, currentMonthNumber, lastMonth, currentYear } =
+  const { dateMode, currentDate, currentMonthNumber, currentYear } =
     useContext(DateContext);
 
   const { addNewIncome } = useContext(IncomeContext);
+
+  const lastMonth = new Date().getMonth();
 
   function showCategory(callback) {
     setIsCategory(callback);
@@ -39,6 +45,23 @@ const AddExpenses = (props) => {
   const postNewExpense = (categor) => {
     addNewExpense(categor);
     updateExpenses(dateMode, amount, categor);
+  };
+
+  const deleteExpense = () => {
+    console.log(deleteExpenseId);
+    let deletedExpenseAmount;
+    const newExp = allExpenses.filter((item) => {
+      if (item.id !== deleteExpenseId) {
+        return item;
+      }
+
+      deletedExpenseAmount = item.moneyAmount;
+    });
+
+    setAllExpenses(newExp);
+    setIsUpdate(true);
+
+    updateTotalExpenses(deletedExpenseAmount);
   };
 
   const updateExpenses = (dateMode, amount, categor) => {
@@ -54,27 +77,81 @@ const AddExpenses = (props) => {
       },
     ]);
 
-    if (dateMode.day) {
+    updateTotalExpenses();
+    // setDeleteExpenseId(null);
+
+    // if (dateMode.day) {
+    //   debugger;
+    //   const dayExp = +amount + dayExpenses;
+    //   setDayExpenses(dayExp);
+    // } else if (dateMode.month && currentMonthNumber === lastMonth) {
+    //   const monthExp = +amount + monthExpenses;
+    //   setMonthExpenses(monthExp);
+    // } else if (dateMode.month && currentMonthNumber !== lastMonth) {
+    //   const monthExp = monthExpenses;
+    //   setMonthExpenses(monthExp);
+    // } else if (
+    //   dateMode.year &&
+    //   currentYear.getFullYear() === new Date().getFullYear()
+    // ) {
+    //   const yearExp = +amount + yearExpenses;
+    //   setYearExpenses(yearExp);
+    // } else if (
+    //   dateMode.year &&
+    //   currentYear.getFullYear() !== new Date().getFullYear()
+    // ) {
+    //   const yearExp = yearExpenses;
+    //   setYearExpenses(yearExp);
+    // }
+
+    // setIsUpdate(true);
+    // setMenu({ isOpen: !menu.isOpen });
+    // setIsCategory(false);
+  };
+
+  const updateTotalExpenses = (deletedAmount) => {
+    if (dateMode.day && deleteExpenseId === null) {
       const dayExp = +amount + dayExpenses;
       setDayExpenses(dayExp);
-    } else if (dateMode.month && currentMonthNumber === lastMonth) {
+    }
+    if (dateMode.day && deleteExpenseId !== null) {
+      const dayExp = +dayExpenses - +deletedAmount;
+      setDayExpenses(dayExp);
+      setDeleteExpenseId(null);
+    }
+    if (dateMode.month && currentMonthNumber === lastMonth) {
       const monthExp = +amount + monthExpenses;
       setMonthExpenses(monthExp);
-    } else if (dateMode.month && currentMonthNumber !== lastMonth) {
+    }
+    if (dateMode.month && currentMonthNumber !== lastMonth) {
       const monthExp = monthExpenses;
       setMonthExpenses(monthExp);
-    } else if (
+    }
+    if (dateMode.month && deleteExpenseId !== null) {
+      const monthExp = +monthExpenses - +deletedAmount;
+      setMonthExpenses(monthExp);
+      setDeleteExpenseId(null);
+    }
+
+    ///
+    if (
       dateMode.year &&
       currentYear.getFullYear() === new Date().getFullYear()
     ) {
       const yearExp = +amount + yearExpenses;
       setYearExpenses(yearExp);
-    } else if (
+    }
+    if (
       dateMode.year &&
       currentYear.getFullYear() !== new Date().getFullYear()
     ) {
       const yearExp = yearExpenses;
       setYearExpenses(yearExp);
+    }
+    if (dateMode.year && deleteExpenseId !== null) {
+      const yearExp = +yearExpenses - +deletedAmount;
+      setYearExpenses(yearExp);
+      setDeleteExpenseId(null);
     }
 
     setIsUpdate(true);
@@ -89,6 +166,10 @@ const AddExpenses = (props) => {
   function toggleMenu() {
     setMenu({ isOpen: !menu.isOpen });
   }
+
+  useEffect(() => {
+    deleteExpense();
+  }, [deleteExpenseId || deleteExpenseId !== null]);
 
   const bottom = props.position;
   return (
@@ -107,7 +188,10 @@ const AddExpenses = (props) => {
         ) : (
           <div className={cl.content}>
             <SwitchButton />
-            <NumPad />
+            <NumPad
+              setIsCategory={setIsCategory}
+              postNewIncome={postNewIncome}
+            />
             {/* <MyButton
               onClick={() =>
                 switchMode.isExpense ? setIsCategory(true) : postNewIncome()

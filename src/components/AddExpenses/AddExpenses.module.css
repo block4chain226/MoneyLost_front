@@ -4,6 +4,8 @@
   width: 90%;
   margin: 0 auto;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 .container span {
@@ -16,7 +18,8 @@
   display: flex;
   /* justify-content: center; */
   flex-direction: column;
-  height: 130%;
+  /* height: 130%; */
+  flex: 1;
 }
 .body {
   width: 100%;
@@ -25,10 +28,14 @@
   display: flex;
   background-color: #fff;
   flex-direction: column;
-  border-radius: 10px;
-  height: 54%;
+  border-radius: 35px;
+  height: 55%;
   transition: all 0.5s;
-  border: 0.5px solid teal;
+  background: #e8f1f5;
+  box-shadow: -16px -16px 40px rgb(255 255 255 / 30%),
+    16px 4px 64px rgb(18 61 101 / 20%),
+    inset -8px -6px 80px rgb(255 255 255 / 2%);
+  border-top: 1px solid #fff;
 }
 .category {
   display: flex;

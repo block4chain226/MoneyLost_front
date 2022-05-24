@@ -1,0 +1,25 @@
+.neoBtn {
+  background: #edf2f8;
+  box-shadow: -5px -5px 10px rgb(255 255 255 / 80%),
+    10px 10px 23px rgb(136 165 191 / 36%);
+  filter: blur(0.4px);
+  border-radius: 42px;
+  width: 56px;
+  height: 56px;
+  font-size: 4.5vw;
+  border: 0;
+}
+
+button:focus {
+  background: radial-gradient(
+        315.18% 315.18% at -124.11% -101.79%,
+        #b9cce2 11.1%,
+        #f9f9f9 85.21%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    #e3edf7;
+  box-shadow: -5px -5px 10px rgb(255 255 255 / 80%),
+    10px 10px 23px rgb(136 165 191 / 36%);
+  filter: blur(0.3px);
+  border-radius: 42px;
+}

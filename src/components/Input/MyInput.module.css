@@ -1,11 +1,21 @@
-.MyInput {
+/* .MyInput {
   padding: 13px 10px;
   color: teal;
   font-size: 4vw;
   border-radius: 8px;
   border: 0.2px solid teal;
+  margin-bottom: 20px;
+} */
+
+.MyInput {
+  background: #e3edf7;
+  box-shadow: inset -3px -3px 7px #ffffff,
+    inset 2px 2px 5px rgba(136, 165, 191, 0.38);
+  border-radius: 16px;
+  border: 0;
+  margin-bottom: 20px;
 }
 
 .MyInput:focus {
-  border: 1px solid teal;
+  outline: none;
 }

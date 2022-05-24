@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useContext } from "react";
 import CategoryContext from "../../context/CategoryContext";
 import DateContext from "../../context/DateContext";
 import ExpensesContext from "../../context/ExpensesContext";
 import cl from "./MyDetails.module.css";
+
 const MyDetails = ({ categoryName, money, items }) => {
   const { category } = useContext(CategoryContext);
   const [categoryImg, setCategoryImg] = useState();
+  const [isShowTrash, setIsShowTrash] = useState(false);
 
   const {
     dayExpenses,
@@ -16,6 +18,12 @@ const MyDetails = ({ categoryName, money, items }) => {
     yearExpenses,
     setYearExpenses,
     isUpdate,
+    allExpenses,
+    setAllExpenses,
+
+    setDeleteExpenseId,
+
+    setEditExpenseId,
   } = useContext(ExpensesContext);
 
   const { dateMode } = useContext(DateContext);
@@ -29,6 +37,7 @@ const MyDetails = ({ categoryName, money, items }) => {
       }
     });
   };
+
   const getTotal = () => {
     let total = items.reduce((acc, cut) => {
       return acc + cut.moneyAmount;
@@ -50,6 +59,17 @@ const MyDetails = ({ categoryName, money, items }) => {
       setYearExpenses((total) => total + yearExp);
     }
   };
+
+  // const deleteExpense = (e) => {
+  //   console.log(allExpenses);
+  //   const newExp = allExpenses.filter((item) => {
+  //     if (item.id !== e.currentTarget.id) {
+  //       // allExpenses.splice(allExpenses.indexOf(item), 1);
+  //       return item;
+  //     }
+  //   });
+  //   setAllExpenses(newExp);
+  // };
 
   useEffect(() => {
     getTotal();
@@ -82,7 +102,19 @@ const MyDetails = ({ categoryName, money, items }) => {
               <div className={cl.imgcontainer}>
                 <img src={`http://${categoryImg}`}></img>
               </div>
+
               <span>{item.date}</span>
+              <div
+                id={item._id}
+                onClick={(e) => setDeleteExpenseId(e.currentTarget.id)}
+                // onClick={(e) => console.log(e.currentTarget.id)}
+                className={cl.trash_container}
+              >
+                <img
+                  className={cl.trash}
+                  src={`https://i.ibb.co/7brVtzT/Trash.png`}
+                ></img>
+              </div>
             </div>
             <span>{item.moneyAmount}</span>
           </div>

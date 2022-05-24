@@ -1,11 +1,15 @@
-body {
-  background-color: teal;
-}
 .login {
   width: 100%;
   margin: 0 auto;
   margin-top: 30%;
-  background-color: teal;
+  height: 100vh;
+  /* background: linear-gradient(
+    180deg,
+    #f1f5f8 0%,
+    #ebf3fa 0.01%,
+    #dde7f3 53.92%,
+    #e6f0f9 100%
+  ); */
   padding: 60px;
 
   color: #fff;

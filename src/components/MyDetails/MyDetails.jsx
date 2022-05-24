@@ -105,8 +105,9 @@ const MyDetails = ({ categoryName, money, items }) => {
 
               <span>{item.date}</span>
               <div
-                id={item.id}
+                id={item._id}
                 onClick={(e) => setDeleteExpenseId(e.currentTarget.id)}
+                // onClick={(e) => console.log(e.currentTarget.id)}
                 className={cl.trash_container}
               >
                 <img

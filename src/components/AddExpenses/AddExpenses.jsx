@@ -48,10 +48,19 @@ const AddExpenses = (props) => {
   };
 
   const deleteExpense = () => {
-    console.log(deleteExpenseId);
+    const config = {
+      method: "DELETE",
+    };
+
+    try {
+      fetch(`http://localhost:3000/expenses/${deleteExpenseId}`, config).then(
+        (res) => res.json()
+      );
+    } catch (error) {}
+
     let deletedExpenseAmount;
     const newExp = allExpenses.filter((item) => {
-      if (item.id !== deleteExpenseId) {
+      if (item._id !== deleteExpenseId) {
         return item;
       }
 
@@ -60,7 +69,6 @@ const AddExpenses = (props) => {
 
     setAllExpenses(newExp);
     setIsUpdate(true);
-
     updateTotalExpenses(deletedExpenseAmount);
   };
 

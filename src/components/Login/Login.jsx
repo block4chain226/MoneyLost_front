@@ -69,7 +69,7 @@ const Login = () => {
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username</label>
-        <input
+        <MyInput
           type="text"
           id="username"
           ref={userRef}
@@ -90,18 +90,7 @@ const Login = () => {
           value={password}
           required
         />
-        <MyButton
-          style={{
-            backgroundColor: "white",
-            color: "teal",
-            textAlign: "center",
-            width: "100px",
-            marginBottom: "10px",
-            fontSize: "16px",
-          }}
-        >
-          Sign In
-        </MyButton>
+        <MyButton style={{}}>Sign In</MyButton>
       </form>
       <p>
         Need an Account?

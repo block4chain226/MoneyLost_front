@@ -7,6 +7,7 @@
   width: 56px;
   height: 56px;
   font-size: 4.5vw;
+  border: 0;
 }
 
 button:focus {

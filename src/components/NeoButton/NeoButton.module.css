@@ -4,9 +4,9 @@
     10px 10px 23px rgb(136 165 191 / 36%);
   filter: blur(0.4px);
   border-radius: 42px;
-  width: 56px;
-  height: 56px;
-  font-size: 4.5vw;
+  width: 13.5vw;
+  height: 13.5vw;
+  font-size: 5vw;
 }
 
 button:focus {

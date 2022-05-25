@@ -53,9 +53,7 @@ const AddExpenses = (props) => {
     };
 
     try {
-      fetch(`http://localhost:3000/expenses/${deleteExpenseId}`, config).then(
-        (res) => res.json()
-      );
+      fetch(`http://localhost:3000/expenses/${deleteExpenseId}`, config);
     } catch (error) {}
 
     let deletedExpenseAmount;
@@ -86,35 +84,6 @@ const AddExpenses = (props) => {
     ]);
 
     updateTotalExpenses();
-    // setDeleteExpenseId(null);
-
-    // if (dateMode.day) {
-    //   debugger;
-    //   const dayExp = +amount + dayExpenses;
-    //   setDayExpenses(dayExp);
-    // } else if (dateMode.month && currentMonthNumber === lastMonth) {
-    //   const monthExp = +amount + monthExpenses;
-    //   setMonthExpenses(monthExp);
-    // } else if (dateMode.month && currentMonthNumber !== lastMonth) {
-    //   const monthExp = monthExpenses;
-    //   setMonthExpenses(monthExp);
-    // } else if (
-    //   dateMode.year &&
-    //   currentYear.getFullYear() === new Date().getFullYear()
-    // ) {
-    //   const yearExp = +amount + yearExpenses;
-    //   setYearExpenses(yearExp);
-    // } else if (
-    //   dateMode.year &&
-    //   currentYear.getFullYear() !== new Date().getFullYear()
-    // ) {
-    //   const yearExp = yearExpenses;
-    //   setYearExpenses(yearExp);
-    // }
-
-    // setIsUpdate(true);
-    // setMenu({ isOpen: !menu.isOpen });
-    // setIsCategory(false);
   };
 
   const updateTotalExpenses = (deletedAmount) => {

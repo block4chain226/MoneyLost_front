@@ -4,10 +4,15 @@ import ExpensesContext from "../../context/ExpensesContext";
 import DateContext from "../../context/DateContext";
 import IncomeContext from "../../context/IncomeContext";
 import DateMode from "../DateMode";
+import MyButton from "../MyButton/MyButton";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { monthExpenses, dayExpenses, yearExpenses, setIsUpdate } =
     useContext(ExpensesContext);
+
+  const navigate = useNavigate();
 
   const {
     currentMonth,
@@ -38,8 +43,15 @@ const Header = () => {
     yearIncome,
   } = useContext(IncomeContext);
 
+  const { setAuth } = useAuth();
+
   const [touchStart, setTouchStart] = React.useState(0);
   const [touchEnd, setTouchEnd] = React.useState(0);
+
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    navigate("/login", { replace: true });
+  };
 
   function handleTouchStart(e) {
     setTouchStart(e.targetTouches[0].clientX);
@@ -117,6 +129,7 @@ const Header = () => {
       onTouchEnd={handleTouchEnd}
     >
       <div className={cl.header__container}>
+        <MyButton onClick={logout}>Logout</MyButton>
         <div className={cl.header__money}>
           <div className={cl.money__info}>
             <h2 style={{ width: "350px", fontSize: "8vw" }}>

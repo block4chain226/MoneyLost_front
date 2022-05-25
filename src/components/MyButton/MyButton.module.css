@@ -10,7 +10,7 @@
 
 .myBtn {
   width: 100%;
-  height: 10%;
+  /* height: 10%; */
   background: #edf2f8;
   box-shadow: -2px -2px 9px rgb(255 255 255 / 80%),
     2px 3px 9px rgb(136 165 191 / 36%);

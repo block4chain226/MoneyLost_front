@@ -6,6 +6,7 @@ import MyButton from "../MyButton/MyButton";
 import MyInput from "../Input/MyInput";
 import cl from "./Login.module.css";
 import RequireAuth from "../RequireAuth";
+import SignUp from "../SignUp/SignUp";
 
 const Login = () => {
   const userRef = useRef();
@@ -16,7 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const { setAuth } = useAuth();
+  const { setAuth, isSignIn, setIsSignIn } = useAuth();
 
   useEffect(() => {
     setErrorMsg("");
@@ -62,45 +63,52 @@ const Login = () => {
   };
 
   return (
-    <section className={cl.login}>
-      <p ref={errorRef} aria-live="assertive">
-        {errorMsg}
-      </p>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <MyInput
-          type="text"
-          id="username"
-          ref={userRef}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-          autoComplete="off"
-          value={email}
-          required
-        />
-        <label htmlFor="password">Password</label>
-        <MyInput
-          type="password"
-          id="password"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          value={password}
-          required
-        />
-        <MyButton style={{}}>Sign In</MyButton>
-      </form>
-      <p>
-        Need an Account?
-        <br />
-        <Link to="/">main </Link>
-        <span className="line">
-          <a href="#">Sign Up</a>
-        </span>
-      </p>
-    </section>
+    <>
+      {isSignIn ? (
+        <section className={cl.login}>
+          <p ref={errorRef} aria-live="assertive">
+            {errorMsg}
+          </p>
+          <h1>Sign In</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="username">Username</label>
+            <MyInput
+              type="text"
+              id="username"
+              ref={userRef}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+              autoComplete="off"
+              value={email}
+              required
+            />
+            <label htmlFor="password">Password</label>
+            <MyInput
+              type="password"
+              id="password"
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+              value={password}
+              required
+            />
+            <MyButton>Sign In</MyButton>
+          </form>
+          <p>
+            Need an Account?
+            <br />
+            <span className="line">
+              <a href="#" onClick={() => setIsSignIn(false)}>
+                Sign Up
+              </a>
+            </span>
+          </p>
+        </section>
+      ) : (
+        <SignUp />
+      )}
+    </>
   );
 };
 

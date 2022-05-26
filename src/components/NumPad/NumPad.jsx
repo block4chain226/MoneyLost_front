@@ -36,138 +36,140 @@ const NumPad = ({ setIsCategory, postNewIncome }) => {
           setAmount(event.target.value);
         }}
       />
-      <div className={cl.numpadrow}>
-        <div className={cl.container}>
-          <button
-            value={1}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            1
-          </button>
+      <div className={cl.buttonContainer}>
+        <div className={cl.numpadrow}>
+          <div className={cl.container}>
+            <button
+              value={1}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              1
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button
+              value={2}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              2
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button
+              value={3}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              3
+            </button>
+          </div>
         </div>
-        <div className={cl.container}>
-          <button
-            value={2}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            2
-          </button>
+        <div className={cl.numpadrow}>
+          <div className={cl.container}>
+            <button
+              value={4}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              4
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button
+              value={5}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              5
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button
+              value={6}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              6
+            </button>
+          </div>
         </div>
-        <div className={cl.container}>
-          <button
-            value={3}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            3
-          </button>
+        <div className={cl.numpadrow}>
+          <div className={cl.container}>
+            <button
+              value={7}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              7
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button
+              value={8}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              8
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button
+              value={9}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              9
+            </button>
+          </div>
         </div>
-      </div>
-      <div className={cl.numpadrow}>
-        <div className={cl.container}>
-          <button
-            value={4}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            4
-          </button>
-        </div>
-        <div className={cl.container}>
-          <button
-            value={5}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            5
-          </button>
-        </div>
-        <div className={cl.container}>
-          <button
-            value={6}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            6
-          </button>
-        </div>
-      </div>
-      <div className={cl.numpadrow}>
-        <div className={cl.container}>
-          <button
-            value={7}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            7
-          </button>
-        </div>
-        <div className={cl.container}>
-          <button
-            value={8}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            8
-          </button>
-        </div>
-        <div className={cl.container}>
-          <button
-            value={9}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            9
-          </button>
-        </div>
-      </div>
-      <div className={cl.numpadrow}>
-        <div className={cl.container}>
-          <button
-            value={"."}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            .
-          </button>
-        </div>
-        <div className={cl.container}>
-          <button
-            value={0}
-            type="text"
-            onClick={(event) => {
-              setAmount((amount += event.target.value));
-            }}
-          >
-            0
-          </button>
-        </div>
-        <div className={cl.container}>
-          <button type="text" onClick={deleteChar}>
-            Del
-          </button>
+        <div className={cl.numpadrow}>
+          <div className={cl.container}>
+            <button
+              value={"."}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              .
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button
+              value={0}
+              type="text"
+              onClick={(event) => {
+                setAmount((amount += event.target.value));
+              }}
+            >
+              0
+            </button>
+          </div>
+          <div className={cl.container}>
+            <button type="text" onClick={deleteChar}>
+              Del
+            </button>
+          </div>
         </div>
       </div>
       <button

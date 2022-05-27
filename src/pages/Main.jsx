@@ -10,10 +10,12 @@ import CategoryContext from "../context/CategoryContext";
 import ExpensesContext from "../context/ExpensesContext";
 import IncomeContext from "../context/IncomeContext";
 import DateContext from "../context/DateContext";
+import AddExpenses from "../components/AddExpenses/AddExpenses";
 
 const Main = () => {
   // const { byDayRef, currentDate } = useContext(ExpensesContext);
   const { getDayIncomes } = useContext(IncomeContext);
+  const { category } = useContext(CategoryContext);
 
   useEffect(() => {
     getDayIncomes();
@@ -31,7 +33,10 @@ const Main = () => {
       <Header />
       <DateMode />
       <section className="main">
-        <ExpensesDetails />
+        <div className="main-wrapper">
+          <ExpensesDetails />
+        </div>
+        <AddExpenses position="bottom" category={category}></AddExpenses>
       </section>
     </div>
   );

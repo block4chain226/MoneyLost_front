@@ -5,8 +5,9 @@
   display: flex;
   text-align: center;
   flex-direction: column;
-  position: relative;
+  /* position: relative; */
   background: #eaf2fa;
+  flex: 1;
 }
 
 .header h2,

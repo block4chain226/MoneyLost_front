@@ -1,5 +1,6 @@
 .addexpenses {
 }
+
 .container {
   width: 90%;
   margin: 0 auto;
@@ -29,13 +30,14 @@
   background-color: #fff;
   flex-direction: column;
   border-radius: 35px;
-  height: 55%;
+  height: 100%;
   transition: all 0.5s;
   background: #e8f1f5;
   box-shadow: -16px -16px 40px rgb(255 255 255 / 30%),
     16px 4px 64px rgb(18 61 101 / 20%),
     inset -8px -6px 80px rgb(255 255 255 / 2%);
   border-top: 1px solid #fff;
+  transform: translateY(calc(100% - 30px));
 }
 .category {
   display: flex;
@@ -62,7 +64,8 @@
   display: flex;
 }
 .open {
-  bottom: -50%;
+  /* bottom: -50%; */
+  transform: translateY(0);
 }
 
 .body .bottom {
@@ -77,7 +80,7 @@
 .toggle-right {
 }
 
-@media (max-height: 481px) {
+/* @media (max-height: 481px) {
   .body {
     height: 82%;
   }
@@ -93,4 +96,4 @@
   .open {
     bottom: -65%;
   }
-}
+} */

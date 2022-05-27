@@ -159,33 +159,34 @@ const ExpensesDetails = (props) => {
   }, []);
 
   return (
-    <div className={cl.expenses}>
-      <div className={cl.expenses__details}>
-        <div className={cl.expenses__container}>
-          <div className={cl.expenses}>
-            <ul>
-              {Object.entries(
-                dateMode.day
-                  ? dayTitleCategory
-                  : dateMode.month
-                  ? monthTitleCategory
-                  : yearTitleCategory
-              ).map((item) => {
-                return (
-                  <MyDetails
-                    key={item[1][0].id}
-                    money={amount}
-                    categoryName={item[0]}
-                    items={item[1]}
-                  />
-                );
-              })}
-            </ul>
+    <>
+      <div className={cl.expenses}>
+        <div className={cl.expenses__details}>
+          <div className={cl.expenses__container}>
+            <div className={cl.expenses}>
+              <ul>
+                {Object.entries(
+                  dateMode.day
+                    ? dayTitleCategory
+                    : dateMode.month
+                    ? monthTitleCategory
+                    : yearTitleCategory
+                ).map((item) => {
+                  return (
+                    <MyDetails
+                      key={item[1][0].id}
+                      money={amount}
+                      categoryName={item[0]}
+                      items={item[1]}
+                    />
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <AddExpenses position="bottom" category={category}></AddExpenses>
-    </div>
+    </>
   );
 };
 

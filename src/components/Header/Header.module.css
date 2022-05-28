@@ -55,9 +55,6 @@ h6 {
   justify-content: space-between;
   font-weight: 100;
 }
-
-/* @media (max-height: 568px) {
-  .header {
-    height: 40%;
-  }
-} */
+.header button {
+  margin-bottom: 15%;
+}

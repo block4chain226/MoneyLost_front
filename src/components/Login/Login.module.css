@@ -28,11 +28,11 @@
   margin-bottom: 5px;
 }
 
-input {
+.login input {
   margin-bottom: 10px;
 }
 
-button {
+.login button {
   padding: 7px 10px;
   border-radius: 10px;
   margin-bottom: 10px;

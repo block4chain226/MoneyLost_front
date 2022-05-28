@@ -1,52 +1,46 @@
 .numpad {
   width: 100%;
-  height: 47%;
-  /* display: flex; */
-  /* flex: 1; */
   flex-direction: column;
-  /* margin-bottom: 20px; */
-  /* flex: 1; */
+  flex: 10;
+  display: flex;
 }
 
 .numpadrow {
+  align-items: center;
   display: flex;
-  width: 90%;
-  /* height: 12%; */
-  margin: 0 auto;
-  /* margin-bottom: 12px; */
-  text-align: -webkit-center;
+  width: 100%;
+  flex: 1;
 }
 
 .container {
   width: 33.3%;
-  /* height: 100%; */
+  border-radius: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .numpadrow button {
-  /* width: 35%;
-  height: 100%; */
   background: #edf2f8;
   box-shadow: -4px -3px 7px rgb(255 255 255 / 80%),
     7px 4px 18px rgb(136 165 191 / 36%);
   filter: blur(0.4px);
   border: 0;
-  border-radius: 42px;
-  /* width: 100%; */
-  /* width: 42%; */
-  /* height: 100%; */
-  /* padding-bottom: 10%; */
-  /* font-size: 4vw; */
   display: block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-align: center;
 }
 
 .submit {
   width: 100%;
-  /* height: 10%; */
   background: #edf2f8;
   box-shadow: -2px -2px 9px rgb(255 255 255 / 80%),
     2px 3px 9px rgb(136 165 191 / 36%);
   filter: blur(0.4px);
-  border-radius: 42px;
+  /* border-radius: 42px; */
   border: 0;
 }
 
@@ -54,9 +48,14 @@
   /* padding: 5px 10px; */
   font-size: 5vw;
   width: 100%;
-  /* flex: 1; */
+  flex: 0.5;
+  margin-bottom: 10px;
 }
 
 .buttonContainer {
   max-width: 100%;
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 }

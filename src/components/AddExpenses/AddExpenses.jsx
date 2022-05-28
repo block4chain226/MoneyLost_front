@@ -169,13 +169,6 @@ const AddExpenses = (props) => {
               setIsCategory={setIsCategory}
               postNewIncome={postNewIncome}
             />
-            {/* <MyButton
-              onClick={() =>
-                switchMode.isExpense ? setIsCategory(true) : postNewIncome()
-              }
-            >
-              submit
-            </MyButton> */}
           </div>
         )}
       </div>

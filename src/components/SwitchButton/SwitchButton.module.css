@@ -6,12 +6,13 @@
   border-radius: 10px;
   height: 10%;
   margin-bottom: 10px;
+  flex: 1;
 }
 
 .switch button {
   width: 47%;
-  font-size: 4vw;
-  height: 5vh;
+  font-size: 4.5vw;
+  height: 100%;
   /* background-color: #d5d5d5; */
   border: 0px;
   transition: all 0.8s;
